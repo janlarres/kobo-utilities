@@ -9,10 +9,10 @@ __docformat__ = "restructuredtext en"
 import ast
 import copy
 import enum
+import json
 import traceback
 from dataclasses import dataclass
 from functools import partial
-from pprint import pformat
 from typing import TYPE_CHECKING, Any, Dict, TypeVar, cast
 
 from calibre.constants import DEBUG as _DEBUG
@@ -237,7 +237,7 @@ class ConfigWrapper:
         return dict_wrapper
 
     def __str__(self) -> str:
-        return pformat(self._wrapped_dict)
+        return json.dumps(self._wrapped_dict, indent=4)
 
     def __repr__(self) -> str:
         return self.__str__()
