@@ -1,20 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
         <title>Kobo Utilities Plugin</title>
         <style>
+            html {
+                color-scheme: light dark;
+            }
+
             body {
-                margin: 0 auto;
-                max-width: 36em;
+                font-family: sans-serif;
+                font-size: 1.25rem;
+                line-height: 1.5;
+                max-width: min(70ch, 100% - 4rem);
+                margin-inline: auto;
             }
-            code {
-                background-color: ghostwhite;
+
+            img,
+            svg,
+            video {
+                max-width: 100%;
+                display: block;
             }
+
             pre {
-                border: 1px solid darkgrey;
-                background-color: ghostwhite;
-                padding: 1em;
+                margin-block: 24px;
+                border-radius: 6px;
+                box-shadow: 0px 4px 12px rgba(89, 85, 101, 0.2);
+                padding: 16px;
             }
         </style>
     </head>
