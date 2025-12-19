@@ -36,7 +36,7 @@
         <h1>Kobo Utilities Plugin</h1>
 
         <p>
-            The <i>Kobo Utilities Plugin</i> adds extra function to calibre for
+            The <i>Kobo Utilities Plugin</i> adds extra function to Calibre for
             working with Kobo and newer Tolino (2024 onward) E-Ink eReaders.
             This will allow changes on the eReaders that either cannot be done
             or will make them easier to do. The current functions of the plugin
@@ -66,7 +66,7 @@
                 <a href="#ManageSeriesInfo"
                     >Manage series info for books on the device.</a
                 >
-                This is mainly for books not in the calibre library including
+                This is mainly for books not in the Calibre library including
                 KePubs.
             </li>
 
@@ -91,7 +91,7 @@
 
             <li>
                 List the books missing from the device database. This only lists
-                the books that calibre thinks should be in the database.
+                the books that Calibre thinks should be in the database.
             </li>
 
             <li>
@@ -164,7 +164,7 @@
         <p>
             A large chunk of the code is borrowed from the plugins written by
             kiwidude. A lot of the rest came from looking at other plugins and
-            the general calibre code.
+            the general Calibre code.
         </p>
 
         <p>
@@ -173,23 +173,23 @@
             questions from other users.
         </p>
 
-        <p>And of course a big thank you to Kovid Goyal for calibre.</p>
+        <p>And of course a big thank you to Kovid Goyal for Calibre.</p>
 
         <h2 id="configuration">Installation and Configuration</h2>
 
         <p>
-            The plugin is installed through the calibre preferences dialog.
+            The plugin is installed through the Calibre preferences dialog.
             During the installation, you will be prompted on which toolbar or
             menu to put the plugin button. As there is no available function
             when no devices are connected, put it on the "Main toolbar when a
             device is connected" or "The menubar when a device is connected".
-            After the plugin is installed, restart calibre before attempting to
+            After the plugin is installed, restart Calibre before attempting to
             use it.
         </p>
 
         <p>
             To use the plugin, it needs to be configured. This can be done
-            through the calibre preferences, or from the "Customise plugin"
+            through the Calibre preferences, or from the "Customise plugin"
             option on the plugins menu. There are two areas that need to be
             configured: the columns to be used by the plugin and the action to
             be taken when the plugin button is pressed.
@@ -207,7 +207,7 @@
                 different Kobo devices. Each profile has a set of custom columns
                 used for storing the reading positions of books. If you have
                 different devices use by different people, this allows them to
-                store their reading status for each book in the same calibre
+                store their reading status for each book in the same Calibre
                 library. The custom columns needed are described in
                 <a href="#Columns">"Columns for the Plugin"</a>.
             </p>
@@ -265,7 +265,7 @@
 
             <li>
                 Rating: This is the rating of the book. The standard "Rating"
-                column in calibre can be used, or a custom used. If a custom
+                column in Calibre can be used, or a custom used. If a custom
                 column is used, it must be either a "Ratings, shown with stars"
                 or an "Integers" type column.
             </li>
@@ -288,7 +288,7 @@
             </li>
         </ul>
 
-        <p>To add a custom column to calibre:</p>
+        <p>To add a custom column to Calibre:</p>
 
         <ol>
             <li>Open the preferences and select "Add your own columns".</li>
@@ -300,12 +300,12 @@
 
             <li>
                 Enter a lookup name for the column. This is used internally by
-                calibre and the plugin.
+                Calibre and the plugin.
             </li>
 
             <li>
                 Enter the display name for the column. This is displayed in
-                calibre with the column. This can be anything but should be
+                Calibre with the column. This can be anything but should be
                 meaningful to you and the purpose of the column.
             </li>
 
@@ -318,7 +318,7 @@
 
             <li>
                 When you have finished adding columns, press the "Apply" button
-                to save the changes. You will be prompted to restart calibre.
+                to save the changes. You will be prompted to restart Calibre.
                 You must do this before the columns can be used.
             </li>
         </ol>
@@ -375,7 +375,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         <h3 id="ConfigurationSteps">Configuration Steps</h3>
 
         <p>
-            Once you have created the columns and restarted calibre, you can set
+            Once you have created the columns and restarted Calibre, you can set
             the columns to be used by the plugin. To do this:
         </p>
 
@@ -389,7 +389,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
                 </li>
 
                 <li>
-                    If the device is not connected, open the calibre
+                    If the device is not connected, open the Calibre
                     preferences. The select "Plugins" and find the plugin in the
                     list. Select the plugin and press the press the "Customize
                     plugin" button.
@@ -634,7 +634,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
                 <li>Title</li>
 
                 <li>
-                    Author - the calibre {author} is used. This will correctly
+                    Author - the Calibre {author} is used. This will correctly
                     populate the author on the device for multiple authors
                 </li>
 
@@ -670,7 +670,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
         <p>
             This allows the reading status of books in the device that are not
-            in the calibre library to be changed. An intended use is to reset an
+            in the Calibre library to be changed. An intended use is to reset an
             accidentally opened book to unread. It can also be used to mark
             books as finished after a factory reset or other reason for
             reloading books.
@@ -715,7 +715,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         <p>
             This allows you to change the series information for books already
             on the device. It allows you to set the series name and number for
-            books that you do not have in your calibre. This can change the
+            books that you do not have in your Calibre. This can change the
             series information for KePubs.
         </p>
 
@@ -724,7 +724,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
             "Manage Series" plugin written by kiwidude. If you are familiar with
             that plugin, this works in a very similar way, but is restricted to
             books on the device. If you want to manage series for books in your
-            calibre library, please use the "Manage Series" plugin. The Kobo
+            Calibre library, please use the "Manage Series" plugin. The Kobo
             Touch driver can update the device with this information.
         </p>
 
@@ -800,7 +800,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
         <p>
             This allows the current reading position in an ePub to be stored in
-            the calibre library. This can then be sent back to the device or
+            the Calibre library. This can then be sent back to the device or
             another Kobo device to restore the reading position. As well, the
             rating set on the device can also be stored and restored.
         </p>
@@ -821,7 +821,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
         <p>
             These can all be retrieved from the device and stored in custom
-            columns in the calibre library.
+            columns in the Calibre library.
         </p>
 
         <p>This is only available in the library list.</p>
@@ -885,7 +885,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
             </li>
 
             <li>
-                Update rating - Sets the rating on the device from the calibre
+                Update rating - Sets the rating on the device from the Calibre
                 library.
             </li>
 
@@ -910,7 +910,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
             The "Show Reading Position Changes" dialog shows the list of books
             whose reading position has changed. Each book is listed with the
             percent read and last reading date that is on the device and in the
-            calibre library.
+            Calibre library.
         </p>
 
         <p>
@@ -946,7 +946,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
             when the book is being read. The ToC displayed when reading is from
             the database, not the book. As well, any navigation done using the
             ToC or the next/previous buttons is based on the database version of
-            the ToC. If the book is replaced with a new copy using calibre, it
+            the ToC. If the book is replaced with a new copy using Calibre, it
             can be replaced without the import being run again. In this case,
             the ToC in the database will be different to the ToC in the book
             when it is read. But, the ToC in the database will still be used.
@@ -984,7 +984,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
             <li>
                 The function will analyze the ToC for the book in three places:
-                calibre, on the device and the database on the device.
+                Calibre, on the device and the database on the device.
             </li>
 
             <li>A dialog is displayed showing the ToC status of the books.</li>
@@ -1014,11 +1014,11 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
             <li>
                 "Library ToC" - The number of ToC entries in the book in the
-                calibre library.
+                Calibre library.
             </li>
 
             <li>
-                "Library Format" - The format of the book in the calibre
+                "Library Format" - The format of the book in the Calibre
                 library.
             </li>
 
@@ -1077,7 +1077,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
             <li>
                 Device icon with arrow - The ToC does not match between the
-                calibre library and the book on the device.
+                Calibre library and the book on the device.
             </li>
 
             <li>
@@ -1098,7 +1098,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         </ul>
 
         <p>
-            The icons used are part of calibre so may be replaced by an icon
+            The icons used are part of Calibre so may be replaced by an icon
             theme.
         </p>
 
@@ -1170,7 +1170,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
         <p>
             With this, you can change the cover on the device to the current
-            cover in the calibre library.
+            cover in the Calibre library.
         </p>
 
         <p>
@@ -1195,7 +1195,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
             <li>
                 Upload covers for Kobo ePubs - Replace covers for Kobo KePubs
-                with the cover from the calibre library.
+                with the cover from the Calibre library.
             </li>
         </ul>
 
@@ -1218,7 +1218,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         <ul>
             <li>
                 Remove covers for Kobo ePubs - Replace covers for Kobo KePubs
-                with the cover from the calibre library.
+                with the cover from the Calibre library.
             </li>
         </ul>
 
@@ -1328,7 +1328,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         <p>
             The function uses the device database for determining the related
             books. This means it can operate on all sideloaded books on the
-            device, not just those in the current calibre library. It also means
+            device, not just those in the current Calibre library. It also means
             that the series name or author needs to be correct and consistent.
         </p>
 
@@ -1455,9 +1455,9 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         <h3 id="BooksNotInDatabase">Show books not in the device database</h3>
 
         <p>
-            There are several circumstances where calibre will think a book is
+            There are several circumstances where Calibre will think a book is
             on the device, but it is not in the device database. This usually
-            means the book has been sent to the device by calibre, but the book
+            means the book has been sent to the device by Calibre, but the book
             has not been processed yet.
         </p>
 
@@ -1469,7 +1469,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
         <p>
             Note: This does not show any books that are on the device and
-            calibre does not know about and are not in the device database. If
+            Calibre does not know about and are not in the device database. If
             books have been sideloaded in some other way and are not in the
             device database, they will not be displayed.
         </p>
@@ -1594,7 +1594,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         </p>
 
         <p>
-            One of the signs of a corrupt database is an error from calibre when
+            One of the signs of a corrupt database is an error from Calibre when
             the device is connected. This error is "DatabaseError: database disk
             image is malformed". When using the device, the symptoms can include
             things like the loss of reading position or the same books being
@@ -1654,7 +1654,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
         <p>
             If you would like to run the backup when the device is connected to
-            calibre, see "<a href="#AutomaticDeviceBackup"
+            Calibre, see "<a href="#AutomaticDeviceBackup"
                 >Automatic Device Backup</a
             >".
         </p>
@@ -1663,7 +1663,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
 
         <p>
             The plugin can automate some actions when the device is connected.
-            These will be run when calibre first sees the device and has run the
+            These will be run when Calibre first sees the device and has run the
             initial device jobs to get the list of books from the device.
         </p>
 
@@ -1715,7 +1715,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
                 Choose between "Back up the device database daily" and "Back up
                 the device database on each connection" for how often the backup
                 is done. The first will do a backup the first time the device is
-                connected to calibre each day. The second will do it each time
+                connected to Calibre each day. The second will do it each time
                 the device is connected. If neither is selected, the backup will
                 not be done.
             </li>
@@ -1742,7 +1742,7 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         </ol>
 
         <p>
-            When the device is connected, a background job is started in calibre
+            When the device is connected, a background job is started in Calibre
             to do the backup. The first step of this job is to determine if a
             backup is needed. If it is not, then nothing is done. If a backup is
             needed, the following steps are done:
@@ -1859,32 +1859,32 @@ format(hours, 'hr') & format(minutes, 'min')</pre
         </p>
 
         <p>
-            After hearing of a problem, I might ask you to run calibre in
+            After hearing of a problem, I might ask you to run Calibre in
             debugging mode and send me the output produced. If I do, these are
             the steps:
         </p>
 
         <ol>
             <li>
-                Restart calibre in debug mode by clicking on the arrow next to
+                Restart Calibre in debug mode by clicking on the arrow next to
                 the preferences button and selecting "Restart in Debug mode".
             </li>
 
             <li>
-                Calibre will close and reopen. When calibre reopens a message
+                Calibre will close and reopen. When Calibre reopens a message
                 about being in debug mode will be displayed.
             </li>
 
             <li>
-                Perform the actions in calibre that are not working as expected.
+                Perform the actions in Calibre that are not working as expected.
                 This will normally mean connecting the the device and waiting
                 for it to sync and then using whichever of the plugins functions
                 didn't work for you.
             </li>
 
-            <li>Close calibre.</li>
+            <li>Close Calibre.</li>
 
-            <li>The calibre debug log will then be displayed.</li>
+            <li>The Calibre debug log will then be displayed.</li>
 
             <li>Send a copy of the log file to me when requested.</li>
         </ol>
