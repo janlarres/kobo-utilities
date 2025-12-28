@@ -25,10 +25,10 @@ test_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path = [test_dir, *sys.path]
 
 if TYPE_CHECKING:
-    from ..koboutilities import action, config, utils
-    from ..koboutilities.action import KoboUtilitiesAction
-    from ..koboutilities.constants import BOOK_CONTENTTYPE
-    from ..koboutilities.features import locations
+    from koboutilities import action, config, utils
+    from koboutilities.action import KoboUtilitiesAction
+    from koboutilities.constants import BOOK_CONTENTTYPE
+    from koboutilities.features import locations
 else:
     from calibre_plugins.koboutilities import action, config, utils
     from calibre_plugins.koboutilities.action import KoboUtilitiesAction

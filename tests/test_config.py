@@ -22,7 +22,7 @@ LIBRARY_SOURCE_PATH = Path(TEST_DIR, "library-config.json")
 if TYPE_CHECKING:
     from types import TracebackType
 
-    from ..koboutilities.config import (
+    from koboutilities.config import (
         BackupOptionsStoreConfig,
         ConfigDictWrapper,
         DeviceConfig,
