@@ -206,7 +206,7 @@ def _get_chapter_list(
     # Remove duplicate content paths while preserving order.
     # This is necessary to avoid DB errors about unique primary keys,
     # and there is no point in having two ToC entries point to the same location anyway.
-    # See https://github.com/majutsushi/kobo-utilities/issues/8
+    # See https://github.com/janlarres/kobo-utilities/issues/8
     # This also prevents the dialog from showing the need to update the ToC
     # when it is in fact up to date, but the number of chapters found here
     # is different from the chapters in the DB because the former contains duplicate paths.
