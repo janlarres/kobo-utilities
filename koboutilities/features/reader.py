@@ -136,9 +136,9 @@ def set_reader_fonts(
     device: KoboDevice,
     gui: ui.Main,
     dispatcher: Dispatcher,
-    load_resouces: LoadResources,
+    load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None or len(current_view.selectionModel().selectedRows()) == 0:
         return
@@ -151,7 +151,7 @@ def set_reader_fonts(
         return
 
     dlg = ReaderOptionsDialog(
-        gui, device, load_resouces, contentIDs[0] if len(contentIDs) == 1 else None
+        gui, device, contentIDs[0] if len(contentIDs) == 1 else None
     )
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
@@ -226,7 +226,6 @@ class ReaderOptionsDialog(PluginDialog):
         self,
         parent: QWidget,
         device: KoboDevice,
-        load_resources: LoadResources,
         contentID: str | None,
     ):
         super().__init__(
@@ -244,7 +243,7 @@ class ReaderOptionsDialog(PluginDialog):
             self.line_spacings = LINE_SPACINGS_020901
 
         self.font_list = self.get_font_list()
-        self.initialize_controls(load_resources, contentID)
+        self.initialize_controls(contentID)
 
         # Set some default values from last time dialog was used.
         options = cfg.plugin_prefs.ReadingOptions
@@ -261,7 +260,7 @@ class ReaderOptionsDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources, contentID: str | None):
+    def initialize_controls(self, contentID: str | None):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -269,7 +268,6 @@ class ReaderOptionsDialog(PluginDialog):
             self,
             "images/icon.png",
             _("Kobo eReader font settings"),
-            load_resources,
             "SetReaderFonts",
         )
         layout.addLayout(title_layout)

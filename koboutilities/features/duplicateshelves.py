@@ -46,9 +46,9 @@ def fix_duplicate_shelves(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     shelves = _get_shelf_count(device)
-    dlg = FixDuplicateShelvesDialog(gui, load_resources, shelves)
+    dlg = FixDuplicateShelvesDialog(gui, shelves)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         debug("dialog cancelled")
@@ -79,7 +79,6 @@ class FixDuplicateShelvesDialog(PluginDialog):
     def __init__(
         self,
         parent: ui.Main,
-        load_resources: LoadResources,
         shelves: list[list[Any]],
     ):
         super().__init__(
@@ -89,7 +88,7 @@ class FixDuplicateShelvesDialog(PluginDialog):
         self.shelves = shelves
         self.blockSignals(True)
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         # Display the books in the table
         self.blockSignals(False)
@@ -98,7 +97,7 @@ class FixDuplicateShelvesDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         options = cfg.plugin_prefs.fixDuplicatesOptionsStore
         self.setWindowTitle(_("Duplicate collections in device database"))
         layout = QVBoxLayout(self)
@@ -107,8 +106,7 @@ class FixDuplicateShelvesDialog(PluginDialog):
             self,
             "images/manage_series.png",
             _("Duplicate collections in device database"),
-            load_resources,
-            "FixDuplicateShelves",
+            "FixDuplicateCollections",
         )
         layout.addLayout(title_layout)
 

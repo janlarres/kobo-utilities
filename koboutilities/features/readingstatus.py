@@ -30,7 +30,7 @@ def change_reading_status(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None or len(current_view.selectionModel().selectedRows()) == 0:
         return
@@ -44,7 +44,7 @@ def change_reading_status(
         book.contentIDs = [book.contentID]
     debug("books:", books)
 
-    dlg = ChangeReadingStatusOptionsDialog(gui, load_resources)
+    dlg = ChangeReadingStatusOptionsDialog(gui)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         return
@@ -79,19 +79,19 @@ def change_reading_status(
 
 
 class ChangeReadingStatusOptionsDialog(PluginDialog):
-    def __init__(self, parent: ui.Main, load_resources: LoadResources):
+    def __init__(self, parent: ui.Main):
         super().__init__(
             parent,
             "kobo utilities plugin:change reading status settings dialog",
         )
         self.options = cfg.MetadataOptionsConfig()
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -99,7 +99,6 @@ class ChangeReadingStatusOptionsDialog(PluginDialog):
             self,
             "images/icon.png",
             _("Change reading status in device library"),
-            load_resources,
             "ChangeReadingStatus",
         )
         layout.addLayout(title_layout)

@@ -576,7 +576,7 @@ class KoboUtilitiesAction(InterfaceAction):
                 unique_name="Help",
                 shortcut_name=_("Help"),
                 image="help.png",
-                triggered=lambda _: show_help(self.load_resources),
+                triggered=lambda _: show_help(),
                 is_library_action=True,
                 is_device_action=True,
                 is_no_device_action=True,

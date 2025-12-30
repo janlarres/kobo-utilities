@@ -51,11 +51,12 @@ def remove_annotations_files(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
+    del load_resources
     current_view = gui.current_view()
     if current_view is None:
         return
 
-    dlg = RemoveAnnotationsOptionsDialog(gui, load_resources)
+    dlg = RemoveAnnotationsOptionsDialog(gui)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         return
@@ -402,13 +403,13 @@ class RemoveAnnotationsProgressDialog(QProgressDialog):
 
 
 class RemoveAnnotationsOptionsDialog(PluginDialog):
-    def __init__(self, parent: QWidget, load_resources: LoadResources):
+    def __init__(self, parent: QWidget):
         super().__init__(
             parent,
             "kobo utilities plugin:remove annotation files settings dialog",
         )
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
         self.annotation_clean_option_idx = (
             cfg.plugin_prefs.removeAnnotations.removeAnnotAction
         )
@@ -420,7 +421,7 @@ class RemoveAnnotationsOptionsDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -428,7 +429,6 @@ class RemoveAnnotationsOptionsDialog(PluginDialog):
             self,
             "images/icon.png",
             _("Remove annotations files"),
-            load_resources,
             "RemoveAnnotations",
         )
         layout.addLayout(title_layout)

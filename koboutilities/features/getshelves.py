@@ -38,14 +38,14 @@ def get_shelves_from_device(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None:
         return
 
     debug("start")
 
-    dlg = GetShelvesFromDeviceDialog(gui, load_resources)
+    dlg = GetShelvesFromDeviceDialog(gui)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         debug("dialog cancelled")
@@ -240,12 +240,12 @@ def _get_shelves_from_device(
 
 
 class GetShelvesFromDeviceDialog(PluginDialog):
-    def __init__(self, parent: ui.Main, load_resources: LoadResources):
+    def __init__(self, parent: ui.Main):
         super().__init__(
             parent,
             "kobo utilities plugin:get shelves from device settings dialog",
         )
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
         self.gui = parent
 
         all_books = cfg.plugin_prefs.getShelvesOptionStore.allBooks
@@ -263,16 +263,12 @@ class GetShelvesFromDeviceDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
         title_layout = ImageTitleLayout(
-            self,
-            "images/icon.png",
-            _("Get collections from device"),
-            load_resources,
-            "GetShelvesFromDevice",
+            self, "images/icon.png", _("Get collections from device")
         )
         layout.addLayout(title_layout)
 

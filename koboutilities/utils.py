@@ -22,7 +22,7 @@ from calibre.gui2.library.views import DeviceBooksView
 from calibre.utils.config import config_dir
 from qt.core import QIcon, QPixmap, QUrl
 
-from .constants import GUI_NAME
+from .constants import GUI_NAME, WIKI_URL
 
 try:
     # timed_print got added in Calibre 7.2.0
@@ -457,28 +457,15 @@ def value_changed(old_value: Any | None, new_value: Any | None) -> bool:
     )
 
 
-def show_help(load_resources: LoadResources, anchor: str | None = None):
+def show_help(anchor: str | None = None):
     debug("anchor=", anchor)
 
-    # Extract on demand the help file resource
-    def get_help_file_resource():
-        # We will write the help file out every time, in case the user upgrades the plugin zip
-        # and there is a later help file contained within it.
-        from calibre.utils.localization import get_lang
+    from calibre.utils.localization import get_lang
 
-        lang = get_lang()
-        help_file = "KoboUtilities_Help_en.html"
-        if lang == "fr":
-            help_file = "KoboUtilities_Help_fr.html"
-        file_path = os.path.join(config_dir, "plugins", help_file).replace(os.sep, "/")
-        file_data = load_resources("help/" + help_file)["help/" + help_file]
-        debug("file_path:", file_path)
-        with open(file_path, "wb") as f:
-            f.write(file_data)
-        return file_path
-
-    debug("anchor=", anchor)
-    url = "file:///" + get_help_file_resource()
+    lang = get_lang()
+    url = WIKI_URL
+    if lang == "fr":
+        url += "/French"
     url = QUrl(url)
     if anchor is not None and anchor != "":
         url.setFragment(anchor)

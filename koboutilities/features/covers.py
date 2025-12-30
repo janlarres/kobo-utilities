@@ -29,7 +29,7 @@ def upload_covers(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None or len(current_view.selectionModel().selectedRows()) == 0:
         return
@@ -43,7 +43,7 @@ def upload_covers(
         current_view.model().db, selectedIDs, get_cover=True
     )
 
-    dlg = CoverUploadOptionsDialog(gui, device, load_resources)
+    dlg = CoverUploadOptionsDialog(gui, device)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         return
@@ -73,7 +73,7 @@ def remove_covers(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None or len(current_view.selectionModel().selectedRows()) == 0:
         return
@@ -88,7 +88,7 @@ def remove_covers(
     if len(books) == 0:
         return
 
-    dlg = RemoveCoverOptionsDialog(gui, load_resources)
+    dlg = RemoveCoverOptionsDialog(gui)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         return
@@ -116,9 +116,9 @@ def open_cover_image_directory(
     device: KoboDevice,
     gui: ui.Main,
     dispatcher: Dispatcher,
-    load_resurces: LoadResources,
+    load_resources: LoadResources,
 ) -> None:
-    del dispatcher, load_resurces
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None:
         return
@@ -367,14 +367,12 @@ def _open_cover_image_directory(books: list[Book], device: KoboDevice, gui: ui.M
 
 
 class CoverUploadOptionsDialog(PluginDialog):
-    def __init__(
-        self, parent: QWidget, device: KoboDevice, load_resources: LoadResources
-    ):
+    def __init__(self, parent: QWidget, device: KoboDevice):
         super().__init__(
             parent,
             "kobo utilities plugin:cover upload settings dialog",
         )
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         options = cfg.plugin_prefs.coverUpload
 
@@ -414,7 +412,7 @@ class CoverUploadOptionsDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -422,7 +420,6 @@ class CoverUploadOptionsDialog(PluginDialog):
             self,
             "default_cover.png",
             _("Upload covers"),
-            load_resources,
             "UploadCovers",
         )
         layout.addLayout(title_layout, stretch=0)
@@ -510,12 +507,12 @@ class CoverUploadOptionsDialog(PluginDialog):
 
 
 class RemoveCoverOptionsDialog(PluginDialog):
-    def __init__(self, parent: QWidget, load_resources: LoadResources):
+    def __init__(self, parent: QWidget):
         super().__init__(
             parent,
             "kobo utilities plugin:remove cover settings dialog",
         )
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         options = cfg.plugin_prefs.removeCovers
         self.remove_fullsize_covers_checkbox.setChecked(options.remove_fullsize_covers)
@@ -524,7 +521,7 @@ class RemoveCoverOptionsDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -532,7 +529,6 @@ class RemoveCoverOptionsDialog(PluginDialog):
             self,
             "default_cover.png",
             _("Remove covers"),
-            load_resources,
             "RemoveCovers",
         )
         layout.addLayout(title_layout)

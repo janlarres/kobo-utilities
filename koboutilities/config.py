@@ -1974,7 +1974,6 @@ class ConfigWidget(QWidget):
             self,
             "images/icon.png",
             _("Kobo Utilities options"),
-            self.plugin_action.load_resources,
             "ConfigurationDialog",
         )
         layout.addLayout(title_layout)

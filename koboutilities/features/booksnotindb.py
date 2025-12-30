@@ -42,7 +42,7 @@ def show_books_not_in_database(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None:
         return
@@ -54,7 +54,7 @@ def show_books_not_in_database(
 
     books_not_in_database = _check_book_in_database(device, books)
 
-    dlg = ShowBooksNotInDeviceDatabaseDialog(gui, load_resources, books_not_in_database)
+    dlg = ShowBooksNotInDeviceDatabaseDialog(gui, books_not_in_database)
     dlg.show()
 
 
@@ -175,9 +175,7 @@ class BooksNotInDeviceDatabaseTableWidget(QTableWidget):
 
 
 class ShowBooksNotInDeviceDatabaseDialog(PluginDialog):
-    def __init__(
-        self, parent: ui.Main, load_resources: LoadResources, books: list[Book]
-    ):
+    def __init__(self, parent: ui.Main, books: list[Book]):
         super().__init__(
             parent,
             "kobo utilities plugin:not in device database dialog",
@@ -186,7 +184,7 @@ class ShowBooksNotInDeviceDatabaseDialog(PluginDialog):
         self.books = books
         self.blockSignals(True)
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         # Display the books in the table
         self.blockSignals(False)
@@ -195,7 +193,7 @@ class ShowBooksNotInDeviceDatabaseDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resouces: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(_("Books not in device database"))
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -203,7 +201,6 @@ class ShowBooksNotInDeviceDatabaseDialog(PluginDialog):
             self,
             "images/manage_series.png",
             _("Books not in device database"),
-            load_resouces,
         )
         layout.addLayout(title_layout)
 

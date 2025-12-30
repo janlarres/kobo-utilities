@@ -50,10 +50,11 @@ def clean_images_dir(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
+    del load_resources
     debug("start")
     debug("device.path", device.path)
 
-    dlg = CleanImagesDirOptionsDialog(gui, load_resources)
+    dlg = CleanImagesDirOptionsDialog(gui)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         return
@@ -262,12 +263,12 @@ def _get_imageId_set(
 
 
 class CleanImagesDirOptionsDialog(PluginDialog):
-    def __init__(self, parent: QWidget, load_resources: LoadResources):
+    def __init__(self, parent: QWidget):
         super().__init__(
             parent,
             "kobo utilities plugin:clean images dir settings dialog",
         )
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         self.delete_extra_covers_checkbox.setChecked(
             cfg.plugin_prefs.cleanImagesDir.delete_extra_covers
@@ -276,7 +277,7 @@ class CleanImagesDirOptionsDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -284,7 +285,6 @@ class CleanImagesDirOptionsDialog(PluginDialog):
             self,
             "images/icon.png",
             _("Clean images directory"),
-            load_resources,
             "CleanImagesDir",
         )
         layout.addLayout(title_layout)

@@ -60,7 +60,7 @@ def update_metadata(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None or len(current_view.selectionModel().selectedRows()) == 0:
         return
@@ -87,7 +87,7 @@ def update_metadata(
         ]
     progressbar.hide()
 
-    dlg = UpdateMetadataOptionsDialog(gui, device, books[0], load_resources)
+    dlg = UpdateMetadataOptionsDialog(gui, device, books[0])
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         return
@@ -801,7 +801,6 @@ class UpdateMetadataOptionsDialog(PluginDialog):
         parent: ui.Main,
         device: KoboDevice,
         book: Book,
-        load_resources: LoadResources,
     ):
         super().__init__(
             parent,
@@ -810,7 +809,7 @@ class UpdateMetadataOptionsDialog(PluginDialog):
         self.gui = parent
         self.test_book = book
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         # Set some default values from last time dialog was used.
         title = cfg.plugin_prefs.MetadataOptions.title
@@ -895,7 +894,7 @@ class UpdateMetadataOptionsDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -903,7 +902,6 @@ class UpdateMetadataOptionsDialog(PluginDialog):
             self,
             "images/icon.png",
             _("Update metadata in device library"),
-            load_resources,
             "UpdateMetadata",
         )
         layout.addLayout(title_layout)

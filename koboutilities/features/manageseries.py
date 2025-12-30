@@ -66,7 +66,7 @@ def manage_series_on_device(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     current_view = gui.current_view()
     if current_view is None or len(current_view.selectionModel().selectedRows()) == 0:
         return
@@ -92,9 +92,7 @@ def manage_series_on_device(
     all_series = library_db.all_series()
     all_series.sort(key=lambda x: sort_key(x[1]))
 
-    d = ManageSeriesDeviceDialog(
-        gui, seriesBooks, all_series, series_columns, load_resources
-    )
+    d = ManageSeriesDeviceDialog(gui, seriesBooks, all_series, series_columns)
     d.exec()
     if d.result() != d.DialogCode.Accepted:
         return
@@ -179,17 +177,15 @@ class ManageSeriesDeviceDialog(PluginDialog):
         books: list[SeriesBook],
         all_series: list[tuple[int, str]],
         series_columns: dict[str, str],
-        load_resources: LoadResources,
     ):
         super().__init__(parent, "kobo utilities plugin:series dialog")
         self.db = parent.library_view.model().db
         self.books = books
         self.all_series = all_series
         self.series_columns = series_columns
-        self.load_resources = load_resources
         self.blockSignals(True)
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         # Books will have been sorted by the Calibre series column
         # Choose the appropriate series column to be editing
@@ -213,7 +209,7 @@ class ManageSeriesDeviceDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(_("Manage series"))
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -221,7 +217,6 @@ class ManageSeriesDeviceDialog(PluginDialog):
             self,
             "images/manage_series.png",
             _("Manage series on device"),
-            load_resources,
         )
         layout.addLayout(title_layout)
 
@@ -518,9 +513,7 @@ class ManageSeriesDeviceDialog(PluginDialog):
                 book.set_assigned_index(auto_assign_value)
                 continue
 
-            d = LockSeriesDialog(
-                self, book.title(), book.series_index(), self.load_resources
-            )
+            d = LockSeriesDialog(self, book.title(), book.series_index())
             d.exec()
             if d.result() != d.DialogCode.Accepted:
                 break
@@ -982,22 +975,19 @@ class LockSeriesDialog(PluginDialog):
         parent: QWidget,
         title: str,
         initial_value: float,
-        load_resources: LoadResources,
     ):
         super().__init__(parent, "Manage Series plugin:lock series dialog")
-        self.initialize_controls(title, initial_value, load_resources)
+        self.initialize_controls(title, initial_value)
 
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(
-        self, title: str, initial_value: float, load_resources: LoadResources
-    ):
+    def initialize_controls(self, title: str, initial_value: float):
         self.setWindowTitle(_("Lock series index"))
         layout = QVBoxLayout(self)
         self.setLayout(layout)
         title_layout = ImageTitleLayout(
-            self, "images/lock32.png", _("Lock series index"), load_resources
+            self, "images/lock32.png", _("Lock series index")
         )
         layout.addLayout(title_layout)
 

@@ -37,10 +37,10 @@ def set_related_books(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     debug("start")
     shelves = []
-    dlg = SetRelatedBooksDialog(gui, device, load_resources, shelves)
+    dlg = SetRelatedBooksDialog(gui, device, shelves)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         debug("dialog cancelled")
@@ -222,7 +222,6 @@ class SetRelatedBooksDialog(PluginDialog):
         self,
         parent: ui.Main,
         device: KoboDevice,
-        load_resources: LoadResources,
         related_types: list[dict[str, Any]],
     ):
         super().__init__(
@@ -234,7 +233,7 @@ class SetRelatedBooksDialog(PluginDialog):
         self.blockSignals(True)
         self.dialog_title = _("Set related books")
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         self.related_category = (
             cfg.plugin_prefs.setRelatedBooksOptionsStore.relatedBooksType
@@ -253,7 +252,7 @@ class SetRelatedBooksDialog(PluginDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -261,7 +260,6 @@ class SetRelatedBooksDialog(PluginDialog):
             self,
             "images/manage_series.png",
             self.dialog_title,
-            load_resources,
             "SetRelatedBooks",
         )
         layout.addLayout(title_layout)

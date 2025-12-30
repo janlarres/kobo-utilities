@@ -11,6 +11,8 @@ and is now maintained by me.
 The main homepage for the plugin is the thread on the MobileRead Forum:
 <https://www.mobileread.com/forums/showthread.php?t=366110>
 
+Documentation for the plugin can be found [on the Wiki](https://github.com/janlarres/kobo-utilities/wiki).
+
 <a href="images/screenshots/menu.png"><img src="images/screenshots/menu.png" width="250" alt="Screenshot of the menu"/></a>
 <a href="images/screenshots/options.png"><img src="images/screenshots/options.png" width="350" alt="Screenshot of the options"/></a>
 

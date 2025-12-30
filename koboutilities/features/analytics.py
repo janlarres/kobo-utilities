@@ -26,11 +26,11 @@ def block_analytics(
     dispatcher: Dispatcher,
     load_resources: LoadResources,
 ) -> None:
-    del dispatcher
+    del dispatcher, load_resources
     # Some background info:
     # https://www.mobileread.com/forums/showpost.php?p=3934039&postcount=44
     debug("start")
-    dlg = BlockAnalyticsOptionsDialog(gui, load_resources)
+    dlg = BlockAnalyticsOptionsDialog(gui)
     dlg.exec()
     if dlg.result() != dlg.DialogCode.Accepted:
         return
@@ -85,19 +85,19 @@ def _block_analytics(device: KoboDevice, create_trigger: bool):
 
 
 class BlockAnalyticsOptionsDialog(PluginDialog):
-    def __init__(self, parent: QWidget, load_resources: LoadResources):
+    def __init__(self, parent: QWidget):
         super().__init__(
             parent,
             "kobo utilities plugin:block analytics settings dialog",
         )
         self.createAnalyticsEventsTrigger = True
 
-        self.initialize_controls(load_resources)
+        self.initialize_controls()
 
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
 
-    def initialize_controls(self, load_resources: LoadResources):
+    def initialize_controls(self):
         self.setWindowTitle(GUI_NAME)
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -105,7 +105,6 @@ class BlockAnalyticsOptionsDialog(PluginDialog):
             self,
             "images/icon.png",
             _("Block analytics"),
-            load_resources,
             "BlockAnalyticsEvents",
         )
         layout.addLayout(title_layout)

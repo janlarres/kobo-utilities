@@ -91,8 +91,6 @@ def build(args: argparse.Namespace) -> Path:
             zip_file.write(f, arcname=f.relative_to(Path("koboutilities").absolute()))
         for f in Path("images").iterdir():
             zip_file.write(f)
-        for f in Path("help").iterdir():
-            zip_file.write(f)
         for f in Path("translations").glob("*.mo"):
             zip_file.write(f)
 

@@ -50,7 +50,7 @@ def update_book_toc_on_device(
 ):
     """Compare the ToC between calibre and the device and update it."""
 
-    del dispatcher
+    del dispatcher, load_resources
     debug("start")
 
     if not utils.check_device_is_ready(
@@ -95,11 +95,7 @@ def update_book_toc_on_device(
 
     progressbar.hide()
 
-    d = UpdateBooksToCDialog(
-        gui,
-        load_resources,
-        books,
-    )
+    d = UpdateBooksToCDialog(gui, books)
     d.exec()
     if d.result() != d.DialogCode.Accepted:
         return
@@ -968,7 +964,6 @@ class UpdateBooksToCDialog(PluginDialog):
     def __init__(
         self,
         parent: ui.Main,
-        load_resources: LoadResources,
         books: list[dict[str, Any]],
     ):
         super().__init__(parent, "kobo utilities plugin:update book toc dialog")
@@ -977,7 +972,7 @@ class UpdateBooksToCDialog(PluginDialog):
         layout = QVBoxLayout(self)
         self.setLayout(layout)
         title_layout = ImageTitleLayout(
-            self, "toc.png", _("Update ToCs in device database"), load_resources
+            self, "toc.png", _("Update ToCs in device database")
         )
         layout.addLayout(title_layout)
 

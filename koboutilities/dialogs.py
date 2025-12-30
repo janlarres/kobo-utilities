@@ -38,8 +38,6 @@ if TYPE_CHECKING:
     from calibre.devices.kobo.books import Book
     from qt.core import QIcon
 
-    from .utils import LoadResources
-
 
 # pulls in translation files for _() strings
 load_translations()
@@ -55,7 +53,6 @@ class ImageTitleLayout(QHBoxLayout):
         parent: QWidget,
         icon_name: str,
         title: str,
-        load_resources: LoadResources,
         help_anchor: str | None = None,
     ):
         super().__init__()
@@ -87,9 +84,7 @@ class ImageTitleLayout(QHBoxLayout):
             Qt.TextInteractionFlag.LinksAccessibleByMouse
             | Qt.TextInteractionFlag.LinksAccessibleByKeyboard
         )
-        help_label.linkActivated.connect(
-            lambda _url: utils.show_help(load_resources, help_anchor)
-        )
+        help_label.linkActivated.connect(lambda _url: utils.show_help(help_anchor))
         help_layout.addWidget(help_label)
 
         help_layout.setAlignment(Qt.AlignmentFlag.AlignRight)
