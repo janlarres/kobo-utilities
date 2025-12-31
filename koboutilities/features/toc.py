@@ -610,19 +610,18 @@ def _compare_toc_entries(
     for i, chapter_format1 in enumerate(book[book_format1 + "_chapters"]):
         chapter_format1_path = chapter_format1["path"]
         chapter_format2_path = book[book_format2 + "_chapters"][i]["path"]
-
         if chapter_format1_path != chapter_format2_path:
             debug("path different for chapter index: %d" % i)
             debug("format1=%s, path='%s'" % (book_format1, chapter_format1_path))
             debug("format2=%s, path='%s'" % (book_format2, chapter_format2_path))
             return False
-        if chapter_format1["title"] != book[book_format2 + "_chapters"][i]["title"]:
+
+        chapter_format1_title = chapter_format1["title"]
+        chapter_format2_title = book[book_format2 + "_chapters"][i]["title"]
+        if chapter_format1_title != chapter_format2_title:
             debug("title different for chapter index: %d" % i)
-            debug("format1=%s, path='%s'" % (book_format1, chapter_format1["title"]))
-            debug(
-                "format2=%s, path='%s'"
-                % (book_format2, book[book_format1 + "_chapters"][i]["title"])
-            )
+            debug("format1=%s, title='%s'" % (book_format1, chapter_format1_title))
+            debug("format2=%s, title='%s'" % (book_format2, chapter_format2_title))
             return False
     debug("chapter paths and titles the same.")
     return True
