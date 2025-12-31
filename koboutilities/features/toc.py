@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import re
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any, Generator, cast
 
 from calibre.devices.kobo.driver import KOBOTOUCH
 from calibre.ebooks.metadata import authors_to_string
@@ -163,7 +163,7 @@ def _read_toc(
 def _get_manifest_entries(container: EpubContainer) -> list[dict[str, Any]]:
     debug("start")
     manifest_entries = []
-    for spine_name, _spine_linear in container.spine_names:
+    for spine_name in _get_spine_names(container):
         spine_path = container.name_to_href(spine_name, container.opf_name)
         file_size = container.filesize(spine_name)
         manifest_entries.append(
@@ -171,6 +171,18 @@ def _get_manifest_entries(container: EpubContainer) -> list[dict[str, Any]]:
         )
     debug("manifest_entries=", manifest_entries)
     return manifest_entries
+
+
+# Copied from container#spine_iter(), but returns all items in order
+# instead of returning non-linear items at the end
+def _get_spine_names(container: EpubContainer) -> Generator[str | None, None, None]:
+    manifest_id_map = container.manifest_id_map
+    for item in container.opf_xpath("//opf:spine/opf:itemref[@idref]"):
+        idref = item.get("idref")
+        name = manifest_id_map.get(idref, None)
+        path = container.name_path_map.get(name, None)
+        if path:
+            yield name
 
 
 def _get_chapter_list(
