@@ -463,7 +463,9 @@ def _get_chapter_status(
                 )
         book["good"] = book["good"] and book["kobo_format_status"]
 
-        if len(book["kobo_database_chapters"]) == 0:
+        if len(book["kobo_database_chapters"]) == 0 and (
+            len(book["kobo_chapters"]) != 0 or len(book["library_chapters"]) != 0
+        ):
             debug("No chapters in database for book.")
             book["can_update_toc"] = False
             book["kobo_database_status"] = False
