@@ -1211,6 +1211,8 @@ class ToCBookListTableWidget(QTableWidget):
         self.setMinimumColumnWidth(1, 100)
         self.setMinimumColumnWidth(2, 100)
         self.setMinimumColumnWidth(3, 100)
+        self.setMaximumColumnWidth(self.TITLE_COLUMN_NO, 300)
+        self.setMaximumColumnWidth(self.AUTHOR_COLUMN_NO, 300)
         self.setMinimumSize(300, 0)
         self.sortItems(1)
         self.sortItems(0)
@@ -1218,6 +1220,10 @@ class ToCBookListTableWidget(QTableWidget):
     def setMinimumColumnWidth(self, col: int, minimum: int):
         if self.columnWidth(col) < minimum:
             self.setColumnWidth(col, minimum)
+
+    def setMaximumColumnWidth(self, col: int, maximum: int):
+        if self.columnWidth(col) > maximum:
+            self.setColumnWidth(col, maximum)
 
     def populate_table_row(self, row: int, book: dict[str, Any]):
         book_status = 0
