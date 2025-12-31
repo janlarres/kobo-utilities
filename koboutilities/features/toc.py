@@ -21,6 +21,11 @@ from qt.core import (
     QVBoxLayout,
 )
 
+try:
+    from calibre.ebooks.oeb.polish.kepubify import DUMMY_TITLE_PAGE_NAME
+except ImportError:
+    DUMMY_TITLE_PAGE_NAME = None  # pyright: ignore[reportConstantRedefinition]
+
 from .. import utils
 from ..constants import GUI_NAME
 from ..dialogs import (
@@ -165,6 +170,13 @@ def _get_manifest_entries(container: EpubContainer) -> list[dict[str, Any]]:
     manifest_entries = []
     for spine_name in _get_spine_names(container):
         spine_path = container.name_to_href(spine_name, container.opf_name)
+
+        if DUMMY_TITLE_PAGE_NAME is not None and DUMMY_TITLE_PAGE_NAME in str(
+            spine_path
+        ):
+            debug("Skipping Calibre dummy title page")
+            continue
+
         file_size = container.filesize(spine_name)
         manifest_entries.append(
             {"path": spine_path, "file_size": file_size, "name": spine_name}
@@ -532,7 +544,14 @@ def _get_database_chapters(
         chapter["toc_depth"] = row["Depth"]
         chapter["added"] = True
         debug("chapter= ", chapter)
-        chapters.append(chapter)
+
+        if (
+            DUMMY_TITLE_PAGE_NAME is not None
+            and DUMMY_TITLE_PAGE_NAME in chapter["path"]
+        ):
+            debug("Skipping Calibre dummy title page")
+        else:
+            chapters.append(chapter)
 
     chapters.sort(key=lambda x: x["VolumeIndex"])
 
