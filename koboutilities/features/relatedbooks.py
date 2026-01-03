@@ -285,16 +285,18 @@ class SetRelatedBooksDialog(PluginDialog):
             related_categories_option_group_box_layout
         )
         self.related_categories_option_button_group = QButtonGroup(self)
-        self.related_categories_option_button_group.buttonClicked[int].connect(
+        self.related_categories_option_button_group.buttonClicked.connect(
             self._related_categories_option_radio_clicked
         )
-        for clean_option in related_categories_options:
+        self.related_categories_buttons = {}
+        for idx, clean_option in enumerate(related_categories_options):
             clean_options = related_categories_options[clean_option]
             rdo = QRadioButton(clean_options[0], self)
             rdo.setToolTip(clean_options[1])
             self.related_categories_option_button_group.addButton(rdo)
             self.related_categories_option_button_group.setId(rdo, clean_option)
             related_categories_option_group_box_layout.addWidget(rdo)
+            self.related_categories_buttons[rdo] = idx
 
         self.fetch_button = QPushButton(_("Get list"), self)
         self.fetch_button.setToolTip(
@@ -347,8 +349,8 @@ class SetRelatedBooksDialog(PluginDialog):
         self.accept()
         return
 
-    def _related_categories_option_radio_clicked(self, idx: int):
-        self.related_category = idx
+    def _related_categories_option_radio_clicked(self, button: QRadioButton):
+        self.related_category = self.related_categories_buttons[button]
 
     def fetch_button_clicked(self):
         self.related_types = _get_related_books_count(
