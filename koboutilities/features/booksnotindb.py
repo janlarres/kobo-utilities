@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING, cast
 
 from calibre.gui2.library.delegates import DateDelegate
 from calibre.utils.config import tweaks
-from calibre.utils.date import utc_tz
 from qt.core import (
     QAbstractItemView,
     QDialogButtonBox,
@@ -165,7 +164,7 @@ class BooksNotInDeviceDatabaseTableWidget(QTableWidget):
                     book.datetime[4],
                     book.datetime[5],
                     book.datetime[6],
-                    utc_tz,
+                    dt.timezone.utc,
                 ),
                 is_read_only=True,
                 default_to_today=False,

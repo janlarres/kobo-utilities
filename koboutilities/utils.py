@@ -230,7 +230,9 @@ def convert_kobo_date(kobo_date: str | None) -> dt.datetime | None:
     if kobo_date is None:
         return None
 
-    from calibre.utils.date import local_tz, utc_tz
+    from calibre.utils.date import local_tz
+
+    utc_tz = dt.timezone.utc
 
     try:
         converted_date = dt.datetime.strptime(
