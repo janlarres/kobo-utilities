@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 2.25.0 - 2026-01-11
+
+- Moved the documentation to a GitHub wiki for easier access and maintenance.
+- Fixed a few bugs where some books where incorrectly marked as needing update
+  when comparing tables of contents.
+- Fixed an exception when opening the Related Books feature on supported
+  firmware versions.
+- Fixed a small incompatibility with Calibre 9.
+
 ## Version 2.24.5 - 2025-10-06
 
 - Fixed an error that prevented the "Remove annotation files" feature from working

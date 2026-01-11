@@ -21,7 +21,7 @@ wheels = [
 
 [[package]]
 name = "kobo-utilities"
-version = "2.24.5"
+version = "2.25.0"
 source = { virtual = "." }
 dependencies = [
     { name = "apsw" },
