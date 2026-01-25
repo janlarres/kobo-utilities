@@ -69,9 +69,8 @@ def _getAnnotationForSelected(device: KoboDevice, gui: ui.Main) -> None:
             debug("paths=", paths)
             if len(paths) > 0:
                 the_path = paths[0]
-                if len(paths) > 1 and (
-                    len(os.path.splitext(paths[0])) > 1
-                ):  # No extension - is kepub
+                if len(paths) > 1 and (len(os.path.splitext(paths[0])) > 1):
+                    # No extension - is kepub
                     the_path = paths[1]
                 path_map[id_] = {"path": the_path, "fmts": get_formats(id_)}
         return path_map
@@ -179,7 +178,11 @@ def backup_annotation_files(
         device, books, dest_path
     )
     result_message = _(
-        "Annotations backup summary:\n\tBooks with annotations={0}\n\tBooks without annotations={1}\n\tKobo epubs={2}\n\tTotal books={3}"
+        "Annotations backup summary:\n"
+        "\tBooks with annotations={0}\n"
+        "\tBooks without annotations={1}\n"
+        "\tKobo epubs={2}\n"
+        "\tTotal books={3}"
     ).format(annotations_found, no_annotations, kepubs, count_books)
     info_dialog(
         gui,
