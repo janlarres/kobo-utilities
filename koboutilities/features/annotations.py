@@ -54,8 +54,8 @@ def _getAnnotationForSelected(device: KoboDevice, gui: ui.Main) -> None:
             rows = range(gui.library_view.model().rowCount(QModelIndex()))
         return list(map(gui.library_view.model().id, rows))
 
-    def get_formats(_id: int) -> list[str]:
-        formats = db.formats(_id, index_is_id=True)
+    def get_formats(id_: int) -> list[str]:
+        formats = db.formats(id_, index_is_id=True)
         return [fmt.lower() for fmt in formats.split(",")]
 
     def generate_annotation_paths(
@@ -64,8 +64,8 @@ def _getAnnotationForSelected(device: KoboDevice, gui: ui.Main) -> None:
         # Generate path templates
         # Individual storage mount points scanned/resolved in driver.get_annotations()
         path_map = {}
-        for _id in ids:
-            paths = utils.get_device_paths_from_id(_id, gui)
+        for id_ in ids:
+            paths = utils.get_device_paths_from_id(id_, gui)
             debug("paths=", paths)
             if len(paths) > 0:
                 the_path = paths[0]
@@ -73,7 +73,7 @@ def _getAnnotationForSelected(device: KoboDevice, gui: ui.Main) -> None:
                     len(os.path.splitext(paths[0])) > 1
                 ):  # No extension - is kepub
                     the_path = paths[1]
-                path_map[_id] = {"path": the_path, "fmts": get_formats(_id)}
+                path_map[id_] = {"path": the_path, "fmts": get_formats(id_)}
         return path_map
 
     annotationText = []
