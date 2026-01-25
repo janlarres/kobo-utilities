@@ -140,17 +140,17 @@ msgstr "Définir des livres apparentés"
 
 #: action.py:458 action.py:460 action.py:455 action.py:457 action.py:487
 #: action.py:489 action.py:504 action.py:506
-msgid "Copy annotation for selected book"
+msgid "Copy annotations for selected books"
 msgstr "Copier l'annotation pour les livres sélectionnés"
 
 #: action.py:464 action.py:466 action.py:461 action.py:463 action.py:493
 #: action.py:495 action.py:510 action.py:512
-msgid "Back up annotation file"
+msgid "Back up EPUB annotation files"
 msgstr "Sauvegarder le fichier d'annotation"
 
 #: action.py:470 action.py:472 action.py:467 action.py:469 action.py:499
 #: action.py:501 action.py:516 action.py:518
-msgid "Remove annotation files"
+msgid "Remove EPUB annotation files"
 msgstr "Supprimer les fichiers d'annotation"
 
 #: action.py:480 action.py:482 action.py:477 action.py:479 action.py:509

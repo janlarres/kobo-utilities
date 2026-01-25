@@ -399,26 +399,26 @@ class KoboUtilitiesAction(InterfaceAction):
             self.menu.addSeparator()
             self.create_menu_item_ex(
                 self.menu,
-                _("Copy annotation for selected book"),
+                _("Copy annotations for selected books"),
                 image="edit_input.png",
-                unique_name="Copy annotation for selected book",
-                shortcut_name=_("Copy annotation for selected book"),
+                unique_name="Copy annotations for selected books",
+                shortcut_name=_("Copy annotations for selected books"),
                 triggered=menu_wrapper(annotations.getAnnotationForSelected),
                 is_library_action=True,
             )
             self.create_menu_item_ex(
                 self.menu,
-                _("Back up annotation file"),
-                unique_name="Back up annotation file",
-                shortcut_name=_("Back up annotation file"),
+                _("Back up EPUB annotation files"),
+                unique_name="Back up EPUB annotation files",
+                shortcut_name=_("Back up EPUB annotation files"),
                 triggered=menu_wrapper(annotations.backup_annotation_files),
                 is_library_action=True,
             )
             self.create_menu_item_ex(
                 self.menu,
-                _("Remove annotation files"),
-                unique_name="Remove annotation files",
-                shortcut_name=_("Remove annotation files"),
+                _("Remove EPUB annotation files"),
+                unique_name="Remove EPUB annotation files",
+                shortcut_name=_("Remove EPUB annotation files"),
                 triggered=menu_wrapper(removeannotations.remove_annotations_files),
                 is_library_action=True,
                 is_device_action=True,
