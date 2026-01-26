@@ -391,7 +391,6 @@ class BackupOptionsStoreConfig(ConfigWrapper):
     backupCopiesToKeepSpin: int = 5
     backupDestDirectory: str = ""
     backupEachCOnnection: bool = False
-    backupZipDatabase: bool = True
     doDailyBackp: bool = False
 
 
@@ -1447,16 +1446,6 @@ class DevicesTab(QWidget):
             self.copies_to_keep_checkbox_clicked
         )
 
-        self.zip_database_checkbox = QCheckBox(
-            _("Compress database with config files"), self
-        )
-        self.zip_database_checkbox.setToolTip(
-            _(
-                "If checked, the database file will be added to the zip file with configuration files."
-            )
-        )
-        options_layout.addWidget(self.zip_database_checkbox, 2, 0, 1, 3)
-
         layout.addLayout(options_layout)
 
         self.toggle_backup_options_state(False)
@@ -1626,7 +1615,6 @@ class DevicesTab(QWidget):
         self.copies_to_keep_checkbox_clicked(
             enabled and self.copies_to_keep_checkbox.isChecked()
         )
-        self.zip_database_checkbox.setEnabled(enabled)
 
     def do_daily_backp_checkbox_clicked(self, checked: bool):
         enable_backup_options = (
@@ -1676,7 +1664,6 @@ class DevicesTab(QWidget):
         self.do_daily_backp_checkbox.setChecked(do_daily_backup)
         self.backup_each_connection_checkbox.setChecked(backup_each_connection)
         self.dest_directory_edit.setText(backup_prefs.backupDestDirectory)
-        self.zip_database_checkbox.setChecked(backup_prefs.backupZipDatabase)
         if copies_to_keep == -1:
             self.copies_to_keep_checkbox.setChecked(False)
         else:
@@ -1692,7 +1679,6 @@ class DevicesTab(QWidget):
         backup_prefs.backupEachCOnnection = (
             self.backup_each_connection_checkbox.isChecked()
         )
-        backup_prefs.backupZipDatabase = self.zip_database_checkbox.isChecked()
         backup_prefs.backupDestDirectory = self.dest_directory_edit.text()
         backup_prefs.backupCopiesToKeepSpin = (
             self.copies_to_keep_spin.value()

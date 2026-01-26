@@ -145,7 +145,6 @@ def device_database_backup_job(backup_options_raw: bytes):
     dest_dir = backup_options.backup_store_config.backupDestDirectory
     copies_to_keep = backup_options.backup_store_config.backupCopiesToKeepSpin
     do_daily_backup = backup_options.backup_store_config.doDailyBackp
-    zip_database = backup_options.backup_store_config.backupZipDatabase
     database_file = backup_options.database_file
     device_path = backup_options.device_path
     debug("copies_to_keep=", copies_to_keep)
@@ -249,24 +248,20 @@ def device_database_backup_job(backup_options_raw: bytes):
                 zfn = os.path.relpath(absfn, device_path).replace(os.sep, "/")
                 backup_file(config_backup_zip, absfn, basename=zfn)
 
-        if zip_database:
-            debug("adding database KoboReader to zip file=%s" % backup_file_path)
-            backup_file(
-                config_backup_zip, backup_file_path, basename="KoboReader.sqlite"
-            )
-            os.unlink(backup_file_path)
+        backup_file(config_backup_zip, backup_file_path, basename="KoboReader.sqlite")
+        os.unlink(backup_file_path)
 
-            if bookreader_backup_file_path is not None:
-                debug(
-                    "adding database BookReader to zip file=%s"
-                    % bookreader_backup_file_path
-                )
-                backup_file(
-                    config_backup_zip,
-                    bookreader_backup_file_path,
-                    basename="BookReader.sqlite",
-                )
-                os.unlink(bookreader_backup_file_path)
+        if bookreader_backup_file_path is not None:
+            debug(
+                "adding database BookReader to zip file=%s"
+                % bookreader_backup_file_path
+            )
+            backup_file(
+                config_backup_zip,
+                bookreader_backup_file_path,
+                basename="BookReader.sqlite",
+            )
+            os.unlink(bookreader_backup_file_path)
 
     if copies_to_keep > 0:
         debug("copies to keep:%s" % copies_to_keep)
