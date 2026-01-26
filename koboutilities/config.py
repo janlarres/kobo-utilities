@@ -13,6 +13,7 @@ import json
 import traceback
 from dataclasses import dataclass
 from functools import partial
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, TypeVar, cast
 
 from calibre.constants import DEBUG as _DEBUG
@@ -389,7 +390,7 @@ class BackupAnnotationsConfig(ConfigWrapper):
 
 class BackupOptionsStoreConfig(ConfigWrapper):
     backupCopiesToKeepSpin: int = 5
-    backupDestDirectory: str = ""
+    backupDestDirectory: str = str(Path.home())
     backupEachCOnnection: bool = False
     doDailyBackp: bool = False
 
@@ -475,7 +476,7 @@ class PluginConfig(ConfigWrapper):
     removeAnnotations: RemoveAnnotationsConfig
     removeCovers: RemoveCoversConfig
     setRelatedBooksOptionsStore: SetRelatedBooksOptionsStoreConfig
-    _version: int = 0
+    _version: int = 3
 
 
 class CustomColumnOptionsConfig(ConfigWrapper):
@@ -601,6 +602,16 @@ def do_config_migrations() -> None:
             for device in devices:
                 plugin_prefs.Devices[device.serial_no] = device
             plugin_prefs._version = 2
+
+    if plugin_prefs._version == 2:
+        debug("Migrating device config to default to $HOME as backup dir")
+        with plugin_prefs:
+            if not plugin_prefs.backupOptionsStore.backupDestDirectory:
+                plugin_prefs.backupOptionsStore.backupDestDirectory = str(Path.home())
+            for device in plugin_prefs.Devices.values():
+                if not device.backupOptionsStore.backupDestDirectory:
+                    device.backupOptionsStore.backupDestDirectory = str(Path.home())
+            plugin_prefs._version = 3
 
 
 def do_library_migrations(db: LibraryDatabase) -> None:
