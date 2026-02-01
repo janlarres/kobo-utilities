@@ -131,6 +131,8 @@ KOBO_FONTS = {
     },
 }
 
+load_translations()
+
 
 def set_reader_fonts(
     device: KoboDevice,

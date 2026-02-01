@@ -190,6 +190,8 @@ FETCH_QUERIES[(4, 0, 7523)] = FetchQueries(KEPUB_FETCH_QUERY, EPUB_FETCH_QUERY)
 # With 4.17.13651, epub location is stored in the same way a for kepubs.
 FETCH_QUERIES[(4, 17, 13651)] = FetchQueries(KEPUB_FETCH_QUERY, KEPUB_FETCH_QUERY)
 
+load_translations()
+
 
 def handle_bookmarks(
     device: KoboDevice,

@@ -41,6 +41,8 @@ if TYPE_CHECKING:
     from ..config import KoboDevice
     from ..utils import Dispatcher, LoadResources
 
+load_translations()
+
 DATE_COLUMNS = [
     "timestamp",
     "last_modified",

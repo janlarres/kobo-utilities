@@ -32,6 +32,8 @@ if TYPE_CHECKING:
     from ..config import KoboDevice
     from ..utils import Dispatcher, LoadResources
 
+load_translations()
+
 
 @dataclass
 class CleanImagesDirJobOptions:

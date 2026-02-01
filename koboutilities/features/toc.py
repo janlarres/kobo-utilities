@@ -46,6 +46,8 @@ if TYPE_CHECKING:
     from ..config import KoboDevice
     from ..utils import DeviceDatabaseConnection, Dispatcher, LoadResources
 
+load_translations()
+
 
 def update_book_toc_on_device(
     device: KoboDevice,

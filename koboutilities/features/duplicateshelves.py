@@ -39,6 +39,8 @@ if TYPE_CHECKING:
     from ..config import KoboDevice
     from ..utils import Dispatcher, LoadResources
 
+load_translations()
+
 
 def fix_duplicate_shelves(
     device: KoboDevice,

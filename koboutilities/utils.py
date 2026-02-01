@@ -51,6 +51,8 @@ plugin_icon_resources = {}
 Dispatcher = Callable[[Callable[[DeviceJob], None]], None]
 LoadResources = Callable[[Iterable[str]], Dict[str, bytes]]
 
+load_translations()
+
 
 def debug(*args: Any):
     if DEBUG:
