@@ -65,6 +65,7 @@ PLUGIN_ICONS = [
     "images/ms_ff.png",
     "images/device_connected.png",
     "images/clock.png",
+    "images/clock-history.png",
     "images/database.png",
     "images/databases.png",
     "images/vise.png",
@@ -445,6 +446,19 @@ class KoboUtilitiesAction(InterfaceAction):
                 is_library_action=True,
                 is_device_action=True,
             )
+
+            self.create_menu_item_ex(
+                self.menu,
+                _("Restore backup to device"),
+                unique_name="Restore backup to device",
+                shortcut_name=_("Restore backup to device"),
+                image="images/clock-history.png",
+                triggered=menu_wrapper(backup.restore_backup),
+                is_library_action=True,
+                is_device_action=True,
+                is_supported=device is not None,
+            )
+
             databaseMenu = cast("QMenu", self.menu.addMenu(_("Database")))
             databaseMenu.setIcon(get_icon("images/database.png"))
             self.create_menu_item_ex(

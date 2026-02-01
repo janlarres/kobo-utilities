@@ -4,13 +4,14 @@ import datetime as dt
 import glob
 import os
 import pickle
+import re
 import shutil
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from calibre.gui2 import FileDialog
+from calibre.gui2 import FileDialog, error_dialog, info_dialog, question_dialog
 from qt.core import QFileDialog
 
 from .. import utils
@@ -33,6 +34,13 @@ class DatabaseBackupJobOptions:
     device_path: Path
 
 
+@dataclass
+class BackupDeviceInfo:
+    device_name: str
+    serial_number: str
+    fw_version: str
+
+
 # Backup file names will be KoboReader-devicename-serialnumber-timestamp.zip
 BACKUP_FILE_TEMPLATE = "KoboReader-{0}-{1}-{2}.zip"
 BACKUP_PATHS = [
@@ -43,6 +51,8 @@ BACKUP_PATHS = [
     ".kobo/affiliate.conf",
     ".kobo/version",
 ]
+
+load_translations()
 
 
 def backup_device_database(
@@ -230,3 +240,176 @@ def check_do_backup(options: DatabaseBackupJobOptions, now: dt.datetime) -> bool
         return False
 
     return True
+
+
+def restore_backup(
+    device: KoboDevice,
+    gui: ui.Main,
+    dispatcher: Dispatcher,
+    load_resources: LoadResources,
+) -> None:
+    del dispatcher, load_resources
+
+    backup_dir = device.backup_config.backupDestDirectory
+    fd = FileDialog(
+        parent=gui,
+        name="Kobo Utilities plugin:choose backup to restore",
+        title=_("Choose backup to restore"),
+        filters=[(_("Kobo backups"), ["zip"])],
+        add_all_files_filter=False,
+        default_dir=backup_dir,
+        mode=QFileDialog.FileMode.ExistingFile,
+    )
+    if not fd.accepted:
+        return
+    backup_path = fd.get_files()[0]
+    if not backup_path:
+        return
+    backup_path = Path(backup_path)
+    debug(f"backup_file={backup_path}")
+
+    match = re.match(
+        BACKUP_FILE_TEMPLATE.format(
+            r"(?P<device_name>[^-]+)",
+            r"(?P<serial_number>[^-]+)",
+            r"(?P<timestamp>\d{8}-\d{6})",
+        ),
+        backup_path.name,
+    )
+    if match is None:
+        debug(f"Failed to parse filename {backup_path.name}")
+        invalid_backup_dialog(backup_path.name, gui)
+        return
+    bk_device_name = match.group("device_name")
+    bk_timestamp = dt.datetime.strptime(match.group("timestamp"), "%Y%m%d-%H%M%S")  # noqa: DTZ007
+
+    with tempfile.TemporaryDirectory(prefix="koboutilities-restore-") as tmpdir:
+        tmpdir = Path(tmpdir)
+        debug(f"tmpdir={tmpdir}")
+        do_restore(backup_path, tmpdir, device, bk_device_name, bk_timestamp, gui)
+
+
+def do_restore(
+    backup_path: Path,
+    tmpdir: Path,
+    device: KoboDevice,
+    bk_device_name: str,
+    bk_timestamp: dt.datetime,
+    gui: ui.Main,
+) -> None:
+    shutil.unpack_archive(backup_path, tmpdir)
+
+    if (
+        not (tmpdir / ".kobo/KoboReader.sqlite").exists()
+        or not (tmpdir / ".kobo/version").exists()
+    ):
+        debug("Failed to find critical files in backup")
+        invalid_backup_dialog(backup_path.name, gui)
+        return
+
+    restore_msg = _(
+        "Restoring this backup from {date} will overwrite the database"
+        " and some configuration files on the device with the files from the backup."
+        " Are you sure you want to proceed?"
+    ).format(date=bk_timestamp.strftime("%c"))
+
+    backup_info, device_info = get_backup_info(tmpdir, bk_device_name, device)
+    debug(f"backup_info={backup_info}")
+    debug(f"device_info={device_info}")
+    is_incompatible = backup_info != device_info
+    if is_incompatible:
+        restore_msg = get_incompatible_message(backup_info, device_info) + restore_msg
+    if not question_dialog(
+        gui,
+        "Restore backup?",
+        restore_msg,
+        show_copy_button=is_incompatible,
+        default_yes=False,
+        override_icon="dialog_warning.png" if is_incompatible else None,
+        yes_text=_("Restore"),
+        no_text=_("Cancel"),
+    ):
+        debug("Cancelled restore")
+        return
+
+    device_path = str(device.driver._main_prefix)
+    debug(f"Restoring backup to {device_path}")
+
+    # Delete the version file before restoring because we don't want to overwrite it
+    # with potentially incompatible information
+    (tmpdir / ".kobo/version").unlink()
+    shutil.copytree(tmpdir, device_path, dirs_exist_ok=True)
+
+    # Remove temporary SQLite files that could cause issues with the restored DB
+    Path(device_path, ".kobo/KoboReader.sqlite-shm").unlink(missing_ok=True)
+    Path(device_path, ".kobo/KoboReader.sqlite-wal").unlink(missing_ok=True)
+    debug("Backup successfully restored")
+
+    info_dialog(
+        gui,
+        _("Backup restored"),
+        _(
+            "Backup restored."
+            " You should eject and restart your device now"
+            " to ensure that the device reads the database correctly."
+        ),
+        show=True,
+        show_copy_button=False,
+    )
+
+
+def invalid_backup_dialog(filename: str, gui: ui.Main) -> None:
+    error_dialog(
+        gui,
+        _("Invalid backup"),
+        _(
+            'The file "{0}" does not appear to be a valid KoboUtilities backup file'
+        ).format(filename),
+        show=True,
+    )
+
+
+def get_backup_info(
+    tmpdir: Path, bk_device_name: str, device: KoboDevice
+) -> tuple[BackupDeviceInfo, BackupDeviceInfo]:
+    bk_version_info = (tmpdir / ".kobo/version").read_text().split(",")
+    bk_serial_number = bk_version_info[0]
+    bk_fwversion = bk_version_info[2]
+
+    dv_serial_number = device.version_info.serial_no
+    dv_device_name = "".join(device.driver.gui_name.split())
+    dv_fwversion = ".".join(map(str, device.driver.fwversion))
+
+    return (
+        BackupDeviceInfo(bk_device_name, bk_serial_number, bk_fwversion),
+        BackupDeviceInfo(dv_device_name, dv_serial_number, dv_fwversion),
+    )
+
+
+def get_incompatible_message(
+    backup_info: BackupDeviceInfo, device_info: BackupDeviceInfo
+) -> str:
+    message = _(
+        "<b>The information of this backup does not match the device information."
+        " Restoring an incompatible backup can have unintended consequences"
+        " and may require you to reset your device.</b>"
+    )
+
+    row = "<tr><td>{0}</td><td>{1}</td></tr>"
+
+    def format_info_row(v1: str, v2: str) -> str:
+        if v1 == v2:
+            return row.format(v1, v2)
+        return row.format(
+            f"<span style='color: red; font-weight: bold'>{v1}</span>",
+            f"<span style='color: red; font-weight: bold'>{v2}</span>",
+        )
+
+    message += "<br><table>"
+    message += "<tr><th>{0}</th><th>{1}</th></tr>".format(_("Backup"), _("Device"))
+    message += format_info_row(backup_info.device_name, device_info.device_name)
+    message += format_info_row(backup_info.serial_number, device_info.serial_number)
+    message += format_info_row(backup_info.fw_version, device_info.fw_version)
+    message += "</table><br><br>"
+
+    return message
