@@ -279,23 +279,28 @@ class ReaderOptionsDialog(PluginDialog):
         options_layout = QGridLayout()
         options_group.setLayout(options_layout)
 
-        options_layout.addWidget(QLabel(_("Font face")), 0, 0, 1, 1)
+        note = QLabel(
+            _("Note that depending on your device not all fonts may be supported.")
+        )
+        options_layout.addWidget(note, 0, 0, 1, 5)
+
+        options_layout.addWidget(QLabel(_("Font face")), 1, 0, 1, 1)
         self.font_choice = FontChoiceComboBox(self, self.font_list)
-        options_layout.addWidget(self.font_choice, 0, 1, 1, 4)
-        options_layout.addWidget(QLabel(_("Font size")), 1, 0, 1, 1)
+        options_layout.addWidget(self.font_choice, 1, 1, 1, 4)
+        options_layout.addWidget(QLabel(_("Font size")), 2, 0, 1, 1)
         self.font_size_spin = QSpinBox(self)
         self.font_size_spin.setMinimum(12)
         self.font_size_spin.setMaximum(58)
         self.font_size_spin.setToolTip(
             _("Font size to use when reading. The device default is about 22.")
         )
-        options_layout.addWidget(self.font_size_spin, 1, 1, 1, 1)
+        options_layout.addWidget(self.font_size_spin, 2, 1, 1, 1)
 
-        options_layout.addWidget(QLabel(_("Line spacing")), 2, 0, 1, 1)
+        options_layout.addWidget(QLabel(_("Line spacing")), 3, 0, 1, 1)
         self.line_spacing_spin = QSpinBox(self)
         self.line_spacing_spin.setMinimum(0)
         self.line_spacing_spin.setMaximum(len(self.line_spacings) - 1)
-        options_layout.addWidget(self.line_spacing_spin, 2, 1, 1, 1)
+        options_layout.addWidget(self.line_spacing_spin, 3, 1, 1, 1)
         self.line_spacing_spin.setToolTip(
             _(
                 "The line spacing number is how many times the right arrow is pressed on the device."
@@ -304,7 +309,7 @@ class ReaderOptionsDialog(PluginDialog):
         self.line_spacing_spin.valueChanged.connect(self.line_spacing_spin_changed)
 
         self.custom_line_spacing_checkbox = QCheckBox(_("Custom setting"), self)
-        options_layout.addWidget(self.custom_line_spacing_checkbox, 2, 2, 1, 1)
+        options_layout.addWidget(self.custom_line_spacing_checkbox, 3, 2, 1, 1)
         self.custom_line_spacing_checkbox.setToolTip(
             _(
                 "If you want to try a line spacing other than the Kobo specified, check this and enter a number."
@@ -316,14 +321,14 @@ class ReaderOptionsDialog(PluginDialog):
 
         self.custom_line_spacing_edit = QLineEdit(self)
         self.custom_line_spacing_edit.setEnabled(False)
-        options_layout.addWidget(self.custom_line_spacing_edit, 2, 3, 1, 2)
+        options_layout.addWidget(self.custom_line_spacing_edit, 3, 3, 1, 2)
         self.custom_line_spacing_edit.setToolTip(
             _(
                 "Kobo use from 1.3 to 4.0. Any number can be entered, but whether the device will use it, is another matter."
             )
         )
 
-        options_layout.addWidget(QLabel(_("Left margins")), 3, 0, 1, 1)
+        options_layout.addWidget(QLabel(_("Left margins")), 4, 0, 1, 1)
         self.left_margins_spin = QSpinBox(self)
         self.left_margins_spin.setMinimum(0)
         self.left_margins_spin.setMaximum(16)
@@ -332,11 +337,11 @@ class ReaderOptionsDialog(PluginDialog):
                 "Margins on the device are set in multiples of two, but single steps work."
             )
         )
-        options_layout.addWidget(self.left_margins_spin, 3, 1, 1, 1)
+        options_layout.addWidget(self.left_margins_spin, 4, 1, 1, 1)
         self.left_margins_spin.valueChanged.connect(self.left_margins_spin_changed)
 
         self.lock_margins_checkbox = QCheckBox(_("Lock margins"), self)
-        options_layout.addWidget(self.lock_margins_checkbox, 3, 2, 1, 1)
+        options_layout.addWidget(self.lock_margins_checkbox, 4, 2, 1, 1)
         self.lock_margins_checkbox.setToolTip(
             _(
                 "Lock the left and right margins to the same value. Changing the left margin will also set the right margin."
@@ -344,7 +349,7 @@ class ReaderOptionsDialog(PluginDialog):
         )
         self.lock_margins_checkbox.clicked.connect(self.lock_margins_checkbox_clicked)
 
-        options_layout.addWidget(QLabel(_("Right margins")), 3, 3, 1, 1)
+        options_layout.addWidget(QLabel(_("Right margins")), 4, 3, 1, 1)
         self.right_margins_spin = QSpinBox(self)
         self.right_margins_spin.setMinimum(0)
         self.right_margins_spin.setMaximum(16)
@@ -353,14 +358,14 @@ class ReaderOptionsDialog(PluginDialog):
                 "Margins on the device are set in multiples of three, but single steps work."
             )
         )
-        options_layout.addWidget(self.right_margins_spin, 3, 4, 1, 1)
+        options_layout.addWidget(self.right_margins_spin, 4, 4, 1, 1)
 
-        options_layout.addWidget(QLabel(_("Justification")), 5, 0, 1, 1)
+        options_layout.addWidget(QLabel(_("Justification")), 6, 0, 1, 1)
         self.justification_choice = JustificationChoiceComboBox(self)
-        options_layout.addWidget(self.justification_choice, 5, 1, 1, 1)
+        options_layout.addWidget(self.justification_choice, 6, 1, 1, 1)
 
         self.update_config_file_checkbox = QCheckBox(_("Update config file"), self)
-        options_layout.addWidget(self.update_config_file_checkbox, 5, 2, 1, 1)
+        options_layout.addWidget(self.update_config_file_checkbox, 6, 2, 1, 1)
         self.update_config_file_checkbox.setToolTip(
             _(
                 "Update the 'Kobo eReader.conf' file with the new settings. These will be used when opening new books or books that do not have stored settings."
@@ -368,7 +373,7 @@ class ReaderOptionsDialog(PluginDialog):
         )
 
         self.do_not_update_if_set_checkbox = QCheckBox(_("Do not update if set"), self)
-        options_layout.addWidget(self.do_not_update_if_set_checkbox, 5, 3, 1, 2)
+        options_layout.addWidget(self.do_not_update_if_set_checkbox, 6, 3, 1, 2)
         self.do_not_update_if_set_checkbox.setToolTip(
             _("Do not upate the font settings if it is already set for the book.")
         )
