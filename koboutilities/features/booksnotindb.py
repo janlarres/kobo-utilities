@@ -92,7 +92,7 @@ class BooksNotInDeviceDatabaseTableWidget(QTableWidget):
     def __init__(self, parent: QWidget):
         QTableWidget.__init__(self, parent)
         self.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        self.fmt = tweaks["gui_pubdate_display_format"]
+        self.fmt = cast("str | None", tweaks["gui_pubdate_display_format"])
         if self.fmt is None:
             self.fmt = "MMM yyyy"
 

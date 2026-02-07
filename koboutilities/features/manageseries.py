@@ -778,7 +778,7 @@ class SeriesTableWidget(QTableWidget):
         self.setAcceptDrops(True)
         self.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
         self.setDropIndicatorShown(True)
-        self.fmt = tweaks["gui_pubdate_display_format"]
+        self.fmt = cast("str | None", tweaks["gui_pubdate_display_format"])
         if self.fmt is None:
             self.fmt = "MMM yyyy"
 
