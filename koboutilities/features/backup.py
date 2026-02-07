@@ -41,6 +41,16 @@ class BackupDeviceInfo:
     fw_version: str
 
 
+@dataclass
+class BackupInfo(BackupDeviceInfo):
+    pass
+
+
+@dataclass
+class DeviceInfo(BackupDeviceInfo):
+    pass
+
+
 # Backup file names will be KoboReader-devicename-serialnumber-timestamp.zip
 BACKUP_FILE_TEMPLATE = "KoboReader-{0}-{1}-{2}.zip"
 BACKUP_PATHS = [
@@ -316,16 +326,44 @@ def do_restore(
     backup_info, device_info = get_backup_info(tmpdir, bk_device_name, device)
     debug(f"backup_info={backup_info}")
     debug(f"device_info={device_info}")
-    is_incompatible = backup_info != device_info
-    if is_incompatible:
-        restore_msg = get_incompatible_message(backup_info, device_info) + restore_msg
+
+    if backup_info.device_name != device_info.device_name:
+        debug("Incompatible backup")
+        error_dialog(
+            gui,
+            _("Incompatible backup"),
+            _(
+                "This backup was created from a different device type. Restoring backups to a different device type is not supported."
+            )
+            + format_info_table(backup_info, device_info),
+            show=True,
+        )
+        return
+    if backup_info.serial_number != device_info.serial_number:
+        restore_msg = (
+            _(
+                "This backup was created from a different device."
+                " Make sure that the device to restore to is the expected device."
+            )
+            + format_info_table(backup_info, device_info)
+            + restore_msg
+        )
+    elif backup_info.fw_version != device_info.fw_version:
+        restore_msg = (
+            _(
+                "This backup was created from a device running a different firmware version."
+                " This is probably okay, but you should make sure that your device is up to date"
+                " before restoring."
+            )
+            + format_info_table(backup_info, device_info)
+            + restore_msg
+        )
+
     if not question_dialog(
         gui,
         "Restore backup?",
         restore_msg,
-        show_copy_button=is_incompatible,
         default_yes=False,
-        override_icon="dialog_warning.png" if is_incompatible else None,
         yes_text=_("Restore"),
         no_text=_("Cancel"),
     ):
@@ -371,7 +409,7 @@ def invalid_backup_dialog(filename: str, gui: ui.Main) -> None:
 
 def get_backup_info(
     tmpdir: Path, bk_device_name: str, device: KoboDevice
-) -> tuple[BackupDeviceInfo, BackupDeviceInfo]:
+) -> tuple[BackupInfo, DeviceInfo]:
     bk_version_info = (tmpdir / ".kobo/version").read_text().split(",")
     bk_serial_number = bk_version_info[0]
     bk_fwversion = bk_version_info[2]
@@ -381,35 +419,36 @@ def get_backup_info(
     dv_fwversion = ".".join(map(str, device.driver.fwversion))
 
     return (
-        BackupDeviceInfo(bk_device_name, bk_serial_number, bk_fwversion),
-        BackupDeviceInfo(dv_device_name, dv_serial_number, dv_fwversion),
+        BackupInfo(bk_device_name, bk_serial_number, bk_fwversion),
+        DeviceInfo(dv_device_name, dv_serial_number, dv_fwversion),
     )
 
 
-def get_incompatible_message(
-    backup_info: BackupDeviceInfo, device_info: BackupDeviceInfo
-) -> str:
-    message = _(
-        "<b>The information of this backup does not match the device information."
-        " Restoring an incompatible backup can have unintended consequences"
-        " and may require you to reset your device.</b>"
-    )
+def format_info_table(backup_info: BackupInfo, device_info: DeviceInfo) -> str:
+    row = "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>"
 
-    row = "<tr><td>{0}</td><td>{1}</td></tr>"
-
-    def format_info_row(v1: str, v2: str) -> str:
+    def format_info_row(name: str, v1: str, v2: str) -> str:
         if v1 == v2:
-            return row.format(v1, v2)
+            return row.format(name, v1, v2)
         return row.format(
+            name,
             f"<span style='color: red; font-weight: bold'>{v1}</span>",
             f"<span style='color: red; font-weight: bold'>{v2}</span>",
         )
 
-    message += "<br><table>"
-    message += "<tr><th>{0}</th><th>{1}</th></tr>".format(_("Backup"), _("Device"))
-    message += format_info_row(backup_info.device_name, device_info.device_name)
-    message += format_info_row(backup_info.serial_number, device_info.serial_number)
-    message += format_info_row(backup_info.fw_version, device_info.fw_version)
-    message += "</table><br><br>"
+    table = "<br><table>"
+    table += "<tr><th></th><th>{0}</th><th>{1}</th></tr>".format(
+        _("Backup"), _("Device")
+    )
+    table += format_info_row(
+        _("Device type"), backup_info.device_name, device_info.device_name
+    )
+    table += format_info_row(
+        _("Serial number"), backup_info.serial_number, device_info.serial_number
+    )
+    table += format_info_row(
+        _("Firmware version"), backup_info.fw_version, device_info.fw_version
+    )
+    table += "</table><br><br>"
 
-    return message
+    return table
