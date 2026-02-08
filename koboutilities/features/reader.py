@@ -70,7 +70,8 @@ LINE_SPACINGS_030200 = [
     3,
 ]
 KOBO_FONTS = {
-    (0, 0, 0): {  # Format is: Display name, setting name
+    # Format is: Display name, setting name
+    (0, 0, 0): {
         "Document Default": "default",
         "Amasis": "Amasis",
         "Avenir": "Avenir Next",
@@ -84,7 +85,7 @@ KOBO_FONTS = {
         "Ryumin": "A-OTF Ryumin Pr6N",
         "OpenDyslexic": "OpenDyslexic",
     },
-    (3, 19, 0): {  # Format is: Display name, setting name
+    (3, 19, 0): {
         "Document Default": "default",
         "Amasis": "Amasis",
         "Avenir": "Avenir Next",
@@ -98,7 +99,7 @@ KOBO_FONTS = {
         "Kobo UD Kakugo": "KBJ-UDKakugo Pr6N M",
         "OpenDyslexic": "OpenDyslexic",
     },
-    (4, 13, 12638): {  # Format is: Display name, setting name
+    (4, 13, 12638): {
         "Document Default": "default",
         "Amasis": "Amasis",
         "Avenir": "Avenir Next",
@@ -113,7 +114,7 @@ KOBO_FONTS = {
         "Kobo UD Kakugo": "KBJ-UDKakugo Pr6N M",
         "OpenDyslexic": "OpenDyslexic",
     },
-    (4, 34, 20097): {  # Format is: Display name, setting name
+    (4, 34, 20097): {
         "Document Default": "default",
         "Amasis": "Amasis",
         "Avenir": "Avenir Next",
@@ -128,6 +129,26 @@ KOBO_FONTS = {
         "OpenDyslexic": "OpenDyslexic",
         "Rakuten Serif": "Rakuten Serif",
         "Rakuten Sans": "Rakuten Sans",
+    },
+    (4, 39, 22801): {
+        "Document Default": "default",
+        "AR UDJingxihei": "AR UDJingxihei",
+        "Atkinson Hyperlegible": "Atkinson Hyperlegible",
+        "Bariol": "Bariol",
+        "Bitter": "Bitter",
+        "Caecilia": "Caecilia",
+        "Gill Sans": "Gill Sans",
+        "Kobo Nickel": "Kobo Nickel",
+        "Kobo Tsukushi Mincho": "KBJ-TsukuMin Pr6N RB",
+        "Kobo UD Kakugo": "KBJ-UDKakugo Pr6N M",
+        "Malabar": "Malabar",
+        "Noto Sans": "Noto Sans",
+        "OpenDyslexic": "OpenDyslexic",
+        "Rakuten Sans": "Rakuten Sans",
+        "Rakuten Serif": "Rakuten Serif",
+        "Texturina Medium": "Texturina Medium",
+        "Ubuntu": "Ubuntu",
+        "Vollkorn": "Vollkorn",
     },
 }
 
