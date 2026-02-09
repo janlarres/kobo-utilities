@@ -9,7 +9,7 @@ import shutil
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, NewType
 
 from calibre.gui2 import FileDialog, error_dialog, info_dialog, question_dialog
 from qt.core import QFileDialog
@@ -41,14 +41,8 @@ class BackupDeviceInfo:
     fw_version: str
 
 
-@dataclass
-class BackupInfo(BackupDeviceInfo):
-    pass
-
-
-@dataclass
-class DeviceInfo(BackupDeviceInfo):
-    pass
+BackupInfo = NewType("BackupInfo", BackupDeviceInfo)
+DeviceInfo = NewType("DeviceInfo", BackupDeviceInfo)
 
 
 # Backup file names will be KoboReader-devicename-serialnumber-timestamp.zip
@@ -420,8 +414,8 @@ def get_backup_info(
     dv_fwversion = ".".join(map(str, device.driver.fwversion))
 
     return (
-        BackupInfo(bk_device_name, bk_serial_number, bk_fwversion),
-        DeviceInfo(dv_device_name, dv_serial_number, dv_fwversion),
+        BackupInfo(BackupDeviceInfo(bk_device_name, bk_serial_number, bk_fwversion)),
+        DeviceInfo(BackupDeviceInfo(dv_device_name, dv_serial_number, dv_fwversion)),
     )
 
 
