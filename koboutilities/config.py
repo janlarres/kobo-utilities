@@ -1685,6 +1685,7 @@ class DevicesTab(QWidget):
             self.do_daily_backp_checkbox_clicked(do_daily_backup)
         if backup_each_connection:
             self.backup_each_connection_checkbox_clicked(backup_each_connection)
+        self.toggle_backup_options_state(do_daily_backup or backup_each_connection)
 
     def persist_backup_config(self, backup_prefs: BackupOptionsStoreConfig) -> None:
         backup_prefs.doDailyBackp = self.do_daily_backp_checkbox.isChecked()
