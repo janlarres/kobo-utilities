@@ -390,7 +390,7 @@ class BackupAnnotationsConfig(ConfigWrapper):
 
 class BackupOptionsStoreConfig(ConfigWrapper):
     backupCopiesToKeepSpin: int = 5
-    backupDestDirectory: str = str(Path.home())
+    backupDestDirectory: str = str(Path.home() / "Kobo backups")
     backupEachCOnnection: bool = False
     doDailyBackp: bool = False
 
@@ -606,11 +606,12 @@ def do_config_migrations() -> None:
     if plugin_prefs._version == 2:
         debug("Migrating device config to default to $HOME as backup dir")
         with plugin_prefs:
+            dest = str(Path.home() / "Kobo backups")
             if not plugin_prefs.backupOptionsStore.backupDestDirectory:
-                plugin_prefs.backupOptionsStore.backupDestDirectory = str(Path.home())
+                plugin_prefs.backupOptionsStore.backupDestDirectory = dest
             for device in plugin_prefs.Devices.values():
                 if not device.backupOptionsStore.backupDestDirectory:
-                    device.backupOptionsStore.backupDestDirectory = str(Path.home())
+                    device.backupOptionsStore.backupDestDirectory = dest
             plugin_prefs._version = 3
 
 

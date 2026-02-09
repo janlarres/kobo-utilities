@@ -153,7 +153,7 @@ def device_database_backup_job(backup_options_raw: bytes):
     debug("backup_options=", backup_options)
     device_name = backup_options.device_name
     serial_number = backup_options.serial_number
-    dest_dir = backup_options.backup_store_config.backupDestDirectory
+    dest_dir = Path(backup_options.backup_store_config.backupDestDirectory)
     copies_to_keep = backup_options.backup_store_config.backupCopiesToKeepSpin
     device_path = backup_options.device_path
 
@@ -192,8 +192,9 @@ def device_database_backup_job(backup_options_raw: bytes):
             raise Exception(check_result)
 
         # Create the zip file archive
-        backup_file_path = Path(dest_dir, backup_file_name)
+        backup_file_path = dest_dir / backup_file_name
         debug("backup_file_path=%s" % backup_file_path)
+        dest_dir.mkdir(parents=True, exist_ok=True)
         shutil.make_archive(
             str(backup_file_path.parent / backup_file_path.stem), "zip", tmpdir
         )
