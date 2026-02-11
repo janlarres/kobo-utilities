@@ -11,6 +11,7 @@ requires-python = "==3.8.5"
 # Calibre 6.0.0 (2022-07-11): PyQt6-6.3.1
 # Calibre 7.0.0 (2023-11-17): PyQt6-6.5.2
 # Calibre 8.0.0 (2025-03-21): PyQt6-6.8.1
+# Calibre 9.0.0 (2026-01-30): PyQt6-6.10.1
 dependencies = ["apsw==3.43.0", "pyqt6>=6.7.1"]
 
 [dependency-groups]
