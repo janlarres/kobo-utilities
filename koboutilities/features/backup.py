@@ -374,8 +374,8 @@ def do_restore(
     shutil.copytree(tmpdir, device_path, dirs_exist_ok=True)
 
     # Remove temporary SQLite files that could cause issues with the restored DB
-    Path(device_path, ".kobo/KoboReader.sqlite-shm").unlink(missing_ok=True)
-    Path(device_path, ".kobo/KoboReader.sqlite-wal").unlink(missing_ok=True)
+    for ext in ["shm", "wal"]:
+        Path(device_path, f".kobo/KoboReader.sqlite-{ext}").unlink(missing_ok=True)
     debug("Backup successfully restored")
 
     info_dialog(
