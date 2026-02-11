@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 2.26.0 - 2026-02-11
+
+- Added feature to restore a previously created backup to a device.
+- Always include the database in the backup ZIP for simplicity, space savings,
+  and easier restore.
+- Set a default backup location so that forgetting to specify a directory
+  doesn't cause the backup feature to silently not do anything.
+- Updated fonts in the "Set reader font" feature to firmware 4.39.22801.
+- Fixed some translations not loading correctly in some cases.
+- Clarified annotations menu entries a bit.
+
 ## Version 2.25.0 - 2026-01-11
 
 - Moved the documentation to a GitHub wiki for easier access and maintenance.
