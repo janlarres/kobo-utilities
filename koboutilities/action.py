@@ -768,48 +768,34 @@ class KoboUtilitiesAction(InterfaceAction):
     @property
     def device_driver_name(self) -> str:
         if self.device:
-            device_driver_name = self.device.driver.name
-        else:
-            from calibre.customize.ui import is_disabled
-
-            try:
-                from calibre_plugins.kobotouch_extended.device.driver import (  # type: ignore[reportMissingImports]
-                    KOBOTOUCHEXTENDED,
-                )
-
-                cuurent_driver = (
-                    KOBOTOUCHEXTENDED
-                    if not is_disabled(KOBOTOUCHEXTENDED)
-                    else KOBOTOUCH
-                )
-            except Exception as e:
-                debug("could not load extended driver. Exception=", e)
-                cuurent_driver = KOBOTOUCH
-            device_driver_name = cuurent_driver.name
-
-        return device_driver_name
+            return self.device.driver.name
+        return self.get_current_driver().name
 
     def configure_device(self):
         if self.device:
             self.gui.configure_connected_device()
         else:
-            from calibre.customize.ui import is_disabled
-
-            try:
-                from calibre_plugins.kobotouch_extended.device.driver import (  # type: ignore[reportMissingImports]
-                    KOBOTOUCHEXTENDED,
-                )
-
-                driver_to_configure = (
-                    KOBOTOUCHEXTENDED
-                    if not is_disabled(KOBOTOUCHEXTENDED)
-                    else KOBOTOUCH
-                )
-            except Exception as e:
-                debug("could not load extended driver. Exception=", e)
-                driver_to_configure = KOBOTOUCH
+            driver_to_configure = self.get_current_driver()
             driver_to_configure = driver_to_configure(None)
             driver_to_configure.do_user_config(self.gui)
+
+    def get_current_driver(self) -> type[KOBOTOUCH]:
+        if calibre_version >= cast("tuple[int, int, int]", (8, 0, 0)):
+            return KOBOTOUCH
+
+        from calibre.customize.ui import is_disabled
+
+        try:
+            from calibre_plugins.kobotouch_extended.device.driver import (  # type: ignore[reportMissingImports]
+                KOBOTOUCHEXTENDED,
+            )
+
+            return (
+                KOBOTOUCHEXTENDED if not is_disabled(KOBOTOUCHEXTENDED) else KOBOTOUCH
+            )
+        except Exception as e:
+            debug("could not load extended driver. Exception=", e)
+            return KOBOTOUCH
 
     def switch_device_driver(self):
         from calibre.customize.ui import disable_plugin, enable_plugin, is_disabled
