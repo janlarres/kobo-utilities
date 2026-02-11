@@ -262,6 +262,9 @@ def prepare_release(args: argparse.Namespace) -> None:
     )
     changelog_file.write_text(changelog)
 
+    # Update messages.pot
+    xgettext(args)
+
 
 def install(args: argparse.Namespace) -> None:
     plugin_zip = build(args)
