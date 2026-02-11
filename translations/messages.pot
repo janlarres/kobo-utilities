@@ -1,15 +1,15 @@
 # Translations template for kobo-utilities.
-# Copyright (C) 2025 David Forrester and Jan Larres
+# Copyright (C) 2026 David Forrester and Jan Larres
 # This file is distributed under the same license as the kobo-utilities
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: kobo-utilities v2.21.1-19-g50037bb-dirty\n"
+"Project-Id-Version: kobo-utilities v2.26.0-2-gdf777bf-dirty\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-13 22:18+1200\n"
+"POT-Creation-Date: 2026-02-11 23:38+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,449 +18,918 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: koboutilities/action.py:233 koboutilities/action.py:914
-#: koboutilities/action.py:1030 koboutilities/action.py:1076
-#: koboutilities/action.py:1146 koboutilities/action.py:1351
-#: koboutilities/action.py:1480 koboutilities/action.py:1529
-#: koboutilities/action.py:1625 koboutilities/action.py:1729
-#: koboutilities/action.py:1791 koboutilities/action.py:1830
-#: koboutilities/action.py:1875 koboutilities/action.py:1981
-#: koboutilities/action.py:2036 koboutilities/action.py:2043
-#: koboutilities/action.py:2076 koboutilities/action.py:2197
-#: koboutilities/action.py:2253 koboutilities/action.py:2303
-#: koboutilities/action.py:2708 koboutilities/action.py:2769
-#: koboutilities/action.py:2837 koboutilities/action.py:2882
-#: koboutilities/action.py:3384 koboutilities/action.py:5434
-msgid "Kobo Utilities"
-msgstr ""
-
-#: koboutilities/action.py:310
+#: koboutilities/action.py:169
 msgid "Connected device: "
 msgstr ""
 
-#: koboutilities/action.py:313
+#: koboutilities/action.py:172
 msgid "Firmware version: "
 msgstr ""
 
-#: koboutilities/action.py:316
+#: koboutilities/action.py:175
 msgid "Driver: "
 msgstr ""
 
-#: koboutilities/action.py:395
+#: koboutilities/action.py:230 koboutilities/utils.py:294
+msgid "No device connected."
+msgstr ""
+
+#: koboutilities/action.py:264
 msgid "&Set reader font for selected books"
 msgstr ""
 
-#: koboutilities/action.py:397
+#: koboutilities/action.py:266
 msgid "Set reader font for selected books"
 msgstr ""
 
-#: koboutilities/action.py:406
+#: koboutilities/action.py:276
 msgid "&Remove reader font for selected books"
 msgstr ""
 
-#: koboutilities/action.py:408
+#: koboutilities/action.py:278
 msgid "Remove reader font for selected books"
 msgstr ""
 
-#: koboutilities/action.py:419
+#: koboutilities/action.py:289
 msgid "Update &metadata in device library"
 msgstr ""
 
-#: koboutilities/action.py:421 koboutilities/dialogs.py:986
+#: koboutilities/action.py:291 koboutilities/features/metadata.py:906
 msgid "Update metadata in device library"
 msgstr ""
 
-#: koboutilities/action.py:428
+#: koboutilities/action.py:299
 msgid "&Change reading status in device library"
 msgstr ""
 
-#: koboutilities/action.py:430 koboutilities/dialogs.py:1689
+#: koboutilities/action.py:301 koboutilities/features/readingstatus.py:103
 msgid "Change reading status in device library"
 msgstr ""
 
-#: koboutilities/action.py:437
+#: koboutilities/action.py:308
 msgid "&Manage series information in device library"
 msgstr ""
 
-#: koboutilities/action.py:439
+#: koboutilities/action.py:310
 msgid "Manage series information in device library"
 msgstr ""
 
-#: koboutilities/action.py:449
+#: koboutilities/action.py:318
 msgid "&Store/restore reading positions"
 msgstr ""
 
-#: koboutilities/action.py:451
+#: koboutilities/action.py:320
 msgid "Store/restore reading positions"
 msgstr ""
 
-#: koboutilities/action.py:459
+#: koboutilities/action.py:329
 msgid "&Update ToC for selected books"
 msgstr ""
 
-#: koboutilities/action.py:462
+#: koboutilities/action.py:332
 msgid "Update ToC for selected books"
 msgstr ""
 
-#: koboutilities/action.py:470
+#: koboutilities/action.py:340
 msgid "&Upload covers for selected books"
 msgstr ""
 
-#: koboutilities/action.py:472
+#: koboutilities/action.py:342
 msgid "Upload covers for selected books"
 msgstr ""
 
-#: koboutilities/action.py:478
+#: koboutilities/action.py:349
 msgid "&Remove covers for selected books"
 msgstr ""
 
-#: koboutilities/action.py:480
+#: koboutilities/action.py:351
 msgid "Remove covers for selected books"
 msgstr ""
 
-#: koboutilities/action.py:489
+#: koboutilities/action.py:360
 msgid "&Clean images directory of extra cover images"
 msgstr ""
 
-#: koboutilities/action.py:491
+#: koboutilities/action.py:362
 msgid "Clean images directory of extra cover images"
 msgstr ""
 
-#: koboutilities/action.py:498
+#: koboutilities/action.py:369
 msgid "&Open cover image directory"
 msgstr ""
 
-#: koboutilities/action.py:500
+#: koboutilities/action.py:371
 msgid "Open cover image directory"
 msgstr ""
 
-#: koboutilities/action.py:510 koboutilities/action.py:512
-#: koboutilities/action.py:1830 koboutilities/action.py:3860
-#: koboutilities/dialogs.py:3752 koboutilities/dialogs.py:3756
-msgid "Order series collections"
-msgstr ""
-
-#: koboutilities/action.py:522 koboutilities/action.py:524
-#: koboutilities/action.py:1981 koboutilities/dialogs.py:1329
+#: koboutilities/action.py:381 koboutilities/action.py:383
+#: koboutilities/features/getshelves.py:135
+#: koboutilities/features/getshelves.py:273
 msgid "Get collections from device"
 msgstr ""
 
-#: koboutilities/action.py:532 koboutilities/action.py:534
-#: koboutilities/action.py:1875 koboutilities/action.py:4084
-#: koboutilities/dialogs.py:3988
+#: koboutilities/action.py:392 koboutilities/action.py:394
+#: koboutilities/features/relatedbooks.py:72
+#: koboutilities/features/relatedbooks.py:130
+#: koboutilities/features/relatedbooks.py:236
 msgid "Set related books"
 msgstr ""
 
-#: koboutilities/action.py:543 koboutilities/action.py:546
-msgid "Copy annotation for selected book"
+#: koboutilities/action.py:403 koboutilities/action.py:406
+msgid "Copy annotations for selected books"
 msgstr ""
 
-#: koboutilities/action.py:552 koboutilities/action.py:554
-msgid "Back up annotation file"
+#: koboutilities/action.py:412 koboutilities/action.py:414
+msgid "Back up EPUB annotation files"
 msgstr ""
 
-#: koboutilities/action.py:560 koboutilities/action.py:562
-msgid "Remove annotation files"
+#: koboutilities/action.py:420 koboutilities/action.py:422
+msgid "Remove EPUB annotation files"
 msgstr ""
 
-#: koboutilities/action.py:572 koboutilities/action.py:574
+#: koboutilities/action.py:432 koboutilities/action.py:434
 msgid "Show books not in the device database"
 msgstr ""
 
-#: koboutilities/action.py:581 koboutilities/action.py:583
+#: koboutilities/action.py:441 koboutilities/action.py:443
 msgid "Refresh the list of books on the device"
 msgstr ""
 
-#: koboutilities/action.py:588
+#: koboutilities/action.py:452 koboutilities/action.py:454
+msgid "Restore backup to device"
+msgstr ""
+
+#: koboutilities/action.py:462
 msgid "Database"
 msgstr ""
 
-#: koboutilities/action.py:591 koboutilities/action.py:593
-#: koboutilities/action.py:2036 koboutilities/action.py:2043
+#: koboutilities/action.py:466 koboutilities/action.py:468
+#: koboutilities/features/analytics.py:44
+#: koboutilities/features/analytics.py:51
 msgid "Block analytics events"
 msgstr ""
 
-#: koboutilities/action.py:602 koboutilities/action.py:604
+#: koboutilities/action.py:477 koboutilities/action.py:479
 msgid "Fix duplicate collections"
 msgstr ""
 
-#: koboutilities/action.py:612 koboutilities/action.py:614
+#: koboutilities/action.py:487 koboutilities/action.py:489
 msgid "Check the device database"
 msgstr ""
 
-#: koboutilities/action.py:619 koboutilities/action.py:630
+#: koboutilities/action.py:495 koboutilities/action.py:507
 msgid "Not supported for this connection mode"
 msgstr ""
 
-#: koboutilities/action.py:623 koboutilities/action.py:625
+#: koboutilities/action.py:499 koboutilities/action.py:501
 msgid "Compress the device database"
 msgstr ""
 
-#: koboutilities/action.py:634 koboutilities/action.py:636
+#: koboutilities/action.py:511 koboutilities/action.py:513
 msgid "Back up device database"
 msgstr ""
 
-#: koboutilities/action.py:645 koboutilities/action.py:647
+#: koboutilities/action.py:523 koboutilities/action.py:525
 msgid "Set time on device"
 msgstr ""
 
-#: koboutilities/action.py:649
+#: koboutilities/action.py:528
 msgid ""
 "Creates a file on the device which will be used to set the time when the "
 "device is disconnected."
 msgstr ""
 
-#: koboutilities/action.py:663
+#: koboutilities/action.py:542
 msgid "Configure driver"
 msgstr ""
 
-#: koboutilities/action.py:674
+#: koboutilities/action.py:554
 msgid "&Configure driver..."
 msgstr ""
 
-#: koboutilities/action.py:676
+#: koboutilities/action.py:556
 msgid "Driver"
 msgstr ""
 
-#: koboutilities/action.py:679
+#: koboutilities/action.py:560
 msgid "&Configure current driver"
 msgstr ""
 
-#: koboutilities/action.py:683 koboutilities/action.py:685
+#: koboutilities/action.py:564 koboutilities/action.py:566
 msgid "Switch between main and extended driver"
 msgstr ""
 
-#: koboutilities/action.py:696
+#: koboutilities/action.py:577
 msgid "&Customize plugin"
 msgstr ""
 
-#: koboutilities/action.py:698
+#: koboutilities/action.py:579
 msgid "Customize plugin"
 msgstr ""
 
-#: koboutilities/action.py:708
+#: koboutilities/action.py:589
+msgid "&Help"
+msgstr ""
+
+#: koboutilities/action.py:591 koboutilities/dialogs.py:81
+msgid "Help"
+msgstr ""
+
+#: koboutilities/action.py:601
 msgid "&About plugin"
 msgstr ""
 
-#: koboutilities/action.py:711
+#: koboutilities/action.py:604
 msgid "About KoboUtilities"
 msgstr ""
 
-#: koboutilities/action.py:753
+#: koboutilities/action.py:662
 msgid "Not supported for this device"
 msgstr ""
 
-#: koboutilities/action.py:756
+#: koboutilities/action.py:665
 msgid "No device connected"
 msgstr ""
 
-#: koboutilities/action.py:762
+#: koboutilities/action.py:671
 msgid "Only supported in library view"
 msgstr ""
 
-#: koboutilities/action.py:765
+#: koboutilities/action.py:674
 msgid "Only supported in device view"
 msgstr ""
 
-#: koboutilities/action.py:910
+#: koboutilities/action.py:810
 msgid ""
 "The KoboTouchExtended driver is not installed. There is nothing to switch"
 " between, so no changes have been made."
 msgstr ""
 
-#: koboutilities/action.py:914
+#: koboutilities/action.py:814 koboutilities/action.py:902
+#: koboutilities/constants.py:5 koboutilities/features/analytics.py:44
+#: koboutilities/features/analytics.py:51
+#: koboutilities/features/annotations.py:191
+#: koboutilities/features/backup.py:132
+#: koboutilities/features/cleanimages.py:158
+#: koboutilities/features/covers.py:66 koboutilities/features/covers.py:111
+#: koboutilities/features/database.py:64
+#: koboutilities/features/duplicateshelves.py:74
+#: koboutilities/features/getshelves.py:135
+#: koboutilities/features/locations.py:304
+#: koboutilities/features/locations.py:689
+#: koboutilities/features/locations.py:740
+#: koboutilities/features/locations.py:1269
+#: koboutilities/features/locations.py:1601
+#: koboutilities/features/manageseries.py:157
+#: koboutilities/features/metadata.py:115 koboutilities/features/reader.py:199
+#: koboutilities/features/reader.py:241
+#: koboutilities/features/readingstatus.py:77
+#: koboutilities/features/relatedbooks.py:72
+#: koboutilities/features/removeannotations.py:132
+msgid "Kobo Utilities"
+msgstr ""
+
+#: koboutilities/action.py:814
 msgid "Switch device drivers"
 msgstr ""
 
-#: koboutilities/action.py:930
+#: koboutilities/action.py:830
 msgid ""
 "The KoboTouch driver has been disabled and the KoboTouchExtended driver "
 "has been enabled."
 msgstr ""
 
-#: koboutilities/action.py:936
+#: koboutilities/action.py:836
 msgid ""
 "The KoboTouchExtended driver has been disabled and the KoboTouch driver "
 "has been enabled."
 msgstr ""
 
-#: koboutilities/action.py:939
+#: koboutilities/action.py:839
 msgid "You will need to restart calibre for this change to be applied."
 msgstr ""
 
-#: koboutilities/action.py:951 koboutilities/action.py:970
+#: koboutilities/action.py:851 koboutilities/action.py:872
 msgid "Calibre must be restarted before the plugin can be configured."
 msgstr ""
 
-#: koboutilities/action.py:961
+#: koboutilities/action.py:861
 msgid ""
 "New custom columns have been created.\n"
 "You will need to restart calibre for this change to be applied."
 msgstr ""
 
-#: koboutilities/action.py:994
-msgid "Cannot set reader font settings."
-msgstr ""
-
-#: koboutilities/action.py:995 koboutilities/action.py:1047
-#: koboutilities/action.py:1093 koboutilities/action.py:1163
-#: koboutilities/action.py:1420 koboutilities/action.py:1497
-#: koboutilities/action.py:1552 koboutilities/action.py:1589
-#: koboutilities/action.py:1640 koboutilities/action.py:1687
-#: koboutilities/action.py:1744 koboutilities/action.py:1765
-#: koboutilities/action.py:1802 koboutilities/action.py:1842
-#: koboutilities/action.py:1891 koboutilities/action.py:1992
-#: koboutilities/action.py:2021 koboutilities/action.py:2057
-#: koboutilities/action.py:2097 koboutilities/action.py:2223
-#: koboutilities/action.py:2270 koboutilities/action.py:2317
-#: koboutilities/action.py:2345 koboutilities/action.py:2405
-#: koboutilities/action.py:6198
-msgid "No device connected."
-msgstr ""
-
-#: koboutilities/action.py:1022 koboutilities/action.py:1070
-#: koboutilities/action.py:2245 koboutilities/action.py:2295
-msgid "Change summary:"
-msgstr ""
-
-#: koboutilities/action.py:1025
-#, python-brace-format
-msgid ""
-"Font settings updated={0}\n"
-"\tFont settings added={1}\n"
-"\tTotal books={2}"
-msgstr ""
-
-#: koboutilities/action.py:1030 koboutilities/action.py:1076
-#: koboutilities/action.py:1146 koboutilities/action.py:1529
-#: koboutilities/action.py:1729
-msgid "Device library updated"
-msgstr ""
-
-#: koboutilities/action.py:1046
-msgid "Cannot remove reader font settings"
-msgstr ""
-
-#: koboutilities/action.py:1059
-msgid "Remove reader settings"
-msgstr ""
-
-#: koboutilities/action.py:1060
-msgid "Do you want to remove the reader settings for the selected books?"
-msgstr ""
-
-#: koboutilities/action.py:1072
-#, python-brace-format
-msgid "Font settings deleted={0}"
-msgstr ""
-
-#: koboutilities/action.py:1092 koboutilities/action.py:1419
-msgid "Cannot update metadata in device library."
-msgstr ""
-
-#: koboutilities/action.py:1102
-msgid "Getting book list"
-msgstr ""
-
-#: koboutilities/action.py:1104
-#, python-brace-format
-msgid "Number of selected books: {0}"
-msgstr ""
-
-#: koboutilities/action.py:1126
-msgid "Updating metadata on device"
-msgstr ""
-
-#: koboutilities/action.py:1132
-#, python-brace-format
-msgid "Number of books to update metadata for: {0}"
-msgstr ""
-
-#: koboutilities/action.py:1138 koboutilities/action.py:1468
-#: koboutilities/action.py:1521 koboutilities/action.py:1721
-#: koboutilities/action.py:1783 koboutilities/action.py:1822
-#: koboutilities/action.py:1866 koboutilities/action.py:1973
-#: koboutilities/action.py:2185
-msgid "Update summary:"
-msgstr ""
-
-#: koboutilities/action.py:1141 koboutilities/action.py:1724
-#: koboutilities/action.py:2188
-#, python-brace-format
-msgid ""
-"Books updated={0}\n"
-"\tUnchanged books={1}\n"
-"\tBooks not on device={2}\n"
-"\tTotal books={3}"
-msgstr ""
-
-#: koboutilities/action.py:1162
-msgid "Cannot store or restore current reading position."
-msgstr ""
-
-#: koboutilities/action.py:1248
-msgid "Queuing books for storing reading position"
-msgstr ""
-
-#: koboutilities/action.py:1250
-msgid "Getting list of books"
-msgstr ""
-
-#: koboutilities/action.py:1266
-msgid "Queuing books"
-msgstr ""
-
-#: koboutilities/action.py:1278 koboutilities/dialogs.py:315
-#: koboutilities/dialogs.py:437
-#, python-brace-format
-msgid "Queueing {}"
-msgstr ""
-
-#: koboutilities/action.py:1351
+#: koboutilities/action.py:902
 msgid "Time file created on device."
 msgstr ""
 
-#: koboutilities/action.py:1471
-#, python-brace-format
+#: koboutilities/config.py:98
+msgid "* File timestamp"
+msgstr ""
+
+#: koboutilities/config.py:108
+msgid "Kobo reading location"
+msgstr ""
+
+#: koboutilities/config.py:110
+msgid "Kobo reading location from the device."
+msgstr ""
+
+#: koboutilities/config.py:112
+msgid "Current reading location column:"
+msgstr ""
+
+#: koboutilities/config.py:114
 msgid ""
-"Reading locations updated={0}\n"
-"\tBooks with no reading location={1}\n"
-"\tTotal books checked={2}"
+"Select a custom column to store the current reading location. The column "
+"type must be 'text' or 'comments'. Leave this blank if you do not want to"
+" store or restore the current reading location."
 msgstr ""
 
-#: koboutilities/action.py:1480
-msgid "Library updated"
+#: koboutilities/config.py:118
+#, python-format
+msgid "Kobo % read"
 msgstr ""
 
-#: koboutilities/action.py:1496
-msgid "Cannot set bookmark in device library."
+#: koboutilities/config.py:120
+msgid "Percentage read for the book"
 msgstr ""
 
-#: koboutilities/action.py:1524
-#, python-brace-format
+#: koboutilities/config.py:122
+msgid "Percent read column:"
+msgstr ""
+
+#: koboutilities/config.py:124
 msgid ""
-"Books updated={0}\n"
-"\tBooks not on device={1}\n"
-"\tTotal books={2}"
+"Column used to store the current percent read. The column type must be "
+"'integer' or 'float'. Leave this blank if you do not want to store or "
+"restore the percentage read."
 msgstr ""
 
-#: koboutilities/action.py:1551
-msgid "Cannot back up the device database."
+#: koboutilities/config.py:128
+msgid "Kobo rating"
 msgstr ""
 
-#: koboutilities/action.py:1560 koboutilities/config.py:1484
+#: koboutilities/config.py:130
+msgid "Rating for the book on the Kobo device."
+msgstr ""
+
+#: koboutilities/config.py:132
+msgid "Rating column:"
+msgstr ""
+
+#: koboutilities/config.py:134
+msgid ""
+"Column used to store the rating. The column type must be a 'integer'. "
+"Leave this blank if you do not want to store or restore the rating."
+msgstr ""
+
+#: koboutilities/config.py:138
+msgid "Kobo last read"
+msgstr ""
+
+#: koboutilities/config.py:140
+msgid "When the book was last read on the Kobo device."
+msgstr ""
+
+#: koboutilities/config.py:142
+msgid "Last read column:"
+msgstr ""
+
+#: koboutilities/config.py:144
+msgid ""
+"Column used to store when the book was last read. The column type must be"
+" a 'Date'. Leave this blank if you do not want to store the last read "
+"timestamp."
+msgstr ""
+
+#: koboutilities/config.py:148
+msgid "Kobo time spent reading"
+msgstr ""
+
+#: koboutilities/config.py:150
+msgid "The time already spent reading the book, in seconds."
+msgstr ""
+
+#: koboutilities/config.py:152
+msgid "Time spent reading column:"
+msgstr ""
+
+#: koboutilities/config.py:154
+msgid ""
+"Column used to store how much time was spent reading the book, in "
+"seconds. The column type must be 'integer'. Leave this blank if you do "
+"not want to store the time spent reading the book."
+msgstr ""
+
+#: koboutilities/config.py:158
+msgid "Kobo rest of book estimate"
+msgstr ""
+
+#: koboutilities/config.py:160
+msgid "The estimate of the time left to read the book, in seconds."
+msgstr ""
+
+#: koboutilities/config.py:162
+msgid "Rest of book estimate column:"
+msgstr ""
+
+#: koboutilities/config.py:164
+msgid ""
+"Column used to store the estimate of how much time is left in the book, "
+"in seconds. The column type must be 'integer'. Leave this blank if you do"
+" not want to store the estimate of the time left."
+msgstr ""
+
+#: koboutilities/config.py:676
+msgid "(Unknown device)"
+msgstr ""
+
+#: koboutilities/config.py:754
+#, python-brace-format
+msgid "Profile \"{0}\" does not exist."
+msgstr ""
+
+#: koboutilities/config.py:755 koboutilities/config.py:792
+#: koboutilities/config.py:832
+msgid "Select another profile to proceed."
+msgstr ""
+
+#: koboutilities/config.py:790 koboutilities/config.py:830
+#, python-brace-format
+msgid "Profile \"{0}\" is invalid."
+msgstr ""
+
+#: koboutilities/config.py:791
+msgid "It has no columns to store the reading status."
+msgstr ""
+
+#: koboutilities/config.py:825
+#, python-brace-format
+msgid "The column {0} does not exist."
+msgstr ""
+
+#: koboutilities/config.py:827
+#, python-brace-format
+msgid "The columns {0} do not exist."
+msgstr ""
+
+#: koboutilities/config.py:864
+msgid "Profiles:"
+msgstr ""
+
+#: koboutilities/config.py:875
+msgid "Add profile"
+msgstr ""
+
+#: koboutilities/config.py:880
+msgid "Delete profile"
+msgstr ""
+
+#: koboutilities/config.py:885 koboutilities/config.py:1104
+msgid "Rename profile"
+msgstr ""
+
+#: koboutilities/config.py:903
+msgid "&Device this profile is for:"
+msgstr ""
+
+#: koboutilities/config.py:904
+msgid "Select the device this profile is for."
+msgstr ""
+
+#: koboutilities/config.py:911
+msgid "Custom columns"
+msgstr ""
+
+#: koboutilities/config.py:955
+msgid "Store on connect"
+msgstr ""
+
+#: koboutilities/config.py:961
+msgid "Store current bookmarks/reading position on connect"
+msgstr ""
+
+#: koboutilities/config.py:965
+msgid ""
+"When this is checked, the library will be updated with the current "
+"reading position for all books on the device."
+msgstr ""
+
+#: koboutilities/config.py:974
+msgid "Prompt to store any changes"
+msgstr ""
+
+#: koboutilities/config.py:978
+msgid ""
+"Enable this to be prompted to save the changed reading positions after an"
+" automatic store is done."
+msgstr ""
+
+#: koboutilities/config.py:983 koboutilities/features/locations.py:1681
+msgid "Only if more recent"
+msgstr ""
+
+#: koboutilities/config.py:986 koboutilities/features/locations.py:1684
+msgid ""
+"Only store the reading position if the last read timestamp on the device "
+"is more recent than in the library."
+msgstr ""
+
+#: koboutilities/config.py:992 koboutilities/features/locations.py:1690
+msgid "Not if finished in library"
+msgstr ""
+
+#: koboutilities/config.py:996 koboutilities/features/locations.py:1694
+msgid ""
+"Do not store the reading position if the library has the book as "
+"finished. This is if the percent read is 100%."
+msgstr ""
+
+#: koboutilities/config.py:1004
+msgid "You can use this site to download the latest version of Kobo firmware:"
+msgstr ""
+
+#: koboutilities/config.py:1065
+msgid "Add new profile"
+msgstr ""
+
+#: koboutilities/config.py:1066
+msgid "Enter a unique display name for this profile:"
+msgstr ""
+
+#: koboutilities/config.py:1079 koboutilities/config.py:1121
+msgid "Add failed"
+msgstr ""
+
+#: koboutilities/config.py:1080 koboutilities/config.py:1122
+msgid "A profile with the same name already exists"
+msgstr ""
+
+#: koboutilities/config.py:1105
+msgid "Enter a new display name for this profile:"
+msgstr ""
+
+#: koboutilities/config.py:1144
+msgid "Cannot delete"
+msgstr ""
+
+#: koboutilities/config.py:1145
+msgid "You must have at least one profile"
+msgstr ""
+
+#: koboutilities/config.py:1353
+msgid "Devices:"
+msgstr ""
+
+#: koboutilities/config.py:1366
+msgid "Add connected device"
+msgstr ""
+
+#: koboutilities/config.py:1369
+msgid ""
+"If you do not have a device connected currently, either plug one\n"
+"in now or exit the dialog and connect to folder/iTunes first"
+msgstr ""
+
+#: koboutilities/config.py:1379
+msgid "Rename the currently connected device"
+msgstr ""
+
+#: koboutilities/config.py:1385
+msgid "Delete this device from the device list"
+msgstr ""
+
+#: koboutilities/config.py:1391
+msgid "Configure options for each device"
+msgstr ""
+
+#: koboutilities/config.py:1394
+msgid "Selected this option to configure backup for each device."
+msgstr ""
+
+#: koboutilities/config.py:1405
+msgid "Back up the device database daily"
+msgstr ""
+
+#: koboutilities/config.py:1409
+msgid ""
+"If this is selected the plugin will back up the device database the first"
+" time it is connected each day."
+msgstr ""
+
+#: koboutilities/config.py:1418
+msgid "Back up the device database on each connection"
+msgstr ""
+
+#: koboutilities/config.py:1422
+msgid ""
+"If this is selected the plugin will back up the device database each time"
+" the device is connected."
+msgstr ""
+
+#: koboutilities/config.py:1430 koboutilities/features/annotations.py:282
+msgid "Destination:"
+msgstr ""
+
+#: koboutilities/config.py:1432
+msgid "Select the destination to back up the device database to."
+msgstr ""
+
+#: koboutilities/config.py:1437 koboutilities/features/annotations.py:289
+msgid "..."
+msgstr ""
+
+#: koboutilities/config.py:1444
+msgid "Copies to keep"
+msgstr ""
+
+#: koboutilities/config.py:1447
+msgid ""
+"Select this to limit the number of backups kept. If not set, the backup "
+"files must be manually deleted."
+msgstr ""
+
+#: koboutilities/config.py:1453
+msgid "The number of backup copies of the database to keep. The minimum is 2."
+msgstr ""
+
+#: koboutilities/config.py:1531 koboutilities/config.py:1556
+msgid "Rename failed"
+msgstr ""
+
+#: koboutilities/config.py:1532 koboutilities/config.py:1568
+msgid "You must select a device first"
+msgstr ""
+
+#: koboutilities/config.py:1541
+msgid "Rename device"
+msgstr ""
+
+#: koboutilities/config.py:1542
+msgid "Enter a new display name for this device:"
+msgstr ""
+
+#: koboutilities/config.py:1557
+msgid "An error occurred while renaming."
+msgstr ""
+
+#: koboutilities/config.py:1567
+msgid "Delete failed"
+msgstr ""
+
+#: koboutilities/config.py:1576 koboutilities/features/manageseries.py:548
+msgid "Are you sure?"
+msgstr ""
+
+#: koboutilities/config.py:1579
+msgid "Are you sure you want to continue?"
+msgstr ""
+
+#: koboutilities/config.py:1658 koboutilities/features/backup.py:72
 msgid "Choose backup destination"
 msgstr ""
 
-#: koboutilities/action.py:1561
-msgid "SQLite database"
+#: koboutilities/config.py:1765
+msgid "Menu"
 msgstr ""
 
-#: koboutilities/action.py:1588
-msgid "Cannot back up annotation files from device."
+#: koboutilities/config.py:1766
+msgid "Name"
 msgstr ""
 
-#: koboutilities/action.py:1621
+#: koboutilities/config.py:1767
+msgid "Model"
+msgstr ""
+
+#: koboutilities/config.py:1768 koboutilities/features/locations.py:1745
+msgid "Profile"
+msgstr ""
+
+#: koboutilities/config.py:1769 koboutilities/features/backup.py:442
+msgid "Serial number"
+msgstr ""
+
+#: koboutilities/config.py:1770
+msgid "FW version"
+msgstr ""
+
+#: koboutilities/config.py:1771 koboutilities/features/toc.py:1173
+#: koboutilities/features/toc.py:1176
+msgid "Status"
+msgstr ""
+
+#: koboutilities/config.py:1901
+msgid "Other options"
+msgstr ""
+
+#: koboutilities/config.py:1906
+msgid "&Library button default:"
+msgstr ""
+
+#: koboutilities/config.py:1909 koboutilities/config.py:1924
+msgid ""
+"If plugin is placed as a toolbar button, choose a default action when "
+"clicked on"
+msgstr ""
+
+#: koboutilities/config.py:1921
+msgid "&Device button default:"
+msgstr ""
+
+#: koboutilities/config.py:1936
+msgid "Keyboard shortcuts..."
+msgstr ""
+
+#: koboutilities/config.py:1938
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr ""
+
+#: koboutilities/config.py:1943
+msgid "&View library preferences..."
+msgstr ""
+
+#: koboutilities/config.py:1945
+msgid "View data stored in the library database for this plugin"
+msgstr ""
+
+#: koboutilities/config.py:1975
+msgid "Kobo Utilities options"
+msgstr ""
+
+#: koboutilities/config.py:1986
+msgid "Profiles"
+msgstr ""
+
+#: koboutilities/config.py:1987
+msgid "Devices"
+msgstr ""
+
+#: koboutilities/config.py:1988
+msgid "Other"
+msgstr ""
+
+#: koboutilities/config.py:2048
+msgid "Prefs viewer dialog"
+msgstr ""
+
+#: koboutilities/config.py:2049
+#, python-brace-format
+msgid "Preferences for: {}"
+msgstr ""
+
+#: koboutilities/config.py:2084
+msgid "Clear"
+msgstr ""
+
+#: koboutilities/config.py:2088
+msgid "Clear all settings for this plugin"
+msgstr ""
+
+#: koboutilities/config.py:2167
+msgid "Settings deleted"
+msgstr ""
+
+#: koboutilities/config.py:2168
+msgid "<p>All settings for this plugin in this library have been cleared.</p>"
+msgstr ""
+
+#: koboutilities/config.py:2169
+msgid "<p>Please restart calibre now.</p>"
+msgstr ""
+
+#: koboutilities/dialogs.py:100
+msgid "Restart required"
+msgstr ""
+
+#: koboutilities/dialogs.py:102
+msgid "Title image not found - you must restart Calibre before using this plugin!"
+msgstr ""
+
+#: koboutilities/dialogs.py:184
+msgid "Create new column"
+msgstr ""
+
+#: koboutilities/dialogs.py:361
+msgid "Reading status"
+msgstr ""
+
+#: koboutilities/dialogs.py:365
+msgid "Change reading status"
+msgstr ""
+
+#: koboutilities/dialogs.py:371
+msgid "Unread"
+msgstr ""
+
+#: koboutilities/dialogs.py:375
+msgid "Reading"
+msgstr ""
+
+#: koboutilities/dialogs.py:379 koboutilities/features/cleanimages.py:158
+#: koboutilities/features/removeannotations.py:132
+#: koboutilities/features/removeannotations.py:224
+msgid "Finished"
+msgstr ""
+
+#: koboutilities/dialogs.py:383
+msgid "Reset reading position"
+msgstr ""
+
+#: koboutilities/dialogs.py:387
+msgid ""
+"If this option is checked, the current position and last reading date "
+"will be reset."
+msgstr ""
+
+#: koboutilities/utils.py:226
+#, python-format
+msgid "Execution of '%s' failed"
+msgstr ""
+
+#: koboutilities/utils.py:284
+msgid "Device jobs are running or queued."
+msgstr ""
+
+#: koboutilities/utils.py:485
+msgid "Restart calibre now"
+msgstr ""
+
+#: koboutilities/features/analytics.py:49
+msgid "Failed to block analytics events."
+msgstr ""
+
+#: koboutilities/features/analytics.py:109
+msgid "Block analytics"
+msgstr ""
+
+#: koboutilities/features/analytics.py:114
+msgid "AnalyticsEvents database trigger"
+msgstr ""
+
+#: koboutilities/features/analytics.py:116
+msgid "When an entry is added to the AnalyticsEvents, it will be removed."
+msgstr ""
+
+#: koboutilities/features/analytics.py:123
+msgid "Create or change trigger"
+msgstr ""
+
+#: koboutilities/features/analytics.py:126
+msgid "To create or change the trigger, select this option."
+msgstr ""
+
+#: koboutilities/features/analytics.py:130
+msgid "Delete trigger"
+msgstr ""
+
+#: koboutilities/features/analytics.py:133
+msgid ""
+"This will remove the existing trigger and let the device work as Kobo "
+"intended it."
+msgstr ""
+
+#: koboutilities/features/analytics.py:159
+#: koboutilities/features/duplicateshelves.py:177
+#: koboutilities/features/metadata.py:1111
+#: koboutilities/features/readingstatus.py:147
+msgid "No options selected"
+msgstr ""
+
+#: koboutilities/features/analytics.py:160
+#: koboutilities/features/duplicateshelves.py:178
+#: koboutilities/features/metadata.py:1112
+#: koboutilities/features/readingstatus.py:148
+msgid "You must select at least one option to continue."
+msgstr ""
+
+#: koboutilities/features/annotations.py:85
+msgid "Use library only"
+msgstr ""
+
+#: koboutilities/features/annotations.py:86
+msgid "User annotations generated from main library only"
+msgstr ""
+
+#: koboutilities/features/annotations.py:97
+msgid "No books selected"
+msgstr ""
+
+#: koboutilities/features/annotations.py:98
+msgid "No books selected to fetch annotations from"
+msgstr ""
+
+#: koboutilities/features/annotations.py:110
+msgid "No books on device selected"
+msgstr ""
+
+#: koboutilities/features/annotations.py:112
+msgid ""
+"None of the books selected were on the device. Annotations can only be "
+"copied for books on the device."
+msgstr ""
+
+#: koboutilities/features/annotations.py:183
 #, python-brace-format
 msgid ""
 "Annotations backup summary:\n"
@@ -470,31 +939,320 @@ msgid ""
 "\tTotal books={3}"
 msgstr ""
 
-#: koboutilities/action.py:1625
+#: koboutilities/features/annotations.py:191
 msgid " - Annotations backup"
 msgstr ""
 
-#: koboutilities/action.py:1639
-msgid "Cannot remove files from device."
+#: koboutilities/features/annotations.py:275
+msgid "Back up annotations files"
 msgstr ""
 
-#: koboutilities/action.py:1686
-msgid "Cannot change reading status in device library."
+#: koboutilities/features/annotations.py:284
+msgid "Select the destination the annotations files are to be backed up in."
 msgstr ""
 
-#: koboutilities/action.py:1713
-msgid "Changing reading status on device"
+#: koboutilities/features/annotations.py:328
+msgid "Choose destination directory"
 msgstr ""
 
-#: koboutilities/action.py:1743
-msgid "Cannot list books not in device library."
+#: koboutilities/features/backup.py:73
+msgid "SQLite database"
 msgstr ""
 
-#: koboutilities/action.py:1764
-msgid "Cannot fix the duplicate collections in the device library."
+#: koboutilities/features/backup.py:125
+msgid "Backing up Kobo device database"
 msgstr ""
 
-#: koboutilities/action.py:1786
+#: koboutilities/features/backup.py:139
+msgid "Failed to back up device database"
+msgstr ""
+
+#: koboutilities/features/backup.py:262
+msgid "Choose backup to restore"
+msgstr ""
+
+#: koboutilities/features/backup.py:263
+msgid "Kobo backups"
+msgstr ""
+
+#: koboutilities/features/backup.py:316
+#, python-brace-format
+msgid ""
+"Restoring this backup from {date} will overwrite the database and some "
+"configuration files on the device with the files from the backup. Are you"
+" sure you want to proceed?"
+msgstr ""
+
+#: koboutilities/features/backup.py:329
+msgid "Incompatible backup"
+msgstr ""
+
+#: koboutilities/features/backup.py:331
+msgid ""
+"This backup was created from a different device type. Restoring backups "
+"to a different device type is not supported."
+msgstr ""
+
+#: koboutilities/features/backup.py:340
+msgid ""
+"This backup was created from a different device. Make sure that the "
+"device to restore to is the expected device."
+msgstr ""
+
+#: koboutilities/features/backup.py:349
+msgid ""
+"This backup was created from a device running a different firmware "
+"version. This is probably okay, but you should make sure that your device"
+" is up to date before restoring."
+msgstr ""
+
+#: koboutilities/features/backup.py:362
+#: koboutilities/features/locations.py:1714
+msgid "Restore"
+msgstr ""
+
+#: koboutilities/features/backup.py:363
+msgid "Cancel"
+msgstr ""
+
+#: koboutilities/features/backup.py:383
+msgid "Backup restored"
+msgstr ""
+
+#: koboutilities/features/backup.py:385
+msgid ""
+"Backup restored. You should eject and restart your device now to ensure "
+"that the device reads the database correctly."
+msgstr ""
+
+#: koboutilities/features/backup.py:397
+msgid "Invalid backup"
+msgstr ""
+
+#: koboutilities/features/backup.py:399
+#, python-brace-format
+msgid "The file \"{0}\" does not appear to be a valid KoboUtilities backup file"
+msgstr ""
+
+#: koboutilities/features/backup.py:436
+msgid "Backup"
+msgstr ""
+
+#: koboutilities/features/backup.py:436
+msgid "Device"
+msgstr ""
+
+#: koboutilities/features/backup.py:439
+msgid "Device type"
+msgstr ""
+
+#: koboutilities/features/backup.py:445
+msgid "Firmware version"
+msgstr ""
+
+#: koboutilities/features/booksnotindb.py:104
+#: koboutilities/features/locations.py:2116
+#: koboutilities/features/metadata.py:917 koboutilities/features/toc.py:1167
+msgid "Title"
+msgstr ""
+
+#: koboutilities/features/booksnotindb.py:105
+msgid "Author(s)"
+msgstr ""
+
+#: koboutilities/features/booksnotindb.py:106
+msgid "File path"
+msgstr ""
+
+#: koboutilities/features/booksnotindb.py:107
+msgid "PubDate"
+msgstr ""
+
+#: koboutilities/features/booksnotindb.py:108
+msgid "File timestamp"
+msgstr ""
+
+#: koboutilities/features/booksnotindb.py:198
+#: koboutilities/features/booksnotindb.py:204
+msgid "Books not in device database"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:111
+#: koboutilities/features/cleanimages.py:118
+msgid "Cleaning images directory"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:126
+#: koboutilities/features/removeannotations.py:117
+msgid "Failed to check cover directory on device"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:133
+msgid "Checking cover directory completed"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:137
+msgid "No extra files found"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:140
+#, python-brace-format
+msgid "Kobo Utilities found <b>{0} extra cover(s)</b> in the cover directory."
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:143
+msgid "All files have been deleted."
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:146
+msgid "Extra files found in main memory images directory:"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:152
+msgid "Extra files found in SD card images directory:"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:289
+msgid "Clean images directory"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:294
+msgid "Clean images"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:299
+msgid "Delete extra cover image files"
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:303
+msgid ""
+"Check this if you want to delete the extra cover image files from the "
+"images directory on the device."
+msgstr ""
+
+#: koboutilities/features/cleanimages.py:338
+msgid "Creating queue for checking images directory"
+msgstr ""
+
+#: koboutilities/features/covers.py:58 koboutilities/features/covers.py:103
+#: koboutilities/features/reader.py:191 koboutilities/features/reader.py:235
+msgid "Change summary:"
+msgstr ""
+
+#: koboutilities/features/covers.py:60
+#, python-brace-format
+msgid ""
+"Covers uploaded={0}\n"
+"\tBooks not on device={1}\n"
+"\tTotal books={2}"
+msgstr ""
+
+#: koboutilities/features/covers.py:66
+msgid "Covers uploaded"
+msgstr ""
+
+#: koboutilities/features/covers.py:105
+#, python-brace-format
+msgid ""
+"Covers removed={0}\n"
+"\tBooks not on device={1}\n"
+"\tTotal books={2}"
+msgstr ""
+
+#: koboutilities/features/covers.py:111
+msgid "Covers removed"
+msgstr ""
+
+#: koboutilities/features/covers.py:424 koboutilities/features/covers.py:429
+msgid "Upload covers"
+msgstr ""
+
+#: koboutilities/features/covers.py:434
+msgid "Black and white covers"
+msgstr ""
+
+#: koboutilities/features/covers.py:437
+msgid "Dithered covers"
+msgstr ""
+
+#: koboutilities/features/covers.py:439
+msgid "PNG covers"
+msgstr ""
+
+#: koboutilities/features/covers.py:442
+msgid "Keep cover aspect ratio"
+msgstr ""
+
+#: koboutilities/features/covers.py:447
+msgid "Letterbox covers"
+msgstr ""
+
+#: koboutilities/features/covers.py:454
+msgid ""
+"Choose the color to use when letterboxing the cover. The default color is"
+" black (#000000)"
+msgstr ""
+
+#: koboutilities/features/covers.py:460
+msgid "Upload covers for Kobo ePubs"
+msgstr ""
+
+#: koboutilities/features/covers.py:533 koboutilities/features/covers.py:538
+msgid "Remove covers"
+msgstr ""
+
+#: koboutilities/features/covers.py:544
+msgid "Remove full size covers"
+msgstr ""
+
+#: koboutilities/features/covers.py:548
+msgid ""
+"Check this if you want to remove just the full size cover from the "
+"device. This will save space, but, if covers are used for the sleep "
+"screen, they will not look very good."
+msgstr ""
+
+#: koboutilities/features/covers.py:553
+msgid "Remove covers for Kobo epubs"
+msgstr ""
+
+#: koboutilities/features/covers.py:556
+msgid ""
+"Check this if you want to remove covers for any Kobo epubs synced from "
+"the Kobo server."
+msgstr ""
+
+#: koboutilities/features/database.py:32
+msgid ""
+"Result of running 'PRAGMA integrity_check' on database on the Kobo "
+"device:\n"
+"\n"
+msgstr ""
+
+#: koboutilities/features/database.py:57
+#, python-brace-format
+msgid ""
+"The database on the device has been compressed.\n"
+"\tOriginal size = {0}MB\n"
+"\tCompressed size = {1}MB"
+msgstr ""
+
+#: koboutilities/features/database.py:64
+msgid "Compress device database"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:66
+#: koboutilities/features/getshelves.py:127
+#: koboutilities/features/locations.py:292
+#: koboutilities/features/locations.py:732
+#: koboutilities/features/manageseries.py:147
+#: koboutilities/features/metadata.py:107
+#: koboutilities/features/readingstatus.py:69
+#: koboutilities/features/relatedbooks.py:63
+msgid "Update summary:"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:69
 #, python-brace-format
 msgid ""
 "Starting number of collections={0}\n"
@@ -502,52 +1260,77 @@ msgid ""
 "\tTotal collections={2}"
 msgstr ""
 
-#: koboutilities/action.py:1791
+#: koboutilities/features/duplicateshelves.py:74
 msgid "Duplicate collections fixed"
 msgstr ""
 
-#: koboutilities/action.py:1801
-msgid "Cannot order the series collections in the device library."
+#: koboutilities/features/duplicateshelves.py:104
+#: koboutilities/features/duplicateshelves.py:110
+#: koboutilities/features/duplicateshelves.py:289
+msgid "Duplicate collections in device database"
 msgstr ""
 
-#: koboutilities/action.py:1825
-#, python-brace-format
+#: koboutilities/features/duplicateshelves.py:122
+#: koboutilities/features/getshelves.py:277
+#: koboutilities/features/locations.py:1669
+msgid "Options"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:127
+msgid "Collection to keep"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:128
+#: koboutilities/features/duplicateshelves.py:195
+msgid "Oldest"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:132
+#: koboutilities/features/duplicateshelves.py:196
+msgid "Newest"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:141
+msgid "Purge duplicate collections"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:144
 msgid ""
-"Starting number of collections={0}\n"
-"\tCollections reordered={1}"
+"When this option is selected, the duplicated rows are deleted from the "
+"database. If this is done, they might be restore during the next sync to "
+"the Kobo server."
 msgstr ""
 
-#: koboutilities/action.py:1841
-msgid "Cannot set the related books."
+#: koboutilities/features/duplicateshelves.py:194
+msgid "Collection name"
 msgstr ""
 
-#: koboutilities/action.py:1857
-msgid "Deleted all related books for sideloaded books."
+#: koboutilities/features/duplicateshelves.py:197
+msgid "Number"
 msgstr ""
 
-#: koboutilities/action.py:1868
+#: koboutilities/features/duplicateshelves.py:228
+msgid "(Unnamed collection)"
+msgstr ""
+
+#: koboutilities/features/duplicateshelves.py:338
 #, python-brace-format
-msgid ""
-"Number of series or authors={0}\n"
-"\tNumber of books={1}"
+msgid "Removing duplicates of collection {}"
 msgstr ""
 
-#: koboutilities/action.py:1890
-msgid "Cannot get the collections from device."
-msgstr ""
-
-#: koboutilities/action.py:1913
+#: koboutilities/features/getshelves.py:66
 #, python-brace-format
 msgid ""
 "The selected column is {0}.\n"
 "The driver collection management columns are: {1}"
 msgstr ""
 
-#: koboutilities/action.py:1921 koboutilities/action.py:1936
+#: koboutilities/features/getshelves.py:72
+#: koboutilities/features/getshelves.py:87
 msgid "Getting collections from device"
 msgstr ""
 
-#: koboutilities/action.py:1923
+#: koboutilities/features/getshelves.py:74
 msgid ""
 "The column selected is one of the columns used in the driver "
 "configuration for collection management. Updating this column might "
@@ -556,16 +1339,16 @@ msgid ""
 "Are you sure you want to do this?"
 msgstr ""
 
-#: koboutilities/action.py:1939
+#: koboutilities/features/getshelves.py:90
 msgid "Getting list of collections"
 msgstr ""
 
-#: koboutilities/action.py:1956
+#: koboutilities/features/getshelves.py:108
 #, python-brace-format
 msgid "Number of books to get collections for: {0}"
 msgstr ""
 
-#: koboutilities/action.py:1976
+#: koboutilities/features/getshelves.py:130
 #, python-brace-format
 msgid ""
 "Books processed={0}\n"
@@ -573,1118 +1356,37 @@ msgid ""
 "\tBooks without collections={2}"
 msgstr ""
 
-#: koboutilities/action.py:1991
-msgid "Cannot check Kobo device database."
-msgstr ""
-
-#: koboutilities/action.py:2001
-msgid ""
-"Result of running 'PRAGMA integrity_check' on database on the Kobo "
-"device:\n"
-"\n"
-msgstr ""
-
-#: koboutilities/action.py:2020
-msgid "Cannot block analytics events."
-msgstr ""
-
-#: koboutilities/action.py:2041
-msgid "Failed to block analytics events."
-msgstr ""
-
-#: koboutilities/action.py:2056
-msgid "Cannot compress Kobo device database."
-msgstr ""
-
-#: koboutilities/action.py:2069
-#, python-brace-format
-msgid ""
-"The database on the device has been compressed.\n"
-"\tOriginal size = {0}MB\n"
-"\tCompressed size = {1}MB"
-msgstr ""
-
-#: koboutilities/action.py:2076
-msgid "Compress device database"
-msgstr ""
-
-#: koboutilities/action.py:2096
-msgid "Cannot manage series in device library."
-msgstr ""
-
-#: koboutilities/action.py:2172
-msgid "Updating series information on device"
-msgstr ""
-
-#: koboutilities/action.py:2194
-msgid "No changes made to series information."
-msgstr ""
-
-#: koboutilities/action.py:2197 koboutilities/dialogs.py:2664
-msgid "Manage series on device"
-msgstr ""
-
-#: koboutilities/action.py:2222 koboutilities/action.py:2404
-msgid "Cannot upload covers."
-msgstr ""
-
-#: koboutilities/action.py:2248
-#, python-brace-format
-msgid ""
-"Covers uploaded={0}\n"
-"\tBooks not on device={1}\n"
-"\tTotal books={2}"
-msgstr ""
-
-#: koboutilities/action.py:2253
-msgid "Covers uploaded"
-msgstr ""
-
-#: koboutilities/action.py:2269
-msgid "Cannot remove covers."
-msgstr ""
-
-#: koboutilities/action.py:2298
-#, python-brace-format
-msgid ""
-"Covers removed={0}\n"
-"\tBooks not on device={1}\n"
-"\tTotal books={2}"
-msgstr ""
-
-#: koboutilities/action.py:2303
-msgid "Covers removed"
-msgstr ""
-
-#: koboutilities/action.py:2316
-msgid "Cannot open cover directory"
-msgstr ""
-
-#: koboutilities/action.py:2344
-msgid "Cannot clean covers directory."
-msgstr ""
-
-#: koboutilities/action.py:2687
-#, python-brace-format
-msgid "Storing reading positions for {0} books"
-msgstr ""
-
-#: koboutilities/action.py:2699
-msgid "Failed to get reading positions"
-msgstr ""
-
-#: koboutilities/action.py:2710
-msgid "Storing reading positions completed - No changes found"
-msgstr ""
-
-#: koboutilities/action.py:2762
-msgid "Backing up Kobo device database"
-msgstr ""
-
-#: koboutilities/action.py:2774
-msgid "Failed to back up device database"
-msgstr ""
-
-#: koboutilities/action.py:2789 koboutilities/action.py:2796
-msgid "Cleaning images directory"
-msgstr ""
-
-#: koboutilities/action.py:2801 koboutilities/action.py:2867
-msgid "Failed to check cover directory on device"
-msgstr ""
-
-#: koboutilities/action.py:2808
-msgid "Checking cover directory completed"
-msgstr ""
-
-#: koboutilities/action.py:2812
-msgid "No extra files found"
-msgstr ""
-
-#: koboutilities/action.py:2815
-#, python-brace-format
-msgid "Kobo Utilities found <b>{0} extra cover(s)</b> in the cover directory."
-msgstr ""
-
-#: koboutilities/action.py:2818
-msgid "All files have been deleted."
-msgstr ""
-
-#: koboutilities/action.py:2822
-msgid "Extra files found in main memory images directory:"
-msgstr ""
-
-#: koboutilities/action.py:2830
-msgid "Extra files found in SD card images directory:"
-msgstr ""
-
-#: koboutilities/action.py:2837 koboutilities/action.py:2882
-#: koboutilities/dialogs.py:4192 koboutilities/jobs.py:795
-msgid "Finished"
-msgstr ""
-
-#: koboutilities/action.py:2855 koboutilities/action.py:2862
-#: koboutilities/jobs.py:729 koboutilities/jobs.py:776
-#: koboutilities/jobs.py:795
-msgid "Removing annotations files"
-msgstr ""
-
-#: koboutilities/action.py:2872
-msgid "Cleaning annotations completed"
-msgstr ""
-
-#: koboutilities/action.py:2878
-#, python-brace-format
-msgid "Kobo Utilities removed <b>{0} annotation files(s)</b>."
-msgstr ""
-
-#: koboutilities/action.py:2899
-#, python-brace-format
-msgid "Profile \"{0}\" does not exist."
-msgstr ""
-
-#: koboutilities/action.py:2900 koboutilities/action.py:2951
-#: koboutilities/action.py:2991
-msgid "Select another profile to proceed."
-msgstr ""
-
-#: koboutilities/action.py:2949 koboutilities/action.py:2989
-#, python-brace-format
-msgid "Profile \"{0}\" is invalid."
-msgstr ""
-
-#: koboutilities/action.py:2950
-msgid "It has no columns to store the reading status."
-msgstr ""
-
-#: koboutilities/action.py:2984
-#, python-brace-format
-msgid "The column {0} does not exist."
-msgstr ""
-
-#: koboutilities/action.py:2986
-#, python-brace-format
-msgid "The columns {0} do not exist."
-msgstr ""
-
-#: koboutilities/action.py:3081 koboutilities/action.py:5072
-msgid "Storing reading positions"
-msgstr ""
-
-#: koboutilities/action.py:3140 koboutilities/action.py:4983
-#: koboutilities/book.py:28
-msgid "Unknown"
-msgstr ""
-
-#: koboutilities/action.py:3145
-#, python-brace-format
-msgid "Updating {}"
-msgstr ""
-
-#: koboutilities/action.py:3386 koboutilities/action.py:5436
-#, python-brace-format
-msgid "Storing reading positions completed - {0} changed."
-msgstr ""
-
-#: koboutilities/action.py:3427
-msgid "Use library only"
-msgstr ""
-
-#: koboutilities/action.py:3428
-msgid "User annotations generated from main library only"
-msgstr ""
-
-#: koboutilities/action.py:3439
-msgid "No books selected"
-msgstr ""
-
-#: koboutilities/action.py:3440
-msgid "No books selected to fetch annotations from"
-msgstr ""
-
-#: koboutilities/action.py:3452
-msgid "No books on device selected"
-msgstr ""
-
-#: koboutilities/action.py:3454
-msgid ""
-"None of the books selected were on the device. Annotations can only be "
-"copied for books on the device."
-msgstr ""
-
-#: koboutilities/action.py:3902
-#, python-brace-format
-msgid "Updating collection: {0}"
-msgstr ""
-
-#: koboutilities/action.py:4112
-#, python-brace-format
-msgid "Setting related books for {}"
-msgstr ""
-
-#: koboutilities/action.py:4157 koboutilities/action.py:4170
-msgid "Delete related books"
-msgstr ""
-
-#: koboutilities/action.py:4184 koboutilities/dialogs.py:3561
-#: koboutilities/dialogs.py:3567
-msgid "Duplicate collections in device database"
-msgstr ""
-
-#: koboutilities/action.py:4233
-#, python-brace-format
-msgid "Removing duplicates of collection {}"
-msgstr ""
-
-#: koboutilities/action.py:4433
-#, python-brace-format
-msgid "Updating metadata for {}"
-msgstr ""
-
-#: koboutilities/action.py:5000
-msgid "Published"
-msgstr ""
-
-#: koboutilities/action.py:5002 koboutilities/dialogs.py:3773
-#: koboutilities/dialogs.py:3817 koboutilities/dialogs.py:4022
-msgid "Series"
-msgstr ""
-
-#: koboutilities/action.py:5004 koboutilities/dialogs.py:1045
-msgid "Rating"
-msgstr ""
-
-#: koboutilities/action.py:5006
-msgid "Tags"
-msgstr ""
-
-#: koboutilities/action.py:5119
-#, python-brace-format
-msgid "Checking {}"
-msgstr ""
-
-#: koboutilities/action.py:5842
+#: koboutilities/features/getshelves.py:183
 #, python-brace-format
 msgid "Getting collections for {}"
 msgstr ""
 
-#: koboutilities/action.py:6188
-msgid "Device jobs are running or queued."
-msgstr ""
-
-#: koboutilities/action.py:6218
-msgid "Cannot update the ToC of books on the device"
-msgstr ""
-
-#: koboutilities/action.py:6248
-msgid "Getting ToC status for books"
-msgstr ""
-
-#: koboutilities/action.py:6250
-#, python-brace-format
-msgid "Number of books: {0}"
-msgstr ""
-
-#: koboutilities/action.py:6398
-msgid "eBook is not on Kobo eReader"
-msgstr ""
-
-#: koboutilities/action.py:6418
-msgid "eBook on Kobo eReader is not supported format"
-msgstr ""
-
-#: koboutilities/action.py:6436
-#, python-brace-format
-msgid "No suitable format in library for book. The format of the device is {0}"
-msgstr ""
-
-#: koboutilities/action.py:6454
-msgid "eBook in library has DRM"
-msgstr ""
-
-#: koboutilities/action.py:6468
-msgid "eBook on Kobo eReader has DRM"
-msgstr ""
-
-#: koboutilities/action.py:6568 koboutilities/action.py:6622
-msgid "Book needs to be updated on Kobo eReader"
-msgstr ""
-
-#: koboutilities/action.py:6804
-#, python-brace-format
-msgid "Updating ToC in device database for {0} books."
-msgstr ""
-
-#: koboutilities/action.py:6808
-msgid "Updating ToC in device database"
-msgstr ""
-
-#: koboutilities/action.py:6810
-#, python-brace-format
-msgid "Number of books to update: {0}"
-msgstr ""
-
-#: koboutilities/common_utils.py:288
-#, python-format
-msgid "Execution of '%s' failed"
-msgstr ""
-
-#: koboutilities/common_utils.py:352
-msgid "Help"
-msgstr ""
-
-#: koboutilities/common_utils.py:366
-msgid "Restart required"
-msgstr ""
-
-#: koboutilities/common_utils.py:368
-msgid "Title image not found - you must restart Calibre before using this plugin!"
-msgstr ""
-
-#: koboutilities/common_utils.py:596
-msgid "Create new column"
-msgstr ""
-
-#: koboutilities/common_utils.py:791
-msgid "Restart calibre now"
-msgstr ""
-
-#: koboutilities/common_utils.py:807
-msgid "Prefs viewer dialog"
-msgstr ""
-
-#: koboutilities/common_utils.py:808
-#, python-brace-format
-msgid "Preferences for: {}"
-msgstr ""
-
-#: koboutilities/common_utils.py:840
-msgid "Clear"
-msgstr ""
-
-#: koboutilities/common_utils.py:842
-msgid "Clear all settings for this plugin"
-msgstr ""
-
-#: koboutilities/common_utils.py:917
-msgid "Settings deleted"
-msgstr ""
-
-#: koboutilities/common_utils.py:918
-msgid "<p>All settings for this plugin in this library have been cleared.</p>"
-msgstr ""
-
-#: koboutilities/common_utils.py:919
-msgid "<p>Please restart calibre now.</p>"
-msgstr ""
-
-#: koboutilities/config.py:204
-msgid "* File timestamp"
-msgstr ""
-
-#: koboutilities/config.py:343
-msgid "Kobo reading location"
-msgstr ""
-
-#: koboutilities/config.py:345
-msgid "Kobo reading location from the device."
-msgstr ""
-
-#: koboutilities/config.py:347
-msgid "Current reading location column:"
-msgstr ""
-
-#: koboutilities/config.py:349
-msgid ""
-"Select a custom column to store the current reading location. The column "
-"type must be 'text' or 'comments'. Leave this blank if you do not want to"
-" store or restore the current reading location."
-msgstr ""
-
-#: koboutilities/config.py:353
-#, python-format
-msgid "Kobo % read"
-msgstr ""
-
-#: koboutilities/config.py:355
-msgid "Percentage read for the book"
-msgstr ""
-
-#: koboutilities/config.py:357
-msgid "Percent read column:"
-msgstr ""
-
-#: koboutilities/config.py:359
-msgid ""
-"Column used to store the current percent read. The column type must be "
-"'integer' or 'float'. Leave this blank if you do not want to store or "
-"restore the percentage read."
-msgstr ""
-
-#: koboutilities/config.py:363
-msgid "Kobo rating"
-msgstr ""
-
-#: koboutilities/config.py:365
-msgid "Rating for the book on the Kobo device."
-msgstr ""
-
-#: koboutilities/config.py:367
-msgid "Rating column:"
-msgstr ""
-
-#: koboutilities/config.py:369
-msgid ""
-"Column used to store the rating. The column type must be a 'integer'. "
-"Leave this blank if you do not want to store or restore the rating."
-msgstr ""
-
-#: koboutilities/config.py:373
-msgid "Kobo last read"
-msgstr ""
-
-#: koboutilities/config.py:375
-msgid "When the book was last read on the Kobo device."
-msgstr ""
-
-#: koboutilities/config.py:377
-msgid "Last read column:"
-msgstr ""
-
-#: koboutilities/config.py:379
-msgid ""
-"Column used to store when the book was last read. The column type must be"
-" a 'Date'. Leave this blank if you do not want to store the last read "
-"timestamp."
-msgstr ""
-
-#: koboutilities/config.py:383
-msgid "Kobo time spent reading"
-msgstr ""
-
-#: koboutilities/config.py:385
-msgid "The time already spent reading the book, in seconds."
-msgstr ""
-
-#: koboutilities/config.py:387
-msgid "Time spent reading column:"
-msgstr ""
-
-#: koboutilities/config.py:389
-msgid ""
-"Column used to store how much time was spent reading the book, in "
-"seconds. The column type must be 'integer'. Leave this blank if you do "
-"not want to store the time spent reading the book."
-msgstr ""
-
-#: koboutilities/config.py:393
-msgid "Kobo rest of book estimate"
-msgstr ""
-
-#: koboutilities/config.py:395
-msgid "The estimate of the time left to read the book, in seconds."
-msgstr ""
-
-#: koboutilities/config.py:397
-msgid "Rest of book estimate column:"
-msgstr ""
-
-#: koboutilities/config.py:399
-msgid ""
-"Column used to store the estimate of how much time is left in the book, "
-"in seconds. The column type must be 'integer'. Leave this blank if you do"
-" not want to store the estimate of the time left."
-msgstr ""
-
-#: koboutilities/config.py:578
-msgid "(Unknown device)"
-msgstr ""
-
-#: koboutilities/config.py:619
-msgid "Profiles:"
-msgstr ""
-
-#: koboutilities/config.py:630
-msgid "Add profile"
-msgstr ""
-
-#: koboutilities/config.py:635
-msgid "Delete profile"
-msgstr ""
-
-#: koboutilities/config.py:640 koboutilities/config.py:845
-msgid "Rename profile"
-msgstr ""
-
-#: koboutilities/config.py:648
-msgid "&Device this profile is for:"
-msgstr ""
-
-#: koboutilities/config.py:649
-msgid "Select the device this profile is for."
-msgstr ""
-
-#: koboutilities/config.py:655
-msgid "Custom columns"
-msgstr ""
-
-#: koboutilities/config.py:699
-msgid "Store on connect"
-msgstr ""
-
-#: koboutilities/config.py:705
-msgid "Store current bookmarks/reading position on connect"
-msgstr ""
-
-#: koboutilities/config.py:709
-msgid ""
-"When this is checked, the library will be updated with the current "
-"reading position for all books on the device."
-msgstr ""
-
-#: koboutilities/config.py:718
-msgid "Prompt to store any changes"
-msgstr ""
-
-#: koboutilities/config.py:722
-msgid ""
-"Enable this to be prompted to save the changed reading positions after an"
-" automatic store is done."
-msgstr ""
-
-#: koboutilities/config.py:727 koboutilities/dialogs.py:1522
-msgid "Only if more recent"
-msgstr ""
-
-#: koboutilities/config.py:730 koboutilities/dialogs.py:1525
-msgid ""
-"Only store the reading position if the last read timestamp on the device "
-"is more recent than in the library."
-msgstr ""
-
-#: koboutilities/config.py:736 koboutilities/dialogs.py:1531
-msgid "Not if finished in library"
-msgstr ""
-
-#: koboutilities/config.py:740 koboutilities/dialogs.py:1535
-msgid ""
-"Do not store the reading position if the library has the book as "
-"finished. This is if the percent read is 100%."
-msgstr ""
-
-#: koboutilities/config.py:748
-msgid "You can use this site to download the latest version of Kobo firmware:"
-msgstr ""
-
-#: koboutilities/config.py:808
-msgid "Add new profile"
-msgstr ""
-
-#: koboutilities/config.py:809
-msgid "Enter a unique display name for this profile:"
-msgstr ""
-
-#: koboutilities/config.py:822 koboutilities/config.py:862
-msgid "Add failed"
-msgstr ""
-
-#: koboutilities/config.py:823 koboutilities/config.py:863
-msgid "A profile with the same name already exists"
-msgstr ""
-
-#: koboutilities/config.py:846
-msgid "Enter a new display name for this profile:"
-msgstr ""
-
-#: koboutilities/config.py:884
-msgid "Cannot delete"
-msgstr ""
-
-#: koboutilities/config.py:885
-msgid "You must have at least one profile"
-msgstr ""
-
-#: koboutilities/config.py:892
-#, python-brace-format
-msgid "Do you want to delete the profile named '{0}'"
-msgstr ""
-
-#: koboutilities/config.py:1154
-msgid "Devices:"
-msgstr ""
-
-#: koboutilities/config.py:1167
-msgid "Add connected device"
-msgstr ""
-
-#: koboutilities/config.py:1170
-msgid ""
-"If you do not have a device connected currently, either plug one\n"
-"in now or exit the dialog and connect to folder/iTunes first"
-msgstr ""
-
-#: koboutilities/config.py:1180
-msgid "Rename the currently connected device"
-msgstr ""
-
-#: koboutilities/config.py:1187
-msgid "Delete this device from the device list"
-msgstr ""
-
-#: koboutilities/config.py:1193
-msgid "Configure options for each device"
-msgstr ""
-
-#: koboutilities/config.py:1196
-msgid "Selected this option to configure backup for each device."
-msgstr ""
-
-#: koboutilities/config.py:1207
-msgid "Back up the device database daily"
-msgstr ""
-
-#: koboutilities/config.py:1211
-msgid ""
-"If this is selected the plugin will back up the device database the first"
-" time it is connected each day."
-msgstr ""
-
-#: koboutilities/config.py:1220
-msgid "Back up the device database on each connection"
-msgstr ""
-
-#: koboutilities/config.py:1224
-msgid ""
-"If this is selected the plugin will back up the device database each time"
-" the device is connected."
-msgstr ""
-
-#: koboutilities/config.py:1232 koboutilities/dialogs.py:1769
-msgid "Destination:"
-msgstr ""
-
-#: koboutilities/config.py:1234
-msgid "Select the destination to back up the device database to."
-msgstr ""
-
-#: koboutilities/config.py:1239 koboutilities/dialogs.py:1776
-msgid "..."
-msgstr ""
-
-#: koboutilities/config.py:1246
-msgid "Copies to keep"
-msgstr ""
-
-#: koboutilities/config.py:1249
-msgid ""
-"Select this to limit the number of backups kept. If not set, the backup "
-"files must be manually deleted."
-msgstr ""
-
-#: koboutilities/config.py:1255
-msgid "The number of backup copies of the database to keep. The minimum is 2."
-msgstr ""
-
-#: koboutilities/config.py:1264
-msgid "Compress database with config files"
-msgstr ""
-
-#: koboutilities/config.py:1268
-msgid ""
-"If checked, the database file will be added to the zip file with "
-"configuration files."
-msgstr ""
-
-#: koboutilities/config.py:1338 koboutilities/config.py:1368
-msgid "Rename failed"
-msgstr ""
-
-#: koboutilities/config.py:1339 koboutilities/config.py:1380
-msgid "You must select a device first"
-msgstr ""
-
-#: koboutilities/config.py:1348
-msgid "Rename device"
-msgstr ""
-
-#: koboutilities/config.py:1349
-msgid "Enter a new display name for this device:"
-msgstr ""
-
-#: koboutilities/config.py:1369
-msgid "An error occurred while renaming."
-msgstr ""
-
-#: koboutilities/config.py:1379
-msgid "Delete failed"
-msgstr ""
-
-#: koboutilities/config.py:1388 koboutilities/dialogs.py:2979
-msgid "Are you sure?"
-msgstr ""
-
-#: koboutilities/config.py:1391
-#, python-brace-format
-msgid "You are about to remove the <b>{0}</b> device from this list. "
-msgstr ""
-
-#: koboutilities/config.py:1395
-msgid "Are you sure you want to continue?"
-msgstr ""
-
-#: koboutilities/config.py:1610
-msgid "Menu"
-msgstr ""
-
-#: koboutilities/config.py:1611
-msgid "Name"
-msgstr ""
-
-#: koboutilities/config.py:1612
-msgid "Model"
-msgstr ""
-
-#: koboutilities/config.py:1613
-msgid "Serial number"
-msgstr ""
-
-#: koboutilities/config.py:1614
-msgid "FW version"
-msgstr ""
-
-#: koboutilities/config.py:1615 koboutilities/dialogs.py:4446
-#: koboutilities/dialogs.py:4449
-msgid "Status"
-msgstr ""
-
-#: koboutilities/config.py:1711
-msgid "Other options"
-msgstr ""
-
-#: koboutilities/config.py:1716
-msgid "&Library button default:"
-msgstr ""
-
-#: koboutilities/config.py:1719 koboutilities/config.py:1734
-msgid ""
-"If plugin is placed as a toolbar button, choose a default action when "
-"clicked on"
-msgstr ""
-
-#: koboutilities/config.py:1731
-msgid "&Device button default:"
-msgstr ""
-
-#: koboutilities/config.py:1746
-msgid "Keyboard shortcuts..."
-msgstr ""
-
-#: koboutilities/config.py:1748 koboutilities/dialogs.py:3787
-msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr ""
-
-#: koboutilities/config.py:1753
-msgid "&View library preferences..."
-msgstr ""
-
-#: koboutilities/config.py:1755
-msgid "View data stored in the library database for this plugin"
-msgstr ""
-
-#: koboutilities/config.py:1786
-msgid "Kobo Utilities options"
-msgstr ""
-
-#: koboutilities/config.py:1796
-msgid "Profiles"
-msgstr ""
-
-#: koboutilities/config.py:1797
-msgid "Devices"
-msgstr ""
-
-#: koboutilities/config.py:1798 koboutilities/dialogs.py:3773
-msgid "Other"
-msgstr ""
-
-#: koboutilities/dialogs.py:186
-msgid "Default"
-msgstr ""
-
-#: koboutilities/dialogs.py:187
-msgid "RTL"
-msgstr ""
-
-#: koboutilities/dialogs.py:188
-msgid "LTR"
-msgstr ""
-
-#: koboutilities/dialogs.py:242
-msgid "Creating queue for checking images directory"
-msgstr ""
-
-#: koboutilities/dialogs.py:245
-msgid "Creating queue for removing annotations files"
-msgstr ""
-
-#: koboutilities/dialogs.py:248
-msgid "Queueing books for storing reading position"
-msgstr ""
-
-#: koboutilities/dialogs.py:277 koboutilities/dialogs.py:405
-msgid "Preparing the list of books ..."
-msgstr ""
-
-#: koboutilities/dialogs.py:495
-msgid "Kobo eReader font settings"
-msgstr ""
-
-#: koboutilities/dialogs.py:499
-msgid "Reader font settings"
-msgstr ""
-
-#: koboutilities/dialogs.py:504
-msgid "Font face"
-msgstr ""
-
-#: koboutilities/dialogs.py:507
-msgid "Font size"
-msgstr ""
-
-#: koboutilities/dialogs.py:512
-msgid "Font size to use when reading. The device default is about 22."
-msgstr ""
-
-#: koboutilities/dialogs.py:516
-msgid "Line spacing"
-msgstr ""
-
-#: koboutilities/dialogs.py:523
-msgid ""
-"The line spacing number is how many times the right arrow is pressed on "
-"the device."
-msgstr ""
-
-#: koboutilities/dialogs.py:528
-msgid "Custom setting"
-msgstr ""
-
-#: koboutilities/dialogs.py:532
-msgid ""
-"If you want to try a line spacing other than the Kobo specified, check "
-"this and enter a number."
-msgstr ""
-
-#: koboutilities/dialogs.py:544
-msgid ""
-"Kobo use from 1.3 to 4.0. Any number can be entered, but whether the "
-"device will use it, is another matter."
-msgstr ""
-
-#: koboutilities/dialogs.py:548
-msgid "Left margins"
-msgstr ""
-
-#: koboutilities/dialogs.py:554
-msgid "Margins on the device are set in multiples of two, but single steps work."
-msgstr ""
-
-#: koboutilities/dialogs.py:560
-msgid "Lock margins"
-msgstr ""
-
-#: koboutilities/dialogs.py:564
-msgid ""
-"Lock the left and right margins to the same value. Changing the left "
-"margin will also set the right margin."
-msgstr ""
-
-#: koboutilities/dialogs.py:569
-msgid "Right margins"
-msgstr ""
-
-#: koboutilities/dialogs.py:575
-msgid ""
-"Margins on the device are set in multiples of three, but single steps "
-"work."
-msgstr ""
-
-#: koboutilities/dialogs.py:580
-msgid "Justification"
-msgstr ""
-
-#: koboutilities/dialogs.py:584 koboutilities/dialogs.py:3850
-msgid "Update config file"
-msgstr ""
-
-#: koboutilities/dialogs.py:588
-msgid ""
-"Update the 'Kobo eReader.conf' file with the new settings. These will be "
-"used when opening new books or books that do not have stored settings."
-msgstr ""
-
-#: koboutilities/dialogs.py:592
-msgid "Do not update if set"
-msgstr ""
-
-#: koboutilities/dialogs.py:595
-msgid "Do not upate the font settings if it is already set for the book."
-msgstr ""
-
-#: koboutilities/dialogs.py:603
-msgid "&Get configuration from device"
-msgstr ""
-
-#: koboutilities/dialogs.py:607
-msgid "Read the device configuration file to get the current default settings."
-msgstr ""
-
-#: koboutilities/dialogs.py:612
-msgid "&Get settings from device"
-msgstr ""
-
-#: koboutilities/dialogs.py:616
-msgid "Fetches the current for the selected book from the device."
-msgstr ""
-
-#: koboutilities/dialogs.py:990
-msgid "Metadata to update"
-msgstr ""
-
-#: koboutilities/dialogs.py:996 koboutilities/dialogs.py:3158
-#: koboutilities/dialogs.py:3438 koboutilities/dialogs.py:4440
-msgid "Title"
-msgstr ""
-
-#: koboutilities/dialogs.py:999
-msgid "Use 'Title Sort'"
-msgstr ""
-
-#: koboutilities/dialogs.py:1002 koboutilities/dialogs.py:4441
-msgid "Author"
-msgstr ""
-
-#: koboutilities/dialogs.py:1005
-msgid "Use 'Author Sort'"
-msgstr ""
-
-#: koboutilities/dialogs.py:1009
-msgid "Comments/Synopsis"
-msgstr ""
-
-#: koboutilities/dialogs.py:1012
-msgid "Use template"
-msgstr ""
-
-#: koboutilities/dialogs.py:1022
-msgid "Enter a template to use to set the comment/synopsis."
-msgstr ""
-
-#: koboutilities/dialogs.py:1028
-msgid "Series and index"
-msgstr ""
-
-#: koboutilities/dialogs.py:1031
-msgid "Publisher"
-msgstr ""
-
-#: koboutilities/dialogs.py:1035 koboutilities/dialogs.py:3817
-msgid "Published date"
-msgstr ""
-
-#: koboutilities/dialogs.py:1038
-msgid "ISBN"
-msgstr ""
-
-#: koboutilities/dialogs.py:1042
-msgid "Language"
-msgstr ""
-
-#: koboutilities/dialogs.py:1049
-msgid "Subtitle"
-msgstr ""
-
-#: koboutilities/dialogs.py:1057
-msgid ""
-"Enter a template to use to set the subtitle. If the template is empty, "
-"the subtitle will be cleared."
-msgstr ""
-
-#: koboutilities/dialogs.py:1063
-msgid "Reading direction"
-msgstr ""
-
-#: koboutilities/dialogs.py:1064
-msgid "Set the reading direction"
-msgstr ""
-
-#: koboutilities/dialogs.py:1077
-msgid "Date added"
-msgstr ""
-
-#: koboutilities/dialogs.py:1079
-msgid "Set the date added to the device. This is used when sorting."
-msgstr ""
-
-#: koboutilities/dialogs.py:1090
-msgid "Use plugboard"
-msgstr ""
-
-#: koboutilities/dialogs.py:1093
-msgid ""
-"Set the metadata on the device using the plugboard for the device and "
-"book format."
-msgstr ""
-
-#: koboutilities/dialogs.py:1099
-msgid "Update Kobo ePubs"
-msgstr ""
-
-#: koboutilities/dialogs.py:1101
-msgid "Update the metadata for kePubs downloaded from the Kobo server."
-msgstr ""
-
-#: koboutilities/dialogs.py:1222 koboutilities/dialogs.py:1731
-#: koboutilities/dialogs.py:2223 koboutilities/dialogs.py:3630
-msgid "No options selected"
-msgstr ""
-
-#: koboutilities/dialogs.py:1223 koboutilities/dialogs.py:1732
-#: koboutilities/dialogs.py:2224 koboutilities/dialogs.py:3631
-msgid "You must select at least one option to continue."
-msgstr ""
-
-#: koboutilities/dialogs.py:1333 koboutilities/dialogs.py:1510
-#: koboutilities/dialogs.py:3578 koboutilities/dialogs.py:3799
-msgid "Options"
-msgstr ""
-
-#: koboutilities/dialogs.py:1338
+#: koboutilities/features/getshelves.py:282
 msgid "Collection column:"
 msgstr ""
 
-#: koboutilities/dialogs.py:1340
+#: koboutilities/features/getshelves.py:284
 msgid ""
 "Select a custom column to store the retrieved collection names. The "
 "column type must\n"
 "be of type 'text'."
 msgstr ""
 
-#: koboutilities/dialogs.py:1349
+#: koboutilities/features/getshelves.py:293
 msgid "All books on device"
 msgstr ""
 
-#: koboutilities/dialogs.py:1352
+#: koboutilities/features/getshelves.py:296
 msgid ""
 "Get the collections for all the books on the device that are in the "
 "library. If not checked, will only get them for the selected books."
 msgstr ""
 
-#: koboutilities/dialogs.py:1358
+#: koboutilities/features/getshelves.py:302
 msgid "Replace column with collections"
 msgstr ""
 
-#: koboutilities/dialogs.py:1362
+#: koboutilities/features/getshelves.py:306
 msgid ""
 "If this is selected, the current value in the library, will be replaced "
 "by\n"
@@ -1692,704 +1394,969 @@ msgid ""
 "added to the value"
 msgstr ""
 
-#: koboutilities/dialogs.py:1402
+#: koboutilities/features/getshelves.py:343
 msgid "No collection column selected"
 msgstr ""
 
-#: koboutilities/dialogs.py:1404
+#: koboutilities/features/getshelves.py:345
 msgid "You must select a column to populate from the collections on the device"
 msgstr ""
 
-#: koboutilities/dialogs.py:1506
+#: koboutilities/features/locations.py:242
+msgid "Cannot update metadata in device library."
+msgstr ""
+
+#: koboutilities/features/locations.py:243
+msgid "No fetch queries found for firmware version."
+msgstr ""
+
+#: koboutilities/features/locations.py:295
+#, python-brace-format
+msgid ""
+"Reading locations updated={0}\n"
+"\tBooks with no reading location={1}\n"
+"\tTotal books checked={2}"
+msgstr ""
+
+#: koboutilities/features/locations.py:304
+msgid "Library updated"
+msgstr ""
+
+#: koboutilities/features/locations.py:334
+#: koboutilities/features/locations.py:1324
+msgid "Storing reading positions"
+msgstr ""
+
+#: koboutilities/features/locations.py:381
+#, python-brace-format
+msgid "Checking {}"
+msgstr ""
+
+#: koboutilities/features/locations.py:691
+#: koboutilities/features/locations.py:1603
+#, python-brace-format
+msgid "Storing reading positions completed - {0} changed."
+msgstr ""
+
+#: koboutilities/features/locations.py:734
+#, python-brace-format
+msgid ""
+"Books updated={0}\n"
+"\tBooks not on device={1}\n"
+"\tTotal books={2}"
+msgstr ""
+
+#: koboutilities/features/locations.py:740
+#: koboutilities/features/metadata.py:115 koboutilities/features/reader.py:199
+#: koboutilities/features/reader.py:241
+#: koboutilities/features/readingstatus.py:77
+msgid "Device library updated"
+msgstr ""
+
+#: koboutilities/features/locations.py:1143
+msgid "Queuing books for storing reading position"
+msgstr ""
+
+#: koboutilities/features/locations.py:1145
+msgid "Getting list of books"
+msgstr ""
+
+#: koboutilities/features/locations.py:1161
+msgid "Queuing books"
+msgstr ""
+
+#: koboutilities/features/locations.py:1175
+#: koboutilities/features/locations.py:1888
+#: koboutilities/features/removeannotations.py:392
+#, python-brace-format
+msgid "Queueing {}"
+msgstr ""
+
+#: koboutilities/features/locations.py:1247
+#, python-brace-format
+msgid "Storing reading positions for {0} books"
+msgstr ""
+
+#: koboutilities/features/locations.py:1259
+msgid "Failed to get reading positions"
+msgstr ""
+
+#: koboutilities/features/locations.py:1271
+msgid "Storing reading positions completed - No changes found"
+msgstr ""
+
+#: koboutilities/features/locations.py:1382
+#: koboutilities/features/manageseries.py:1070
+#: koboutilities/features/metadata.py:734
+msgid "Unknown"
+msgstr ""
+
+#: koboutilities/features/locations.py:1385
+#, python-brace-format
+msgid "Updating {}"
+msgstr ""
+
+#: koboutilities/features/locations.py:1664
 msgid "Store or restore reading positions"
 msgstr ""
 
-#: koboutilities/dialogs.py:1515
+#: koboutilities/features/locations.py:1674
 msgid "Store"
 msgstr ""
 
-#: koboutilities/dialogs.py:1517
+#: koboutilities/features/locations.py:1676
 msgid "Store the current reading position in the calibre library."
 msgstr ""
 
-#: koboutilities/dialogs.py:1543
+#: koboutilities/features/locations.py:1702
 msgid "Clear if unread"
 msgstr ""
 
-#: koboutilities/dialogs.py:1546
+#: koboutilities/features/locations.py:1705
 msgid ""
 "If the book on the device is shown as unread, clear the reading position "
 "stored in the library."
 msgstr ""
 
-#: koboutilities/dialogs.py:1551
+#: koboutilities/features/locations.py:1710
 msgid "Run in background"
 msgstr ""
 
-#: koboutilities/dialogs.py:1552
+#: koboutilities/features/locations.py:1711
 msgid "Do store or restore as background job."
 msgstr ""
 
-#: koboutilities/dialogs.py:1555
-msgid "Restore"
-msgstr ""
-
-#: koboutilities/dialogs.py:1557
+#: koboutilities/features/locations.py:1716
 msgid "Copy the current reading position back to the device."
 msgstr ""
 
-#: koboutilities/dialogs.py:1562
+#: koboutilities/features/locations.py:1721
 msgid "Set reading status"
 msgstr ""
 
-#: koboutilities/dialogs.py:1565
+#: koboutilities/features/locations.py:1724
 msgid ""
 "If this is not set, when the current reading position is on the device, "
 "the reading status will not be changes. If the percent read is 100%, the "
 "book will be marked as finished. Otherwise, it will be in progress."
 msgstr ""
 
-#: koboutilities/dialogs.py:1570
+#: koboutilities/features/locations.py:1729
 msgid "Set date to now"
 msgstr ""
 
-#: koboutilities/dialogs.py:1573
+#: koboutilities/features/locations.py:1732
 msgid ""
 "Setting the date to now will put the book at the top of the \"Recent "
 "reads\" list."
 msgstr ""
 
-#: koboutilities/dialogs.py:1578
+#: koboutilities/features/locations.py:1737
 msgid "Update rating"
 msgstr ""
 
-#: koboutilities/dialogs.py:1581
+#: koboutilities/features/locations.py:1740
 msgid ""
 "Set the book rating on the device. If the current rating in the library "
 "is zero, the rating on the device will be reset."
 msgstr ""
 
-#: koboutilities/dialogs.py:1586
-msgid "Profile"
+#: koboutilities/features/locations.py:1834
+msgid "Queueing books for storing reading position"
 msgstr ""
 
-#: koboutilities/dialogs.py:1763
-msgid "Back up annotations files"
+#: koboutilities/features/locations.py:1854
+#: koboutilities/features/removeannotations.py:365
+msgid "Preparing the list of books ..."
 msgstr ""
 
-#: koboutilities/dialogs.py:1771
-msgid "Select the destination the annotations files are to be backed up in."
+#: koboutilities/features/locations.py:2003
+#: koboutilities/features/locations.py:2009
+msgid "Show reading position changes"
 msgstr ""
 
-#: koboutilities/dialogs.py:1812
-msgid "Choose destination directory"
+#: koboutilities/features/locations.py:2019
+#, python-brace-format
+msgid "Profile: {0}"
 msgstr ""
 
-#: koboutilities/dialogs.py:1844
-msgid "Remove annotations files"
+#: koboutilities/features/locations.py:2022
+#, python-brace-format
+msgid "Device: {0}"
 msgstr ""
 
-#: koboutilities/dialogs.py:1850
-msgid "Remove..."
+#: koboutilities/features/locations.py:2030
+msgid "Select updated books in library"
 msgstr ""
 
-#: koboutilities/dialogs.py:1855 koboutilities/dialogs.py:3773
-msgid "All"
+#: koboutilities/features/locations.py:2034
+msgid "Update Goodread reading progress"
 msgstr ""
 
-#: koboutilities/dialogs.py:1856
-msgid "Remove the annotations directory and all files within it"
+#: koboutilities/features/locations.py:2048 koboutilities/features/toc.py:1046
+msgid "Select all"
 msgstr ""
 
-#: koboutilities/dialogs.py:1860
-msgid "For selected books"
+#: koboutilities/features/locations.py:2053 koboutilities/features/toc.py:1071
+msgid "Clear all"
 msgstr ""
 
-#: koboutilities/dialogs.py:1861
-msgid "Only remove annotations files for the selected books"
+#: koboutilities/features/locations.py:2117
+msgid "Authors(s)"
 msgstr ""
 
-#: koboutilities/dialogs.py:1865
-msgid "Where book is not on device"
+#: koboutilities/features/locations.py:2118
+msgid "Current %"
 msgstr ""
 
-#: koboutilities/dialogs.py:1866
-msgid "Remove annotations files where there is no book on the device"
+#: koboutilities/features/locations.py:2119
+msgid "New %"
 msgstr ""
 
-#: koboutilities/dialogs.py:1870
-msgid "Empty"
+#: koboutilities/features/locations.py:2120
+msgid "Current date"
 msgstr ""
 
-#: koboutilities/dialogs.py:1871
-msgid "Remove all empty annotations files"
+#: koboutilities/features/locations.py:2121
+msgid "New date"
 msgstr ""
 
-#: koboutilities/dialogs.py:1875
-msgid "Not empty"
+#: koboutilities/features/locations.py:2122
+msgid "Book ID"
 msgstr ""
 
-#: koboutilities/dialogs.py:1876
-msgid "Only remove annotations files if they contain annotations"
+#: koboutilities/features/manageseries.py:136
+msgid "Updating series information on device"
 msgstr ""
 
-#: koboutilities/dialogs.py:1982 koboutilities/dialogs.py:1985
-msgid "Upload covers"
-msgstr ""
-
-#: koboutilities/dialogs.py:1990
-msgid "Black and white covers"
-msgstr ""
-
-#: koboutilities/dialogs.py:1993
-msgid "Dithered covers"
-msgstr ""
-
-#: koboutilities/dialogs.py:1995
-msgid "PNG covers"
-msgstr ""
-
-#: koboutilities/dialogs.py:1998
-msgid "Keep cover aspect ratio"
-msgstr ""
-
-#: koboutilities/dialogs.py:2003
-msgid "Letterbox covers"
-msgstr ""
-
-#: koboutilities/dialogs.py:2010
+#: koboutilities/features/manageseries.py:150
+#: koboutilities/features/metadata.py:110
+#: koboutilities/features/readingstatus.py:72
+#, python-brace-format
 msgid ""
-"Choose the color to use when letterboxing the cover. The default color is"
-" black (#000000)"
+"Books updated={0}\n"
+"\tUnchanged books={1}\n"
+"\tBooks not on device={2}\n"
+"\tTotal books={3}"
 msgstr ""
 
-#: koboutilities/dialogs.py:2016
-msgid "Upload covers for Kobo ePubs"
+#: koboutilities/features/manageseries.py:154
+msgid "No changes made to series information."
 msgstr ""
 
-#: koboutilities/dialogs.py:2109 koboutilities/dialogs.py:2112
-msgid "Remove covers"
+#: koboutilities/features/manageseries.py:157
+#: koboutilities/features/manageseries.py:221
+msgid "Manage series on device"
 msgstr ""
 
-#: koboutilities/dialogs.py:2118
-msgid "Remove full size covers"
-msgstr ""
-
-#: koboutilities/dialogs.py:2122
-msgid ""
-"Check this if you want to remove just the full size cover from the "
-"device. This will save space, but, if covers are used for the sleep "
-"screen, they will not look very good."
-msgstr ""
-
-#: koboutilities/dialogs.py:2127
-msgid "Remove covers for Kobo epubs"
-msgstr ""
-
-#: koboutilities/dialogs.py:2130
-msgid ""
-"Check this if you want to remove covers for any Kobo epubs synced from "
-"the Kobo server."
-msgstr ""
-
-#: koboutilities/dialogs.py:2173
-msgid "Block analytics"
-msgstr ""
-
-#: koboutilities/dialogs.py:2176
-msgid "AnalyticsEvents database trigger"
-msgstr ""
-
-#: koboutilities/dialogs.py:2178
-msgid "When an entry is added to the AnalyticsEvents, it will be removed."
-msgstr ""
-
-#: koboutilities/dialogs.py:2185
-msgid "Create or change trigger"
-msgstr ""
-
-#: koboutilities/dialogs.py:2188
-msgid "To create or change the trigger, select this option."
-msgstr ""
-
-#: koboutilities/dialogs.py:2192
-msgid "Delete trigger"
-msgstr ""
-
-#: koboutilities/dialogs.py:2195
-msgid ""
-"This will remove the existing trigger and let the device work as Kobo "
-"intended it."
-msgstr ""
-
-#: koboutilities/dialogs.py:2257
-msgid "Clean images directory"
-msgstr ""
-
-#: koboutilities/dialogs.py:2261
-msgid "Clean images"
-msgstr ""
-
-#: koboutilities/dialogs.py:2266
-msgid "Delete extra cover image files"
-msgstr ""
-
-#: koboutilities/dialogs.py:2270
-msgid ""
-"Check this if you want to delete the extra cover image files from the "
-"images directory on the device."
-msgstr ""
-
-#: koboutilities/dialogs.py:2303 koboutilities/dialogs.py:2307
-msgid "Lock series index"
-msgstr ""
-
-#: koboutilities/dialogs.py:2327
-msgid "&Assign this index value to all remaining books"
-msgstr ""
-
-#: koboutilities/dialogs.py:2353
-msgid "You have conflicting or out of sequence series indexes"
-msgstr ""
-
-#: koboutilities/dialogs.py:2357
-msgid "Empty book added to series"
-msgstr ""
-
-#: koboutilities/dialogs.py:2364
-msgid "The book data has been changed"
-msgstr ""
-
-#: koboutilities/dialogs.py:2367
-msgid "The series data is unchanged"
-msgstr ""
-
-#: koboutilities/dialogs.py:2399
-msgid "Value assigned by user"
-msgstr ""
-
-#: koboutilities/dialogs.py:2443
-msgid "Lock original series index"
-msgstr ""
-
-#: koboutilities/dialogs.py:2450
-msgid "Lock series index..."
-msgstr ""
-
-#: koboutilities/dialogs.py:2454 koboutilities/dialogs.py:2752
-msgid "Unlock series index"
-msgstr ""
-
-#: koboutilities/dialogs.py:2460
-msgid "Unlock all series index"
-msgstr ""
-
-#: koboutilities/dialogs.py:2660
+#: koboutilities/features/manageseries.py:215
 msgid "Manage series"
 msgstr ""
 
-#: koboutilities/dialogs.py:2672
+#: koboutilities/features/manageseries.py:229
 msgid "Series &Column:"
 msgstr ""
 
-#: koboutilities/dialogs.py:2682
+#: koboutilities/features/manageseries.py:239
 msgid "Series &Name:"
 msgstr ""
 
-#: koboutilities/dialogs.py:2697
+#: koboutilities/features/manageseries.py:254
 msgid "&Start at:"
 msgstr ""
 
-#: koboutilities/dialogs.py:2710
+#: koboutilities/features/manageseries.py:267
 msgid "Clean titles of Kobo books"
 msgstr ""
 
-#: koboutilities/dialogs.py:2714
+#: koboutilities/features/manageseries.py:271
 msgid ""
 "Removes series information from the titles. For Kobo books, this is "
 "'(Series Name - #1)'"
 msgstr ""
 
-#: koboutilities/dialogs.py:2731
+#: koboutilities/features/manageseries.py:288
 msgid "Move book up in series (Alt+Up)"
 msgstr ""
 
-#: koboutilities/dialogs.py:2733
+#: koboutilities/features/manageseries.py:290
 msgid "Alt+Up"
 msgstr ""
 
-#: koboutilities/dialogs.py:2737
+#: koboutilities/features/manageseries.py:294
 msgid "Move book down in series (Alt+Down)"
 msgstr ""
 
-#: koboutilities/dialogs.py:2739
+#: koboutilities/features/manageseries.py:296
 msgid "Alt+Down"
 msgstr ""
 
-#: koboutilities/dialogs.py:2747
+#: koboutilities/features/manageseries.py:304
 msgid "Lock to index value..."
 msgstr ""
 
-#: koboutilities/dialogs.py:2761
+#: koboutilities/features/manageseries.py:309
+#: koboutilities/features/manageseries.py:801
+msgid "Unlock series index"
+msgstr ""
+
+#: koboutilities/features/manageseries.py:318
 msgid "Remove book from the series list"
 msgstr ""
 
-#: koboutilities/dialogs.py:2771
+#: koboutilities/features/manageseries.py:328
 msgid "Move series index to left of decimal point (Alt+Left)"
 msgstr ""
 
-#: koboutilities/dialogs.py:2774
+#: koboutilities/features/manageseries.py:331
 msgid "Alt+Left"
 msgstr ""
 
-#: koboutilities/dialogs.py:2779
+#: koboutilities/features/manageseries.py:336
 msgid "Move series index to right of decimal point (Alt+Right)"
 msgstr ""
 
-#: koboutilities/dialogs.py:2782
+#: koboutilities/features/manageseries.py:339
 msgid "Alt+Right"
 msgstr ""
 
-#: koboutilities/dialogs.py:2792
+#: koboutilities/features/manageseries.py:351
 msgid " &Restore original series "
 msgstr ""
 
-#: koboutilities/dialogs.py:2980
+#: koboutilities/features/manageseries.py:549
 msgid "Remove the selected book(s) from the series list?"
 msgstr ""
 
-#: koboutilities/dialogs.py:3159
-msgid "Author(s)"
+#: koboutilities/features/manageseries.py:744
+msgid "Value assigned by user"
 msgstr ""
 
-#: koboutilities/dialogs.py:3160
-msgid "File path"
+#: koboutilities/features/manageseries.py:790
+msgid "Lock original series index"
 msgstr ""
 
-#: koboutilities/dialogs.py:3161
-msgid "PubDate"
+#: koboutilities/features/manageseries.py:797
+msgid "Lock series index..."
 msgstr ""
 
-#: koboutilities/dialogs.py:3162
-msgid "File timestamp"
+#: koboutilities/features/manageseries.py:807
+msgid "Unlock all series index"
 msgstr ""
 
-#: koboutilities/dialogs.py:3244 koboutilities/dialogs.py:3248
-msgid "Books not in device database"
+#: koboutilities/features/manageseries.py:988
+#: koboutilities/features/manageseries.py:992
+msgid "Lock series index"
 msgstr ""
 
-#: koboutilities/dialogs.py:3332 koboutilities/dialogs.py:3336
-msgid "Show reading position changes"
+#: koboutilities/features/manageseries.py:1012
+msgid "&Assign this index value to all remaining books"
 msgstr ""
 
-#: koboutilities/dialogs.py:3345
+#: koboutilities/features/manageseries.py:1038
+msgid "You have conflicting or out of sequence series indexes"
+msgstr ""
+
+#: koboutilities/features/manageseries.py:1041
+msgid "Empty book added to series"
+msgstr ""
+
+#: koboutilities/features/manageseries.py:1048
+msgid "The book data has been changed"
+msgstr ""
+
+#: koboutilities/features/manageseries.py:1051
+msgid "The series data is unchanged"
+msgstr ""
+
+#: koboutilities/features/metadata.py:53
+msgid "Default"
+msgstr ""
+
+#: koboutilities/features/metadata.py:54
+msgid "RTL"
+msgstr ""
+
+#: koboutilities/features/metadata.py:55
+msgid "LTR"
+msgstr ""
+
+#: koboutilities/features/metadata.py:74
+msgid "Getting book list"
+msgstr ""
+
+#: koboutilities/features/metadata.py:75
 #, python-brace-format
-msgid "Profile: {0}"
+msgid "Number of selected books: {0}"
 msgstr ""
 
-#: koboutilities/dialogs.py:3348
+#: koboutilities/features/metadata.py:97
+msgid "Updating metadata on device"
+msgstr ""
+
+#: koboutilities/features/metadata.py:100
 #, python-brace-format
-msgid "Device: {0}"
+msgid "Number of books to update metadata for: {0}"
 msgstr ""
 
-#: koboutilities/dialogs.py:3356
-msgid "Select updated books in library"
+#: koboutilities/features/metadata.py:188
+#, python-brace-format
+msgid "Updating metadata for {}"
 msgstr ""
 
-#: koboutilities/dialogs.py:3360
-msgid "Update Goodread reading progress"
+#: koboutilities/features/metadata.py:751
+msgid "Published"
 msgstr ""
 
-#: koboutilities/dialogs.py:3372 koboutilities/dialogs.py:4321
-msgid "Select all"
+#: koboutilities/features/metadata.py:753
+#: koboutilities/features/relatedbooks.py:274
+msgid "Series"
 msgstr ""
 
-#: koboutilities/dialogs.py:3376 koboutilities/dialogs.py:4347
-msgid "Clear all"
+#: koboutilities/features/metadata.py:755
+#: koboutilities/features/metadata.py:966
+msgid "Rating"
 msgstr ""
 
-#: koboutilities/dialogs.py:3439
-msgid "Authors(s)"
+#: koboutilities/features/metadata.py:757
+msgid "Tags"
 msgstr ""
 
-#: koboutilities/dialogs.py:3440
-msgid "Current %"
+#: koboutilities/features/metadata.py:911
+msgid "Metadata to update"
 msgstr ""
 
-#: koboutilities/dialogs.py:3441
-msgid "New %"
+#: koboutilities/features/metadata.py:920
+msgid "Use 'Title Sort'"
 msgstr ""
 
-#: koboutilities/dialogs.py:3442
-msgid "Current date"
+#: koboutilities/features/metadata.py:923 koboutilities/features/toc.py:1168
+msgid "Author"
 msgstr ""
 
-#: koboutilities/dialogs.py:3443
-msgid "New date"
+#: koboutilities/features/metadata.py:926
+msgid "Use 'Author Sort'"
 msgstr ""
 
-#: koboutilities/dialogs.py:3444
-msgid "Book ID"
+#: koboutilities/features/metadata.py:930
+msgid "Comments/Synopsis"
 msgstr ""
 
-#: koboutilities/dialogs.py:3583
-msgid "Collection to keep"
+#: koboutilities/features/metadata.py:933
+msgid "Use template"
 msgstr ""
 
-#: koboutilities/dialogs.py:3584 koboutilities/dialogs.py:3655
-msgid "Oldest"
+#: koboutilities/features/metadata.py:943
+msgid "Enter a template to use to set the comment/synopsis."
 msgstr ""
 
-#: koboutilities/dialogs.py:3588 koboutilities/dialogs.py:3656
-msgid "Newest"
+#: koboutilities/features/metadata.py:949
+msgid "Series and index"
 msgstr ""
 
-#: koboutilities/dialogs.py:3593
-msgid "Purge duplicate collections"
+#: koboutilities/features/metadata.py:952
+msgid "Publisher"
 msgstr ""
 
-#: koboutilities/dialogs.py:3596
+#: koboutilities/features/metadata.py:956
+msgid "Published date"
+msgstr ""
+
+#: koboutilities/features/metadata.py:959
+msgid "ISBN"
+msgstr ""
+
+#: koboutilities/features/metadata.py:963
+msgid "Language"
+msgstr ""
+
+#: koboutilities/features/metadata.py:970
+msgid "Subtitle"
+msgstr ""
+
+#: koboutilities/features/metadata.py:978
 msgid ""
-"When this option is selected, the duplicated rows are deleted from the "
-"database. If this is done, they might be restore during the next sync to "
-"the Kobo server."
+"Enter a template to use to set the subtitle. If the template is empty, "
+"the subtitle will be cleared."
 msgstr ""
 
-#: koboutilities/dialogs.py:3654
-msgid "Collection name"
+#: koboutilities/features/metadata.py:984
+msgid "Reading direction"
 msgstr ""
 
-#: koboutilities/dialogs.py:3657
-msgid "Number"
+#: koboutilities/features/metadata.py:985
+msgid "Set the reading direction"
 msgstr ""
 
-#: koboutilities/dialogs.py:3684
-msgid "(Unnamed collection)"
+#: koboutilities/features/metadata.py:998
+msgid "Date added"
 msgstr ""
 
-#: koboutilities/dialogs.py:3761
-msgid "Order the collections with series names."
+#: koboutilities/features/metadata.py:1000
+msgid "Set the date added to the device. This is used when sorting."
 msgstr ""
 
-#: koboutilities/dialogs.py:3762
-msgid "Order the collections with author names."
+#: koboutilities/features/metadata.py:1011
+msgid "Use plugboard"
 msgstr ""
 
-#: koboutilities/dialogs.py:3763
-msgid "Order the collections that do not have series or author names."
-msgstr ""
-
-#: koboutilities/dialogs.py:3764
-msgid "Order all collections."
-msgstr ""
-
-#: koboutilities/dialogs.py:3767
-msgid "Collections to order"
-msgstr ""
-
-#: koboutilities/dialogs.py:3773 koboutilities/dialogs.py:4027
-msgid "Authors"
-msgstr ""
-
-#: koboutilities/dialogs.py:3785
-msgid "Get collections"
-msgstr ""
-
-#: koboutilities/dialogs.py:3807
-msgid "Order by series name and index and title."
-msgstr ""
-
-#: koboutilities/dialogs.py:3808
-msgid "Order by the published date."
-msgstr ""
-
-#: koboutilities/dialogs.py:3811
-msgid "Order by"
-msgstr ""
-
-#: koboutilities/dialogs.py:3829
-msgid "Selecting ascending will sort the shelf in series order."
-msgstr ""
-
-#: koboutilities/dialogs.py:3830
-msgid "Selecting descending will sort the shelf in reverse series order."
-msgstr ""
-
-#: koboutilities/dialogs.py:3833
-msgid "Order in"
-msgstr ""
-
-#: koboutilities/dialogs.py:3839
-msgid "Ascending"
-msgstr ""
-
-#: koboutilities/dialogs.py:3839
-msgid "Descending"
-msgstr ""
-
-#: koboutilities/dialogs.py:3854
+#: koboutilities/features/metadata.py:1014
 msgid ""
-"If this is selected, the configuration file is updated to set the "
-"selected sort for the collections to 'Date added'."
+"Set the metadata on the device using the plugboard for the device and "
+"book format."
 msgstr ""
 
-#: koboutilities/dialogs.py:3863 koboutilities/dialogs.py:4072
-#: koboutilities/dialogs.py:4306
-msgid "Remove"
+#: koboutilities/features/metadata.py:1020
+msgid "Update Kobo ePubs"
 msgstr ""
 
-#: koboutilities/dialogs.py:3867
+#: koboutilities/features/metadata.py:1022
+msgid "Update the metadata for kePubs downloaded from the Kobo server."
+msgstr ""
+
+#: koboutilities/features/metadata.py:1197
+msgid "&Template editor"
+msgstr ""
+
+#: koboutilities/features/metadata.py:1211
+msgid "Edit template"
+msgstr ""
+
+#: koboutilities/features/metadata.py:1225
+msgid "Invalid template"
+msgstr ""
+
+#: koboutilities/features/metadata.py:1226
+#, python-format
+msgid "The template %s is invalid:"
+msgstr ""
+
+#: koboutilities/features/reader.py:194
+#, python-brace-format
 msgid ""
-"Remove the selected collections from the list. This will mean the "
-"ordering for these collections will not be changed."
+"Font settings updated={0}\n"
+"\tFont settings added={1}\n"
+"\tTotal books={2}"
 msgstr ""
 
-#: koboutilities/dialogs.py:3915
-msgid "Collection/series name"
+#: koboutilities/features/reader.py:223
+msgid "Remove reader settings"
 msgstr ""
 
-#: koboutilities/dialogs.py:3915
-msgid "Books in collection"
+#: koboutilities/features/reader.py:224
+msgid "Do you want to remove the reader settings for the selected books?"
 msgstr ""
 
-#: koboutilities/dialogs.py:4017
+#: koboutilities/features/reader.py:237
+#, python-brace-format
+msgid "Font settings deleted={0}"
+msgstr ""
+
+#: koboutilities/features/reader.py:293
+msgid "Kobo eReader font settings"
+msgstr ""
+
+#: koboutilities/features/reader.py:298
+msgid "Reader font settings"
+msgstr ""
+
+#: koboutilities/features/reader.py:304
+msgid "Note that depending on your device not all fonts may be supported."
+msgstr ""
+
+#: koboutilities/features/reader.py:308
+msgid "Font face"
+msgstr ""
+
+#: koboutilities/features/reader.py:311
+msgid "Font size"
+msgstr ""
+
+#: koboutilities/features/reader.py:316
+msgid "Font size to use when reading. The device default is about 22."
+msgstr ""
+
+#: koboutilities/features/reader.py:320
+msgid "Line spacing"
+msgstr ""
+
+#: koboutilities/features/reader.py:327
+msgid ""
+"The line spacing number is how many times the right arrow is pressed on "
+"the device."
+msgstr ""
+
+#: koboutilities/features/reader.py:332
+msgid "Custom setting"
+msgstr ""
+
+#: koboutilities/features/reader.py:336
+msgid ""
+"If you want to try a line spacing other than the Kobo specified, check "
+"this and enter a number."
+msgstr ""
+
+#: koboutilities/features/reader.py:348
+msgid ""
+"Kobo use from 1.3 to 4.0. Any number can be entered, but whether the "
+"device will use it, is another matter."
+msgstr ""
+
+#: koboutilities/features/reader.py:352
+msgid "Left margins"
+msgstr ""
+
+#: koboutilities/features/reader.py:358
+msgid "Margins on the device are set in multiples of two, but single steps work."
+msgstr ""
+
+#: koboutilities/features/reader.py:364
+msgid "Lock margins"
+msgstr ""
+
+#: koboutilities/features/reader.py:368
+msgid ""
+"Lock the left and right margins to the same value. Changing the left "
+"margin will also set the right margin."
+msgstr ""
+
+#: koboutilities/features/reader.py:373
+msgid "Right margins"
+msgstr ""
+
+#: koboutilities/features/reader.py:379
+msgid ""
+"Margins on the device are set in multiples of three, but single steps "
+"work."
+msgstr ""
+
+#: koboutilities/features/reader.py:384
+msgid "Justification"
+msgstr ""
+
+#: koboutilities/features/reader.py:388
+msgid "Update config file"
+msgstr ""
+
+#: koboutilities/features/reader.py:392
+msgid ""
+"Update the 'Kobo eReader.conf' file with the new settings. These will be "
+"used when opening new books or books that do not have stored settings."
+msgstr ""
+
+#: koboutilities/features/reader.py:396
+msgid "Do not update if set"
+msgstr ""
+
+#: koboutilities/features/reader.py:399
+msgid "Do not upate the font settings if it is already set for the book."
+msgstr ""
+
+#: koboutilities/features/reader.py:407
+msgid "&Get configuration from device"
+msgstr ""
+
+#: koboutilities/features/reader.py:411
+msgid "Read the device configuration file to get the current default settings."
+msgstr ""
+
+#: koboutilities/features/reader.py:416
+msgid "&Get settings from device"
+msgstr ""
+
+#: koboutilities/features/reader.py:420
+msgid "Fetches the current for the selected book from the device."
+msgstr ""
+
+#: koboutilities/features/readingstatus.py:61
+msgid "Changing reading status on device"
+msgstr ""
+
+#: koboutilities/features/relatedbooks.py:54
+msgid "Deleted all related books for sideloaded books."
+msgstr ""
+
+#: koboutilities/features/relatedbooks.py:65
+#, python-brace-format
+msgid ""
+"Number of series or authors={0}\n"
+"\tNumber of books={1}"
+msgstr ""
+
+#: koboutilities/features/relatedbooks.py:160
+#, python-brace-format
+msgid "Setting related books for {}"
+msgstr ""
+
+#: koboutilities/features/relatedbooks.py:203
+#: koboutilities/features/relatedbooks.py:213
+msgid "Delete related books"
+msgstr ""
+
+#: koboutilities/features/relatedbooks.py:269
 msgid "Related books type"
 msgstr ""
 
-#: koboutilities/dialogs.py:4023
+#: koboutilities/features/relatedbooks.py:275
 msgid "The related books will be all books in a series."
 msgstr ""
 
-#: koboutilities/dialogs.py:4028
+#: koboutilities/features/relatedbooks.py:279
+msgid "Authors"
+msgstr ""
+
+#: koboutilities/features/relatedbooks.py:280
 msgid "The related books will be all books by the same author."
 msgstr ""
 
-#: koboutilities/dialogs.py:4049
+#: koboutilities/features/relatedbooks.py:303
 msgid "Get list"
 msgstr ""
 
-#: koboutilities/dialogs.py:4051
+#: koboutilities/features/relatedbooks.py:305
 msgid "Get the list of categories to use for the related books"
 msgstr ""
 
-#: koboutilities/dialogs.py:4062
+#: koboutilities/features/relatedbooks.py:316
 msgid "Series/author name"
 msgstr ""
 
-#: koboutilities/dialogs.py:4063
+#: koboutilities/features/relatedbooks.py:317
 msgid "Number of books"
 msgstr ""
 
-#: koboutilities/dialogs.py:4076
+#: koboutilities/features/relatedbooks.py:328
+#: koboutilities/features/toc.py:1029
+msgid "Remove"
+msgstr ""
+
+#: koboutilities/features/relatedbooks.py:333
 msgid ""
 "Remove the selected category from the list. This will mean related books "
 "will not be changed for that category."
 msgstr ""
 
-#: koboutilities/dialogs.py:4081
+#: koboutilities/features/relatedbooks.py:338
 msgid "Delete all"
 msgstr ""
 
-#: koboutilities/dialogs.py:4084
+#: koboutilities/features/relatedbooks.py:342
 msgid "Delete all related books for sideloaded books."
 msgstr ""
 
-#: koboutilities/dialogs.py:4114
+#: koboutilities/features/relatedbooks.py:371
 msgid "Do you want to remove related books for all sideloaded books?"
 msgstr ""
 
-#: koboutilities/dialogs.py:4174
-msgid "Reading status"
+#: koboutilities/features/relatedbooks.py:389
+msgid "Collection/series name"
 msgstr ""
 
-#: koboutilities/dialogs.py:4178
-msgid "Change reading status"
+#: koboutilities/features/relatedbooks.py:389
+msgid "Books in collection"
 msgstr ""
 
-#: koboutilities/dialogs.py:4184
-msgid "Unread"
+#: koboutilities/features/removeannotations.py:104
+#: koboutilities/features/removeannotations.py:111
+#: koboutilities/features/removeannotations.py:158
+#: koboutilities/features/removeannotations.py:205
+#: koboutilities/features/removeannotations.py:224
+msgid "Removing annotations files"
 msgstr ""
 
-#: koboutilities/dialogs.py:4188
-msgid "Reading"
+#: koboutilities/features/removeannotations.py:122
+msgid "Cleaning annotations completed"
 msgstr ""
 
-#: koboutilities/dialogs.py:4196
-msgid "Reset reading position"
+#: koboutilities/features/removeannotations.py:128
+#, python-brace-format
+msgid "Kobo Utilities removed <b>{0} annotation files(s)</b>."
 msgstr ""
 
-#: koboutilities/dialogs.py:4200
-msgid ""
-"If this option is checked, the current position and last reading date "
-"will be reset."
+#: koboutilities/features/removeannotations.py:158
+msgid "Start"
 msgstr ""
 
-#: koboutilities/dialogs.py:4237
-msgid "&Template editor"
+#: koboutilities/features/removeannotations.py:167
+msgid "Annotations directory removed."
 msgstr ""
 
-#: koboutilities/dialogs.py:4251
-msgid "Edit template"
+#: koboutilities/features/removeannotations.py:176
+msgid "Getting annotations files."
 msgstr ""
 
-#: koboutilities/dialogs.py:4265
-msgid "Invalid template"
+#: koboutilities/features/removeannotations.py:178
+#, python-brace-format
+msgid "Found {0} annotation files."
 msgstr ""
 
-#: koboutilities/dialogs.py:4266
-#, python-format
-msgid "The template %s is invalid:"
+#: koboutilities/features/removeannotations.py:192
+msgid "Checking annotations files."
 msgstr ""
 
-#: koboutilities/dialogs.py:4289
+#: koboutilities/features/removeannotations.py:199
+#, python-brace-format
+msgid "Found {0} annotation files to be removed."
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:215
+#, python-brace-format
+msgid "{0} annotations files removed."
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:351
+msgid "Creating queue for removing annotations files"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:433
+msgid "Remove annotations files"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:440
+msgid "Remove..."
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:445
+msgid "All"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:446
+msgid "Remove the annotations directory and all files within it"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:450
+msgid "For selected books"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:451
+msgid "Only remove annotations files for the selected books"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:455
+msgid "Where book is not on device"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:456
+msgid "Remove annotations files where there is no book on the device"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:460
+msgid "Empty"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:461
+msgid "Remove all empty annotations files"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:465
+msgid "Not empty"
+msgstr ""
+
+#: koboutilities/features/removeannotations.py:466
+msgid "Only remove annotations files if they contain annotations"
+msgstr ""
+
+#: koboutilities/features/toc.py:64
+msgid "Cannot update the ToC of books on the device"
+msgstr ""
+
+#: koboutilities/features/toc.py:96
+msgid "Getting ToC status for books"
+msgstr ""
+
+#: koboutilities/features/toc.py:98
+#, python-brace-format
+msgid "Number of books: {0}"
+msgstr ""
+
+#: koboutilities/features/toc.py:282
+msgid "eBook is not on Kobo eReader"
+msgstr ""
+
+#: koboutilities/features/toc.py:302
+msgid "eBook on Kobo eReader is not supported format"
+msgstr ""
+
+#: koboutilities/features/toc.py:320
+#, python-brace-format
+msgid "No suitable format in library for book. The format of the device is {0}"
+msgstr ""
+
+#: koboutilities/features/toc.py:339
+msgid "eBook in library has DRM"
+msgstr ""
+
+#: koboutilities/features/toc.py:353
+msgid "eBook on Kobo eReader has DRM"
+msgstr ""
+
+#: koboutilities/features/toc.py:450 koboutilities/features/toc.py:504
+msgid "Book needs to be updated on Kobo eReader"
+msgstr ""
+
+#: koboutilities/features/toc.py:694
+#, python-brace-format
+msgid "Updating ToC in device database for {0} books."
+msgstr ""
+
+#: koboutilities/features/toc.py:698
+msgid "Updating ToC in device database"
+msgstr ""
+
+#: koboutilities/features/toc.py:700
+#, python-brace-format
+msgid "Number of books to update: {0}"
+msgstr ""
+
+#: koboutilities/features/toc.py:1009
 msgid "Update ToCs in device database"
 msgstr ""
 
-#: koboutilities/dialogs.py:4302
+#: koboutilities/features/toc.py:1025
 msgid "Update ToC"
 msgstr ""
 
-#: koboutilities/dialogs.py:4303
+#: koboutilities/features/toc.py:1026
 msgid "Update ToC in device database for selected books."
 msgstr ""
 
-#: koboutilities/dialogs.py:4308
+#: koboutilities/features/toc.py:1032
 msgid "Remove selected books from the list"
 msgstr ""
 
-#: koboutilities/dialogs.py:4313
+#: koboutilities/features/toc.py:1037
 msgid "Send books"
 msgstr ""
 
-#: koboutilities/dialogs.py:4316
+#: koboutilities/features/toc.py:1041
 msgid "Send books to device that have been updated in the library."
 msgstr ""
 
-#: koboutilities/dialogs.py:4324 koboutilities/dialogs.py:4343
+#: koboutilities/features/toc.py:1050 koboutilities/features/toc.py:1068
 msgid "Select all books in the list."
 msgstr ""
 
-#: koboutilities/dialogs.py:4327
+#: koboutilities/features/toc.py:1053
 msgid "Select books to send"
 msgstr ""
 
-#: koboutilities/dialogs.py:4333
+#: koboutilities/features/toc.py:1058
 msgid "Select all books that need to be sent to the device."
 msgstr ""
 
-#: koboutilities/dialogs.py:4337
+#: koboutilities/features/toc.py:1062
 msgid "Select books to update"
 msgstr ""
 
-#: koboutilities/dialogs.py:4350
+#: koboutilities/features/toc.py:1075
 msgid "Unselect all books in the list."
 msgstr ""
 
-#: koboutilities/dialogs.py:4369 koboutilities/dialogs.py:4391
+#: koboutilities/features/toc.py:1096 koboutilities/features/toc.py:1118
 msgid "Update books"
 msgstr ""
 
-#: koboutilities/dialogs.py:4372
+#: koboutilities/features/toc.py:1099
 #, python-brace-format
 msgid ""
 "There are {0} books that need to be updated on the device. After the book"
@@ -2397,7 +2364,7 @@ msgid ""
 "ToC.<br/>Do you want to send the books to the device?"
 msgstr ""
 
-#: koboutilities/dialogs.py:4394
+#: koboutilities/features/toc.py:1121
 #, python-brace-format
 msgid ""
 "There are {0} books that need to have their ToC updated on the device. "
@@ -2406,78 +2373,38 @@ msgid ""
 "the device?"
 msgstr ""
 
-#: koboutilities/dialogs.py:4442
+#: koboutilities/features/toc.py:1169
 msgid "Library ToC"
 msgstr ""
 
-#: koboutilities/dialogs.py:4443
+#: koboutilities/features/toc.py:1170
 msgid "Library format"
 msgstr ""
 
-#: koboutilities/dialogs.py:4444
+#: koboutilities/features/toc.py:1171
 msgid "Kobo ToC"
 msgstr ""
 
-#: koboutilities/dialogs.py:4445
+#: koboutilities/features/toc.py:1172
 msgid "Kobo format"
 msgstr ""
 
-#: koboutilities/dialogs.py:4447
+#: koboutilities/features/toc.py:1174
 msgid "Send"
 msgstr ""
 
-#: koboutilities/dialogs.py:4448
+#: koboutilities/features/toc.py:1175
 msgid "Kobo database ToC"
 msgstr ""
 
-#: koboutilities/dialogs.py:4450
+#: koboutilities/features/toc.py:1177
 msgid "ToC"
 msgstr ""
 
-#: koboutilities/dialogs.py:4451
+#: koboutilities/features/toc.py:1178
 msgid "Reading position"
 msgstr ""
 
-#: koboutilities/dialogs.py:4452
+#: koboutilities/features/toc.py:1179
 msgid "Comment"
-msgstr ""
-
-#: koboutilities/dialogs.py:4720
-#, python-brace-format
-msgid "About {}"
-msgstr ""
-
-#: koboutilities/dialogs.py:4725
-msgid "OK"
-msgstr ""
-
-#: koboutilities/jobs.py:729
-msgid "Start"
-msgstr ""
-
-#: koboutilities/jobs.py:738
-msgid "Annotations directory removed."
-msgstr ""
-
-#: koboutilities/jobs.py:747
-msgid "Getting annotations files."
-msgstr ""
-
-#: koboutilities/jobs.py:749
-#, python-brace-format
-msgid "Found {0} annotation files."
-msgstr ""
-
-#: koboutilities/jobs.py:763
-msgid "Checking annotations files."
-msgstr ""
-
-#: koboutilities/jobs.py:770
-#, python-brace-format
-msgid "Found {0} annotation files to be removed."
-msgstr ""
-
-#: koboutilities/jobs.py:786
-#, python-brace-format
-msgid "{0} annotations files removed."
 msgstr ""
