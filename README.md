@@ -56,7 +56,9 @@ but you can use anything that supports the PO format.
 
 The translation template (POT) is available at `translations/messages.pot`.
 It is recommended to run the `scripts/run xgettext` command before working on a translation
-to make sure that all of the strings are up to date.
+to make sure that all of the strings are up to date,
+however it is also possible to download the last release's version from
+<https://raw.githubusercontent.com/janlarres/kobo-utilities/refs/heads/main/translations/messages.pot>.
 Also, when working on an existing translation please make sure to use your editor's
 feature to first update the PO file from the POT template.
 In Poedit this feature can be found under "Translation → Update from POT File...".
