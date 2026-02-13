@@ -171,7 +171,9 @@ def device_database_backup_job(backup_options_raw: bytes):
             dst_path = tmpdir / src_path.relative_to(device_path)
             debug(f"dst_path={dst_path}")
             dst_path.parent.mkdir(parents=True, exist_ok=True)
-            if src_path.is_dir():
+            if not src_path.exists():
+                debug(f"File {src_path} does not exist; not backing up")
+            elif src_path.is_dir():
                 shutil.copytree(src_path, dst_path)
             else:
                 shutil.copyfile(src_path, dst_path)
