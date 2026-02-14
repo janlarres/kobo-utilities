@@ -15,7 +15,6 @@ repos:
       - id: check-symlinks
       - id: check-merge-conflict
       - id: detect-private-key
-      - id: no-commit-to-branch
       - id: check-executables-have-shebangs
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.14
