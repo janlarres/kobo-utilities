@@ -225,7 +225,7 @@ class DuplicateShelvesInDeviceDatabaseTableWidget(QTableWidget):
 
     def populate_table_row(self, row: int, shelf: list[Any]):
         self.blockSignals(True)
-        shelf_name = shelf[0] if shelf[0] else _("(Unnamed collection)")
+        shelf_name = shelf[0] or _("(Unnamed collection)")
         titleColumn = QTableWidgetItem(shelf_name)
         titleColumn.setFlags(Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEnabled)
         self.setItem(row, 0, titleColumn)

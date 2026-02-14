@@ -717,7 +717,7 @@ def _render_synopsis(mi: Metadata, book: Book, template: str | None = None):
             output_profile.empty_ratings_char,
         )
 
-        tags = Tags((mi.tags if mi.tags else []), output_profile)
+        tags = Tags((mi.tags or []), output_profile)
         debug("tags=", tags)
 
         comments = mi.comments.strip() if mi.comments else ""
@@ -731,7 +731,7 @@ def _render_synopsis(mi: Metadata, book: Book, template: str | None = None):
         author = escape(author)
         publisher = cast("str", mi.publisher) if mi.publisher else ""
         publisher = escape(publisher)
-        title_str = mi.title if mi.title else _("Unknown")
+        title_str = mi.title or _("Unknown")
         title_str = escape(title_str)
         series = Series(mi.series, mi.series_index)
 

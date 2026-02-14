@@ -174,7 +174,7 @@ def run_tests(plugin_zip: Path, bin_path: Path, args: argparse.Namespace) -> boo
         )
 
         # Run tests
-        tests = args.tests if args.tests else Path("tests").glob("test_*.py")
+        tests = args.tests or Path("tests").glob("test_*.py")
         failed_tests = False
         for test in tests:
             failed_tests |= run_test(bin_path, test_env, test)

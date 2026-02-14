@@ -908,11 +908,7 @@ def _restore_current_bookmark(
                         metadata = book.get_user_metadata(kobo_percentRead_column, True)
                         assert metadata is not None
                         kobo_percentRead = metadata["#value#"]
-                        kobo_percentRead = (
-                            kobo_percentRead
-                            if kobo_percentRead
-                            else result["___PercentRead"]
-                        )
+                        kobo_percentRead = kobo_percentRead or result["___PercentRead"]
                         chapter_values.append(kobo_percentRead)
                         chapter_set_clause += ", ___PercentRead  = ? "
 
