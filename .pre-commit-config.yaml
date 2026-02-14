@@ -33,6 +33,10 @@ repos:
     rev: 1.31.7
     hooks:
       - id: basedpyright
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.10
+    hooks:
+      - id: actionlint
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.16.0
     hooks:
