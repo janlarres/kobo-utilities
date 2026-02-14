@@ -7,9 +7,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: kobo-utilities v2.26.0-2-gdf777bf-dirty\n"
+"Project-Id-Version: kobo-utilities v2.26.0-7-g68a9392-dirty\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-11 23:38+1300\n"
+"POT-Creation-Date: 2026-02-14 12:58+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -706,7 +706,7 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: koboutilities/config.py:1769 koboutilities/features/backup.py:442
+#: koboutilities/config.py:1769 koboutilities/features/backup.py:444
 msgid "Serial number"
 msgstr ""
 
@@ -967,15 +967,15 @@ msgstr ""
 msgid "Failed to back up device database"
 msgstr ""
 
-#: koboutilities/features/backup.py:262
+#: koboutilities/features/backup.py:264
 msgid "Choose backup to restore"
 msgstr ""
 
-#: koboutilities/features/backup.py:263
+#: koboutilities/features/backup.py:265
 msgid "Kobo backups"
 msgstr ""
 
-#: koboutilities/features/backup.py:316
+#: koboutilities/features/backup.py:318
 #, python-brace-format
 msgid ""
 "Restoring this backup from {date} will overwrite the database and some "
@@ -983,70 +983,70 @@ msgid ""
 " sure you want to proceed?"
 msgstr ""
 
-#: koboutilities/features/backup.py:329
+#: koboutilities/features/backup.py:331
 msgid "Incompatible backup"
 msgstr ""
 
-#: koboutilities/features/backup.py:331
+#: koboutilities/features/backup.py:333
 msgid ""
 "This backup was created from a different device type. Restoring backups "
 "to a different device type is not supported."
 msgstr ""
 
-#: koboutilities/features/backup.py:340
+#: koboutilities/features/backup.py:342
 msgid ""
 "This backup was created from a different device. Make sure that the "
 "device to restore to is the expected device."
 msgstr ""
 
-#: koboutilities/features/backup.py:349
+#: koboutilities/features/backup.py:351
 msgid ""
 "This backup was created from a device running a different firmware "
 "version. This is probably okay, but you should make sure that your device"
 " is up to date before restoring."
 msgstr ""
 
-#: koboutilities/features/backup.py:362
+#: koboutilities/features/backup.py:364
 #: koboutilities/features/locations.py:1714
 msgid "Restore"
 msgstr ""
 
-#: koboutilities/features/backup.py:363
+#: koboutilities/features/backup.py:365
 msgid "Cancel"
 msgstr ""
 
-#: koboutilities/features/backup.py:383
+#: koboutilities/features/backup.py:385
 msgid "Backup restored"
 msgstr ""
 
-#: koboutilities/features/backup.py:385
+#: koboutilities/features/backup.py:387
 msgid ""
 "Backup restored. You should eject and restart your device now to ensure "
 "that the device reads the database correctly."
 msgstr ""
 
-#: koboutilities/features/backup.py:397
+#: koboutilities/features/backup.py:399
 msgid "Invalid backup"
 msgstr ""
 
-#: koboutilities/features/backup.py:399
+#: koboutilities/features/backup.py:401
 #, python-brace-format
 msgid "The file \"{0}\" does not appear to be a valid KoboUtilities backup file"
 msgstr ""
 
-#: koboutilities/features/backup.py:436
+#: koboutilities/features/backup.py:438
 msgid "Backup"
 msgstr ""
 
-#: koboutilities/features/backup.py:436
+#: koboutilities/features/backup.py:438
 msgid "Device"
 msgstr ""
 
-#: koboutilities/features/backup.py:439
+#: koboutilities/features/backup.py:441
 msgid "Device type"
 msgstr ""
 
-#: koboutilities/features/backup.py:445
+#: koboutilities/features/backup.py:447
 msgid "Firmware version"
 msgstr ""
 

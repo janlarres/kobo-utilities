@@ -1,6 +1,6 @@
 [project]
 name = "kobo-utilities"
-version = "2.26.0"
+version = "2.26.1"
 description = "A Calibre plugin providing additional functionality for Kobo eReaders"
 readme = "README.md"
 license = "GPL-3.0-only"

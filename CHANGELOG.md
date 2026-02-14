@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.26.1 - 2026-02-14
+
+- Fixed the backup process failing when some files were not present on the device.
+
 ## Version 2.26.0 - 2026-02-11
 
 - Added feature to restore a previously created backup to a device.
