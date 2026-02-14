@@ -26,11 +26,11 @@ repos:
       - id: ruff-check
       - id: ruff-format
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.28.0
+    rev: v8.30.0
     hooks:
       - id: gitleaks
   - repo: https://github.com/DetachHead/basedpyright-prek-mirror
-    rev: 1.31.7
+    rev: 1.37.4
     hooks:
       - id: basedpyright
   - repo: https://github.com/rhysd/actionlint
@@ -38,7 +38,7 @@ repos:
     hooks:
       - id: actionlint
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.16.0
+    rev: v1.22.0
     hooks:
       - id: zizmor
   - repo: local
