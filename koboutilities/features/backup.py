@@ -433,7 +433,7 @@ def format_info_table(backup_info: BackupInfo, device_info: DeviceInfo) -> str:
             f"<span style='color: red; font-weight: bold'>{v2}</span>",
         )
 
-    table = "<br><table>"
+    table = "<p><table>"
     table += "<tr><th></th><th>{0}</th><th>{1}</th></tr>".format(
         _("Backup"), _("Device")
     )
@@ -446,6 +446,6 @@ def format_info_table(backup_info: BackupInfo, device_info: DeviceInfo) -> str:
     table += format_info_row(
         _("Firmware version"), backup_info.fw_version, device_info.fw_version
     )
-    table += "</table><br><br>"
+    table += "</table><p>"
 
     return table
