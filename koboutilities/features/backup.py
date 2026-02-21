@@ -11,10 +11,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, NewType
 
+import apsw
 from calibre.gui2 import FileDialog, error_dialog, info_dialog, question_dialog
 from qt.core import QFileDialog
 
 from .. import utils
+from ..constants import CORRUPT_MSG
 from ..utils import debug
 
 if TYPE_CHECKING:
@@ -136,8 +138,9 @@ def auto_backup_device_database(
 
 def _device_database_backup_completed(job: DeviceJob, gui: ui.Main):
     if job.failed:
+        if isinstance(job.exception, apsw.CorruptError):
+            job.description += "<p>" + CORRUPT_MSG
         gui.job_exception(job, dialog_title=_("Failed to back up device database"))
-        return
 
 
 def device_database_backup_job(backup_options_raw: bytes):
@@ -178,14 +181,14 @@ def device_database_backup_job(backup_options_raw: bytes):
             else:
                 shutil.copyfile(src_path, dst_path)
 
-        # Check if the database is corrupted, since we don't want to back up
-        # a corrupted database
+        # Check if the database is corrupt, since we don't want to back up
+        # a corrupt database
         check_result = utils.check_device_database(
             str(tmpdir / ".kobo/KoboReader.sqlite")
         )
         if check_result.split()[0] != "ok":
             debug("database is corrupt!")
-            raise Exception(check_result)
+            raise apsw.CorruptError(check_result)
 
         # Create the zip file archive
         backup_file_path = dest_dir / backup_file_name

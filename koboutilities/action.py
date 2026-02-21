@@ -9,12 +9,14 @@ import calendar
 import os
 import threading
 import time
+import traceback
 from pathlib import Path
 from typing import TYPE_CHECKING, Callable, Literal, cast
 
+import apsw
 from calibre.constants import numeric_version as calibre_version
 from calibre.devices.kobo.driver import KOBO, KOBOTOUCH
-from calibre.gui2 import info_dialog
+from calibre.gui2 import error_dialog, info_dialog
 from calibre.gui2.actions import InterfaceAction, menu_action_unique_name
 from calibre.gui2.device import device_signals
 from calibre.gui2.dialogs.message_box import MessageBox
@@ -23,7 +25,7 @@ from qt.core import QMenu, Qt, QTimer, pyqtSignal
 from . import ActionKoboUtilities
 from . import config as cfg
 from .config import KoboDevice, KoboVersionInfo
-from .constants import GUI_NAME
+from .constants import CORRUPT_MSG, GUI_NAME
 from .features import (
     analytics,
     annotations,  # pyright: ignore[reportDuplicateImport]
@@ -228,12 +230,26 @@ class KoboUtilitiesAction(InterfaceAction):
             def wrapper():
                 if self.device is None:
                     raise AssertionError(_("No device connected."))
-                func(
-                    self.device,
-                    self.gui,
-                    cast("Dispatcher", self.Dispatcher),
-                    self.load_resources,
-                )
+                try:
+                    func(
+                        self.device,
+                        self.gui,
+                        cast("Dispatcher", self.Dispatcher),
+                        self.load_resources,
+                    )
+                except apsw.CorruptError:
+                    # Cast this to MessageBox since show=False
+                    dialog = cast(
+                        "MessageBox",
+                        error_dialog(
+                            self.gui,
+                            _("Corrupt database"),
+                            CORRUPT_MSG,
+                            traceback.format_exc(),
+                        ),
+                    )
+                    dialog.msg.setTextFormat(Qt.TextFormat.RichText)
+                    dialog.show()
 
             return wrapper
 

@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from functools import partial
 from typing import TYPE_CHECKING, Any, Callable, cast
 
+import apsw
 from calibre import strftime
 from calibre.devices.kobo.books import Book
 from calibre.ebooks.metadata import authors_to_string
@@ -32,7 +33,7 @@ from qt.core import (
 
 from .. import config as cfg
 from .. import utils
-from ..constants import BOOK_CONTENTTYPE, GUI_NAME, MIMETYPE_KOBO
+from ..constants import BOOK_CONTENTTYPE, CORRUPT_MSG, GUI_NAME, MIMETYPE_KOBO
 from ..dialogs import (
     AuthorsTableWidgetItem,
     CheckableTableWidgetItem,
@@ -1252,6 +1253,8 @@ def _store_queue_job(
 
 def _read_completed(job: DeviceJob, device: KoboDevice, gui: ui.Main):
     if job.failed:
+        if isinstance(job.exception, apsw.CorruptError):
+            job.description += "<p>" + CORRUPT_MSG
         gui.job_exception(job, dialog_title=_("Failed to get reading positions"))
         return
     modified_epubs_map: dict[int, dict[str, Any]]
