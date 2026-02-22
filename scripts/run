@@ -118,6 +118,11 @@ def xgettext(args: argparse.Namespace) -> None:
     with Path("translations/messages.pot").open("wb") as f:
         write_po(f, catalog, width=76)
 
+        # Remove the last the two newlines at the end of the file that the write_po()
+        # function put there
+        f.seek(-1, os.SEEK_END)
+        f.truncate()
+
 
 def msgfmt() -> None:
     for po in Path("translations").glob("*.po"):
