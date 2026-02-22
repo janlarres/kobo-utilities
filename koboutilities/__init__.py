@@ -4,7 +4,7 @@ from __future__ import annotations
 __license__ = "GPL v3"
 __copyright__ = "2013-2020, David Forrester <davidfor@internode.on.net>"
 __docformat__ = "restructuredtext en"
-__version__ = (2, 26, 1)
+__version__ = (2, 27, 0)
 
 # The class that all Interface Action plugin wrappers must inherit from
 from typing import TYPE_CHECKING

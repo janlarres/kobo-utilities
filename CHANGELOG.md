@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.27.0 - 2026-02-22
+
+- Improved backup and restore features to be more robust,
+  especially when using Chromebooks.
+- Give a more helpful error message when the plugin detects
+  that the database is corrupt.
+
 ## Version 2.26.1 - 2026-02-14
 
 - Fixed the backup process failing when some files were not present on the device.
