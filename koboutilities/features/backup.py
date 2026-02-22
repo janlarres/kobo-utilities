@@ -33,6 +33,9 @@ class DatabaseBackupJobOptions:
     backup_store_config: cfg.BackupOptionsStoreConfig
     device_name: str
     serial_number: str
+    # We need the DB path separately from the device path since it may have been
+    # copied somewhere else due to filesystem limitations
+    db_path: str
     device_path: Path
 
 
@@ -53,7 +56,6 @@ BACKUP_PATHS = [
     ".adobe-digital-editions",
     ".kobo/Kobo/Kobo eReader.conf",
     ".kobo/BookReader.sqlite",
-    ".kobo/KoboReader.sqlite",
     ".kobo/affiliate.conf",
     ".kobo/version",
 ]
@@ -119,6 +121,7 @@ def auto_backup_device_database(
         backup_config,
         device_name,
         serial_number,
+        device.db_path,
         Path(str(device.driver._main_prefix)),
     )
     debug("backup_options=", job_options)
@@ -152,6 +155,7 @@ def device_database_backup_job(backup_options_raw: bytes):
     serial_number = backup_options.serial_number
     dest_dir = Path(backup_options.backup_store_config.backupDestDirectory)
     copies_to_keep = backup_options.backup_store_config.backupCopiesToKeepSpin
+    db_path = backup_options.db_path
     device_path = backup_options.device_path
 
     now = dt.datetime.now()  # noqa: DTZ005
@@ -168,6 +172,14 @@ def device_database_backup_job(backup_options_raw: bytes):
         tmpdir = Path(tmpdir)
         debug(f"tmpdir={tmpdir}")
 
+        db_tmp_path = str(tmpdir / ".kobo/KoboReader.sqlite")
+        (tmpdir / ".kobo").mkdir(parents=True, exist_ok=True)
+        with apsw.Connection(db_path) as src, apsw.Connection(
+            db_tmp_path
+        ) as dest, dest.backup("main", src, "main") as backup:
+            while not backup.done:
+                backup.step()
+
         for file in BACKUP_PATHS:
             src_path = device_path / file
             debug(f"src_path={src_path}")
@@ -181,11 +193,9 @@ def device_database_backup_job(backup_options_raw: bytes):
             else:
                 shutil.copyfile(src_path, dst_path)
 
-        # Check if the database is corrupt, since we don't want to back up
+        # Check if the database is corrupt since we don't want to back up
         # a corrupt database
-        check_result = utils.check_device_database(
-            str(tmpdir / ".kobo/KoboReader.sqlite")
-        )
+        check_result = utils.check_device_database(db_tmp_path)
         if check_result.split()[0] != "ok":
             debug("database is corrupt!")
             raise apsw.CorruptError(check_result)
@@ -376,11 +386,32 @@ def do_restore(
     # Delete the version file before restoring because we don't want to overwrite it
     # with potentially incompatible information
     (tmpdir / ".kobo/version").unlink()
+
+    if device.is_db_copied:
+        debug(f"DB is copied; restoring to {device.db_path}")
+
+        # This import is safe since the DB can only have been copied in Calibre versions
+        # where it exists
+        from calibre.devices.kobo.db import kobo_db_lock
+
+        db_tmp_path = tmpdir / ".kobo/KoboReader.sqlite"
+        with kobo_db_lock:
+            # If the DB has been copied to a temporary path we have to restore it to
+            # both locations to ensure consistency
+            shutil.copyfile(db_tmp_path, device.db_path)
+            shutil.copyfile(db_tmp_path, device.device_db_path)
+            for ext in ["journal", "shm", "wal"]:
+                Path(f"{device.db_path}-{ext}").unlink(missing_ok=True)
+                Path(f"{device.device_db_path}-{ext}").unlink(missing_ok=True)
+        # Remove DB so it doesn't get copied again
+        db_tmp_path.unlink()
+
     shutil.copytree(tmpdir, device_path, dirs_exist_ok=True)
 
     # Remove temporary SQLite files that could cause issues with the restored DB
-    for ext in ["shm", "wal"]:
-        Path(device_path, f".kobo/KoboReader.sqlite-{ext}").unlink(missing_ok=True)
+    for ext in ["journal", "shm", "wal"]:
+        Path(f"{device.db_path}-{ext}").unlink(missing_ok=True)
+
     debug("Backup successfully restored")
 
     info_dialog(
