@@ -7,6 +7,7 @@ import pickle
 import re
 import shutil
 import tempfile
+from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, NewType
@@ -174,8 +175,11 @@ def device_database_backup_job(backup_options_raw: bytes):
 
         db_tmp_path = str(tmpdir / ".kobo/KoboReader.sqlite")
         (tmpdir / ".kobo").mkdir(parents=True, exist_ok=True)
-        with apsw.Connection(db_path) as src, apsw.Connection(
-            db_tmp_path
+
+        # closing() is necessary here to close the connection so that Windows
+        # doesn't complain when deleting the temporary directory
+        with apsw.Connection(db_path) as src, closing(
+            apsw.Connection(db_tmp_path)
         ) as dest, dest.backup("main", src, "main") as backup:
             while not backup.done:
                 backup.step()
