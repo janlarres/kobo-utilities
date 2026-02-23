@@ -176,8 +176,12 @@ def device_database_backup_job(backup_options_raw: bytes):
         db_tmp_path = str(tmpdir / ".kobo/KoboReader.sqlite")
         (tmpdir / ".kobo").mkdir(parents=True, exist_ok=True)
 
-        # closing() is necessary here to close the connection so that Windows
-        # doesn't complain when deleting the temporary directory
+        # closing() is necessary here to close the connection at the end of this block
+        # so that Windows doesn't complain when deleting the temporary directory
+        # at the end of the outer block. Normally it would be closed when the
+        # connection goes out of scope at the end of the function.
+        # It should also be safer to close the connection before archiving the DB
+        # so that all journal files are deleted.
         with apsw.Connection(db_path) as src, closing(
             apsw.Connection(db_tmp_path)
         ) as dest, dest.backup("main", src, "main") as backup:
