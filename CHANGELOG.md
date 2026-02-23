@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.27.1 - 2026-02-23
+
+- Fixed an error on Windows when cleaning up after creating a backup
+
 ## Version 2.27.0 - 2026-02-22
 
 - Improved backup and restore features to be more robust,
