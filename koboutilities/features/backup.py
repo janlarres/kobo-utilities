@@ -395,24 +395,28 @@ def do_restore(
     # with potentially incompatible information
     (tmpdir / ".kobo/version").unlink()
 
-    if device.is_db_copied:
-        debug(f"DB is copied; restoring to {device.db_path}")
-
-        # This import is safe since the DB can only have been copied in Calibre versions
-        # where it exists
+    db_tmp_path = tmpdir / ".kobo/KoboReader.sqlite"
+    try:
         from calibre.devices.kobo.db import kobo_db_lock
 
-        db_tmp_path = tmpdir / ".kobo/KoboReader.sqlite"
-        with kobo_db_lock:
+        db_paths = [device.db_path]
+        if device.is_db_copied:
             # If the DB has been copied to a temporary path we have to restore it to
             # both locations to ensure consistency
-            shutil.copyfile(db_tmp_path, device.db_path)
-            shutil.copyfile(db_tmp_path, device.device_db_path)
-            for ext in ["journal", "shm", "wal"]:
-                Path(f"{device.db_path}-{ext}").unlink(missing_ok=True)
-                Path(f"{device.device_db_path}-{ext}").unlink(missing_ok=True)
+            debug(f"DB is copied; restoring to {device.db_path}")
+            db_paths.append(device.device_db_path)
+
+        with kobo_db_lock:
+            for dp_path in db_paths:
+                shutil.copyfile(db_tmp_path, dp_path)
+                for ext in ["journal", "shm", "wal"]:
+                    Path(f"{dp_path}-{ext}").unlink(missing_ok=True)
         # Remove DB so it doesn't get copied again
         db_tmp_path.unlink()
+    except ImportError:
+        # For older versions without the lock we just restore the DB as part of
+        # the normal copying
+        debug("Unable to import DB lock, restoring DB without it")
 
     shutil.copytree(tmpdir, device_path, dirs_exist_ok=True)
 
