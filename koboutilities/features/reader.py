@@ -257,7 +257,7 @@ class ReaderOptionsDialog(PluginDialog):
         )
         self.device = device
 
-        fwversion = cast("tuple[int, int, int]", device.driver.fwversion)
+        fwversion = device.version_info.fw_version
         debug("fwversion=", fwversion)
         self.line_spacings = LINE_SPACINGS
         if fwversion >= (3, 2, 0):
@@ -570,7 +570,7 @@ class ReaderOptionsDialog(PluginDialog):
         font_list = KOBO_FONTS[(0, 0, 0)]
         for fw_version, fw_font_list in sorted(KOBO_FONTS.items()):
             debug("fw_version=", fw_version)
-            if fw_version <= self.device.driver.fwversion:
+            if fw_version <= self.device.version_info.fw_version:
                 debug("found version?=", fw_version)
                 font_list = fw_font_list
             else:

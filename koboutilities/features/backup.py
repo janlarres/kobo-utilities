@@ -459,7 +459,7 @@ def get_backup_info(
 
     dv_serial_number = device.version_info.serial_no
     dv_device_name = "".join(device.driver.gui_name.split())
-    dv_fwversion = ".".join(map(str, device.driver.fwversion))
+    dv_fwversion = ".".join(map(str, device.version_info.fw_version))
 
     return (
         BackupInfo(BackupDeviceInfo(bk_device_name, bk_serial_number, bk_fwversion)),

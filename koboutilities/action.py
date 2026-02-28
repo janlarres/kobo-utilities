@@ -165,14 +165,14 @@ class KoboUtilitiesAction(InterfaceAction):
         if self.device is not None:
             debug(
                 "device connected. self.device.fwversion=",
-                self.device.driver.fwversion,
+                self.device.version_info.fw_version,
             )
             text += "\n"
             text += _("Connected device: ")
             text += self.device.name
             text += "\n"
             text += _("Firmware version: ")
-            text += ".".join([str(i) for i in self.device.driver.fwversion])
+            text += ".".join(map(str, self.device.version_info.fw_version))
         text += "\n"
         text += _("Driver: ")
         text += self.device_driver_name
@@ -402,7 +402,7 @@ class KoboUtilitiesAction(InterfaceAction):
                 is_library_action=True,
                 is_supported=device is not None and device.is_kobotouch,
             )
-            if device is not None and device.driver.fwversion < (4, 4, 0):
+            if device is not None and device.version_info.fw_version < (4, 4, 0):
                 self.create_menu_item_ex(
                     self.menu,
                     _("Set related books"),
@@ -942,7 +942,8 @@ def get_device(gui: ui.Main):
         device_version_info = version_file.read_text().strip().split(",")
         debug("manually read version:", device_version_info)
 
-    serial_no, _, fw_version, _, _, model_id = device_version_info
+    serial_no, _, _, _, _, model_id = device_version_info
+    fw_version = cast("tuple[int, int, int]", device.fwversion)
     version_info = KoboVersionInfo(serial_no, fw_version, model_id)
 
     device_path = device._main_prefix
@@ -984,12 +985,14 @@ def get_device(gui: ui.Main):
     try:
         epub_location_like_kepub = (
             isinstance(device, KOBOTOUCH)
-            and device.fwversion >= device.min_fwversion_epub_location  # type: ignore[reportOperatorIssue]
+            and fw_version >= device.min_fwversion_epub_location
         )
     except Exception:
-        epub_location_like_kepub = isinstance(
-            device, KOBOTOUCH
-        ) and device.fwversion >= (4, 17, 13651)  # type: ignore[reportOperatorIssue]
+        epub_location_like_kepub = isinstance(device, KOBOTOUCH) and fw_version >= (
+            4,
+            17,
+            13651,
+        )
 
     device_db_path = cast(
         "str", device.normalize_path(device_path + ".kobo/KoboReader.sqlite")

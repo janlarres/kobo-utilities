@@ -235,7 +235,7 @@ def store_current_bookmark(
         return
 
     fetch_queries = _get_fetch_query_for_firmware_version(
-        cast("tuple[int, int, int]", device.driver.fwversion)
+        device.version_info.fw_version
     )
     if fetch_queries is None:
         error_dialog(
@@ -392,7 +392,7 @@ def _store_current_bookmark(
             fetch_values = (contentID,)
             assert device.driver.fwversion is not None
             fetch_queries = _get_fetch_query_for_firmware_version(
-                cast("tuple[int, int, int]", device.driver.fwversion)
+                device.version_info.fw_version
             )
             assert fetch_queries is not None
             if contentID.endswith(".kepub.epub"):
@@ -945,7 +945,7 @@ def _restore_current_bookmark(
                         # Now it uses the MAX(___SyncTime, DateLastRead). Need to set ___SyncTime if it is after DateLastRead
                         # to correctly maintain sort order.
                         if (
-                            device.driver.fwversion >= (4, 1, 0)
+                            device.version_info.fw_version >= (4, 1, 0)
                             and last_read < result["___SyncTime"]
                         ):
                             debug("setting ___SyncTime to same as DateLastRead")
@@ -1087,7 +1087,7 @@ def auto_store_current_bookmark(
     library_db = gui.current_db
 
     fetch_queries = _get_fetch_query_for_firmware_version(
-        cast("tuple[int, int, int]", device.driver.fwversion)
+        device.version_info.fw_version
     )
     assert fetch_queries is not None
     profile = device.profile

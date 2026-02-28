@@ -65,7 +65,7 @@ def clean_images_dir(
     assert isinstance(main_prefix, str), f"_main_prefix is type {type(main_prefix)}"
     if (
         isinstance(device.driver, KOBOTOUCH)
-        and device.driver.fwversion >= device.driver.min_fwversion_images_tree
+        and device.version_info.fw_version >= device.driver.min_fwversion_images_tree
     ):
         main_image_path = os.path.join(main_prefix, ".kobo-images")
         sd_image_path = (

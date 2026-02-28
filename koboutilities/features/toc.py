@@ -378,11 +378,9 @@ def _get_chapter_status(
             and len(koboDatabaseReadingLocation) > 0
         ):
             book["koboDatabaseReadingLocation"] = koboDatabaseReadingLocation
-            if (
-                isinstance(device.driver, KOBOTOUCH)
-                and (
-                    device.driver.fwversion < device.driver.min_fwversion_epub_location
-                )  # type: ignore[reportOperatorIssue]
+            if isinstance(device.driver, KOBOTOUCH) and (
+                device.version_info.fw_version
+                < device.driver.min_fwversion_epub_location
             ):
                 reading_location_match = re.match(
                     r"\((\d+)\)(.*)\#?.*", koboDatabaseReadingLocation
@@ -578,11 +576,9 @@ def _get_database_current_chapter(
         else:
             reading_location = result["ChapterIDBookmarked"]
             assert device is not None
-            if (
-                isinstance(device.driver, KOBOTOUCH)
-                and (
-                    device.driver.fwversion < device.driver.min_fwversion_epub_location
-                )  # type: ignore[reportOperatorIssue]
+            if isinstance(device.driver, KOBOTOUCH) and (
+                device.version_info.fw_version
+                < device.driver.min_fwversion_epub_location
             ):
                 reading_location = (
                     reading_location[len(koboContentId) + 1 :]

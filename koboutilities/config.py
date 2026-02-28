@@ -531,7 +531,7 @@ class CustomColumns:
 @dataclass
 class KoboVersionInfo:
     serial_no: str
-    fw_version: str
+    fw_version: tuple[int, int, int]
     model_id: str
 
 
@@ -1812,7 +1812,7 @@ class DevicesTableWidget(QTableWidget):
             )
         device = self.plugin_action.device
         version_info = device.version_info if device is not None else None
-        fw_version = version_info.fw_version if is_connected and version_info else ""
+        fw_version = version_info.fw_version if is_connected and version_info else None
         connected_icon = "images/device_connected.png" if is_connected else None
         debug("connected_icon=%s" % connected_icon)
 
@@ -1828,7 +1828,9 @@ class DevicesTableWidget(QTableWidget):
         type_widget = ReadOnlyTableWidgetItem(device_config.type)
         serial_no = device_config.serial_no
         serial_no_widget = ReadOnlyTableWidgetItem(serial_no)
-        version_no_widget = ReadOnlyTableWidgetItem(fw_version)
+        version_no_widget = ReadOnlyTableWidgetItem(
+            ".".join(map(str, fw_version)) if fw_version else ""
+        )
 
         profile = get_book_profile_for_device(
             self.plugin_action.gui.current_db, serial_no
