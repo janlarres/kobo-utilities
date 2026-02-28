@@ -256,7 +256,7 @@ def _get_chapter_status(
     i = 0
     debug(
         "device format_map='{0}".format(
-            device.driver.settings().format_map  # type: ignore[reportAttributeAccessIssue]
+            device.driver.settings().format_map  # pyright: ignore[reportAttributeAccessIssue]
         )
     )
     for book in books:
@@ -311,7 +311,7 @@ def _get_chapter_status(
             book["library_format"] = book["kobo_format"]
         elif (
             book["kobo_format"] == "KEPUB"
-            and "EPUB".lower() in device.driver.settings().format_map  # type: ignore[reportAttributeAccessIssue]
+            and "EPUB".lower() in device.driver.settings().format_map  # pyright: ignore[reportAttributeAccessIssue]
             and db.has_format(book_id, "EPUB", index_is_id=True)
         ):
             book["library_format"] = "EPUB"

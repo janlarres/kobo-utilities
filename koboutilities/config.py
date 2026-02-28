@@ -74,7 +74,7 @@ try:
     SUPPORTS_CREATE_CUSTOM_COLUMN = True
 except ImportError:
     debug("CreateNewCustomColumn is not supported")
-    SUPPORTS_CREATE_CUSTOM_COLUMN = False  # type: ignore[reportConstantRedefinition]
+    SUPPORTS_CREATE_CUSTOM_COLUMN = False  # pyright: ignore[reportConstantRedefinition]
 
 load_translations()
 
