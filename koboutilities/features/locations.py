@@ -2515,9 +2515,7 @@ def _read_locations(
                 )
             except Exception:
                 debug("Exception raised when logging details of last read. Ignoring.")
-            reading_position_changed = reading_position_changed or (
-                current_last_read != new_last_read
-            )
+            reading_position_changed |= current_last_read != new_last_read
             debug(
                 "After checking current_last_read - reading_position_changed='%s'"
                 % reading_position_changed
@@ -2533,9 +2531,7 @@ def _read_locations(
                             "store_if_more_recent - new timestamp not more recent than current timestamp. Do not store."
                         )
                         break
-                    reading_position_changed = reading_position_changed and (
-                        current_last_read < new_last_read
-                    )
+                    reading_position_changed &= current_last_read < new_last_read
                 elif new_last_read is not None:
                     reading_position_changed = True
 
@@ -2562,9 +2558,7 @@ def _read_locations(
                 if current_percentRead is not None and current_percentRead >= 100:
                     debug("do_not_store_if_reopened - Already finished. Do not store.")
                     break
-            reading_position_changed = (
-                reading_position_changed or current_percentRead != new_kobo_percentRead
-            )
+            reading_position_changed |= current_percentRead != new_kobo_percentRead
 
             try:
                 debug("current_chapterid ='%s'" % current_chapterid)
@@ -2577,7 +2571,7 @@ def _read_locations(
                 debug(
                     "Exception raised when logging details of percent read. Ignoring."
                 )
-            reading_position_changed = reading_position_changed or utils.value_changed(
+            reading_position_changed |= utils.value_changed(
                 current_chapterid, new_chapterid
             )
             debug(
@@ -2601,11 +2595,10 @@ def _read_locations(
                 "current_rating != new_kobo_rating and new_kobo_rating > 0=",
                 current_rating != new_kobo_rating and new_kobo_rating > 0,
             )
-            reading_position_changed = reading_position_changed or (
-                current_rating != new_kobo_rating
-                and not (current_rating is None and new_kobo_rating == 0)
+            reading_position_changed |= current_rating != new_kobo_rating and not (
+                current_rating is None and new_kobo_rating == 0
             )
-            reading_position_changed = reading_position_changed or (
+            reading_position_changed |= (
                 current_rating != new_kobo_rating and new_kobo_rating > 0
             )
 
@@ -2617,7 +2610,7 @@ def _read_locations(
                 "current_time_spent_reading != new_time_spent_reading=",
                 current_time_spent_reading != new_time_spent_reading,
             )
-            reading_position_changed = reading_position_changed or utils.value_changed(
+            reading_position_changed |= utils.value_changed(
                 current_time_spent_reading, new_time_spent_reading
             )
 
@@ -2629,7 +2622,7 @@ def _read_locations(
                 "current_rest_of_book_estimate != new_rest_of_book_estimate=",
                 current_rest_of_book_estimate != new_rest_of_book_estimate,
             )
-            reading_position_changed = reading_position_changed or utils.value_changed(
+            reading_position_changed |= utils.value_changed(
                 current_rest_of_book_estimate, new_rest_of_book_estimate
             )
 
