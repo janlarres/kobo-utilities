@@ -30,7 +30,10 @@ try:
     # timed_print got added in Calibre 7.2.0
     from calibre.gui2 import timed_print
 except ImportError:
-    timed_print = print
+
+    def timed_print(*msg: str) -> None:
+        print(*msg)
+
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -40,7 +43,7 @@ if TYPE_CHECKING:
     from calibre.gui2.dialogs.message_box import MessageBox
     from calibre.gui2.library.models import DeviceBooksModel
     from calibre.gui2.library.views import BooksView
-    from qt.core import QDialogButtonBox, QModelIndex, QPushButton, QWidget
+    from qt.core import QModelIndex, QPushButton, QWidget
 
     from .config import KoboDevice
 
@@ -193,15 +196,15 @@ class DeviceDatabaseConnection(apsw.Connection):
 
     def __exit__(
         self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        tb: TracebackType | None,
+        etype: type[BaseException] | None,
+        evalue: BaseException | None,
+        etraceback: TracebackType | None,
     ) -> bool | None:
         try:
-            suppress_exception = super().__exit__(exc_type, exc_value, tb)
+            suppress_exception = super().__exit__(etype, evalue, etraceback)
             if self.__is_db_copied and (
                 suppress_exception
-                or (exc_type is None and exc_value is None and tb is None)
+                or (etype is None and evalue is None and etraceback is None)
             ):
                 self.__copy_db(self, self.__device_db_path)
         finally:
@@ -493,7 +496,7 @@ def prompt_for_restart(parent: QWidget, title: str, message: str):
     dialog_box = cast(
         "MessageBox", info_dialog(parent, title, message, show_copy_button=False)
     )
-    bb = cast("QDialogButtonBox", dialog_box.bb)  # type: ignore[reportAttributeAccessIssue]
+    bb = dialog_box.bb
     button = cast(
         "QPushButton", bb.addButton(_("Restart calibre now"), bb.ButtonRole.AcceptRole)
     )
