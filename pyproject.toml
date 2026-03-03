@@ -152,6 +152,7 @@ ignore = ["../calibre/src", "calibre-repo/src"]
 pythonVersion = "3.8"
 # reportImportCycles = "warning"
 reportUnnecessaryTypeIgnoreComment = "warning"
+reportUnreachable = "warning"
 
 # Individual strict checks
 strictListInference = true
