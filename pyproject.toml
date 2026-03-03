@@ -15,7 +15,10 @@ requires-python = "==3.8.5"
 dependencies = ["apsw==3.43.0", "pyqt6>=6.7.1"]
 
 [dependency-groups]
-dev = ["vulture>=2.14"]
+dev = [
+    "ipykernel>=6.29.5",
+    "vulture>=2.14",
+]
 
 [tool.ruff]
 line-length = 88
