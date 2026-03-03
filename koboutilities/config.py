@@ -20,6 +20,7 @@ from calibre.constants import DEBUG as _DEBUG
 from calibre.db.legacy import LibraryDatabase
 from calibre.gui2 import choose_dir, error_dialog, gprefs, open_url, question_dialog
 from calibre.gui2.dialogs.confirm_delete import confirm
+from calibre.gui2.dialogs.message_box import ViewLog
 from calibre.gui2.keyboard import ShortcutConfig
 from calibre.utils.config import JSONConfig
 from qt.core import (
@@ -56,7 +57,7 @@ from .dialogs import (
     ReadOnlyTableWidgetItem,
     ReadOnlyTextIconWidgetItem,
 )
-from .utils import debug, get_icon, prompt_for_restart
+from .utils import STORE_LOG, debug, get_icon, prompt_for_restart
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -968,7 +969,11 @@ class ProfilesTab(QWidget):
         self.store_on_connect_checkbox.clicked.connect(
             self.store_on_connect_checkbox_clicked
         )
-        options_layout.addWidget(self.store_on_connect_checkbox, 0, 0, 1, 3)
+        options_layout.addWidget(self.store_on_connect_checkbox, 0, 0, 1, 2)
+
+        self.open_log_button = QPushButton(_("View log"), self)
+        self.open_log_button.clicked.connect(self.open_log_button_clicked)
+        options_layout.addWidget(self.open_log_button, 0, 2, 1, 1)
 
         self.prompt_to_store_checkbox = QCheckBox(
             _("Prompt to store any changes"), self
@@ -1049,6 +1054,11 @@ class ProfilesTab(QWidget):
         self.prompt_to_store_checkbox.setEnabled(checked)
         self.store_if_more_recent_checkbox.setEnabled(checked)
         self.do_not_store_if_reopened_checkbox.setEnabled(checked)
+
+    def open_log_button_clicked(self) -> None:
+        log = STORE_LOG.read_text() if STORE_LOG.exists() else ""
+        d = ViewLog(_("Log of the automatic storing of reading positions"), log, self)
+        d.exec()
 
     # Called by Calibre before save_settings
     def validate(self):

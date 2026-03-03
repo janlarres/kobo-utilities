@@ -45,7 +45,14 @@ from .features import (
     removeannotations,
     toc,
 )
-from .utils import debug, get_icon, is_device_view, set_plugin_icon_resources, show_help
+from .utils import (
+    debug,
+    get_icon,
+    is_device_view,
+    log_store,
+    set_plugin_icon_resources,
+    show_help,
+)
 
 if TYPE_CHECKING:
     from calibre.db.legacy import LibraryDatabase
@@ -148,7 +155,12 @@ class KoboUtilitiesAction(InterfaceAction):
             and device.profile
             and device.profile.storeOptionsStore.storeOnConnect
         ):
-            debug("About to do auto store")
+            debug(f"About to do auto store for device {device.driver.gui_name}")
+            log_store(
+                _("Storing reading positions for device {} ({})").format(
+                    device.driver.gui_name, device.version_info.serial_no
+                )
+            )
             QTimer.singleShot(
                 1000,
                 lambda: locations.auto_store_current_bookmark(
@@ -157,6 +169,12 @@ class KoboUtilitiesAction(InterfaceAction):
                     cast("Dispatcher", self.Dispatcher),
                     cast("LoadResources", self.load_resources),
                 ),
+            )
+        elif device is not None:
+            log_store(
+                _(
+                    "Not storing reading positions for device {} ({}) as no profile for it exists"
+                ).format(device.driver.gui_name, device.version_info.serial_no)
             )
 
     def set_toolbar_button_tooltip(self):
@@ -211,11 +229,24 @@ class KoboUtilitiesAction(InterfaceAction):
 
             if profile and profile.storeOptionsStore.storeOnConnect:
                 debug("About to start auto store")
+                log_store(
+                    _("Storing reading positions for device {} ({})").format(
+                        self.device.driver.gui_name, self.device.version_info.serial_no
+                    )
+                )
                 locations.auto_store_current_bookmark(
                     self.device,
                     self.gui,
                     cast("Dispatcher", self.Dispatcher),
                     self.load_resources,
+                )
+            else:
+                log_store(
+                    _(
+                        "Not storing reading positions for device {} ({}) as no profile for it exists"
+                    ).format(
+                        self.device.driver.gui_name, self.device.version_info.serial_no
+                    )
                 )
 
         self.rebuild_menus()

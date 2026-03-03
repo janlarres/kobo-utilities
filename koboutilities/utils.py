@@ -11,9 +11,11 @@ import inspect
 import os
 import re
 from collections import defaultdict
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, cast
 
 import apsw
+from calibre import ptempfile
 from calibre.constants import DEBUG, iswindows
 from calibre.devices.kobo.books import Book
 from calibre.gui2 import error_dialog, info_dialog, open_url
@@ -48,6 +50,8 @@ plugin_name = None
 # classes if you need any zip images to be displayed on the configuration dialog.
 plugin_icon_resources = {}
 
+STORE_LOG = Path(ptempfile.base_dir(), "kobo-utilities-store.log")
+
 Dispatcher = Callable[[Callable[[DeviceJob], None]], None]
 LoadResources = Callable[[Iterable[str]], Dict[str, bytes]]
 
@@ -68,6 +72,15 @@ def debug(*args: Any):
             f"[DEBUG] [{filename}:{funcname}:{frame.f_lineno}]",
             *args,
         )
+
+
+def log_store(msg: str) -> None:
+    """
+    Write a message to the user-facing location store log.
+    """
+    with STORE_LOG.open("a") as f:
+        now = dt.datetime.now().strftime("%X")  # noqa: DTZ005
+        f.write(f"{now}: {msg}\n")
 
 
 def set_plugin_icon_resources(name: str, resources: dict[str, bytes]):

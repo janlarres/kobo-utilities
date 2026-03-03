@@ -43,7 +43,7 @@ from ..dialogs import (
     ProgressBar,
     RatingTableWidgetItem,
 )
-from ..utils import DeviceDatabaseConnection, debug
+from ..utils import DeviceDatabaseConnection, debug, log_store
 
 if TYPE_CHECKING:
     import datetime as dt
@@ -1100,7 +1100,10 @@ def auto_store_current_bookmark(
 
     profile_name = None
     prompt_to_store = False
-    if profile is not None:
+    if profile is None:
+        log_store(_("No profile found for device"))
+    else:
+        log_store(_("Using profile '{}'".format(profile.profileName)))
         profile_name = profile.profileName
         prompt_to_store = profile.storeOptionsStore.promptToStore
         bookmark_options.storeIfMoreRecent = profile.storeOptionsStore.storeIfMoreRecent
@@ -1264,13 +1267,14 @@ def _read_completed(job: DeviceJob, device: KoboDevice, gui: ui.Main):
 
     update_count = len(modified_epubs_map) if modified_epubs_map else 0
     if update_count == 0:
+        msg = _("Storing reading positions completed - No changes found")
         gui.status_bar.show_message(
-            _("Kobo Utilities")
-            + " - "
-            + _("Storing reading positions completed - No changes found"),
+            _("Kobo Utilities") + " - " + msg,
             3000,
         )
+        log_store(msg)
     else:
+        log_store(_("Found {} books with changes").format(update_count))
         goodreads_sync_plugin = None
         if options.prompt_to_store:
             profile_name = options.profile_name
@@ -1290,6 +1294,7 @@ def _read_completed(job: DeviceJob, device: KoboDevice, gui: ui.Main):
             dlg.exec()
             if dlg.result() != dlg.DialogCode.Accepted:
                 debug("dialog cancelled")
+                log_store(_("Cancelled storing of reading positions"))
                 return
             modified_epubs_map = dlg.reading_locations
         _update_database_columns(modified_epubs_map, device, gui)
@@ -1319,6 +1324,14 @@ def _update_database_columns(
 ):
     debug("reading_locations=", reading_locations)
     debug("start number of reading_locations= %d" % (len(reading_locations)))
+    log_store(
+        _("Updating reading positions for books:")
+        + "\n  - "
+        + "\n  - ".join(
+            f"{book['Title']} ({book['Attribution']})"
+            for book in reading_locations.values()
+        )
+    )
     progressbar = ProgressBar(
         parent=gui, window_title=_("Storing reading positions"), on_top=True
     )
@@ -1596,12 +1609,12 @@ def _update_database_columns(
     debug("finished")
 
     progressbar.hide()
+    done_msg = _("Storing reading positions completed - {0} changed.").format(
+        len(reading_locations)
+    )
+    log_store(done_msg)
     gui.status_bar.show_message(
-        _("Kobo Utilities")
-        + " - "
-        + _("Storing reading positions completed - {0} changed.").format(
-            len(reading_locations)
-        ),
+        _("Kobo Utilities") + " - " + done_msg,
         3000,
     )
 
@@ -2495,6 +2508,11 @@ def _read_locations(
 
         reading_position_changed = False
         if device_status["ReadStatus"] == 0 and clear_if_unread:
+            log_store(
+                _("{}: Book is unread on device, clearing reading positions").format(
+                    title
+                )
+            )
             reading_position_changed = True
             new_chapterid = None
             new_kobo_percentRead = 0
@@ -2502,6 +2520,16 @@ def _read_locations(
             new_time_spent_reading = None
             new_rest_of_book_estimate = None
         elif device_status["ReadStatus"] > 0:
+            log_changes = []
+
+            def log_change(
+                v_cur: Any, v_new: Any, name: str, log_changes: list[str] = log_changes
+            ) -> None:
+                if v_cur != v_new:
+                    log_changes.append(
+                        _("{}: {} (device) → {} (Calibre)").format(name, v_new, v_cur)
+                    )
+
             try:
                 debug(
                     "Start of checks for current_last_read - reading_position_changed='%s'"
@@ -2515,6 +2543,7 @@ def _read_locations(
                 )
             except Exception:
                 debug("Exception raised when logging details of last read. Ignoring.")
+            log_change(current_last_read, new_last_read, _("Last read time"))
             reading_position_changed |= current_last_read != new_last_read
             debug(
                 "After checking current_last_read - reading_position_changed='%s'"
@@ -2558,6 +2587,7 @@ def _read_locations(
                 if current_percentRead is not None and current_percentRead >= 100:
                     debug("do_not_store_if_reopened - Already finished. Do not store.")
                     break
+            log_change(current_percentRead, new_kobo_percentRead, _("Percent read"))
             reading_position_changed |= current_percentRead != new_kobo_percentRead
 
             try:
@@ -2571,6 +2601,7 @@ def _read_locations(
                 debug(
                     "Exception raised when logging details of percent read. Ignoring."
                 )
+            log_change(current_chapterid, new_chapterid, _("Chapter ID"))
             reading_position_changed |= utils.value_changed(
                 current_chapterid, new_chapterid
             )
@@ -2595,6 +2626,7 @@ def _read_locations(
                 "current_rating != new_kobo_rating and new_kobo_rating > 0=",
                 current_rating != new_kobo_rating and new_kobo_rating > 0,
             )
+            log_change(current_rating or 0, new_kobo_rating or 0, _("Rating"))
             reading_position_changed |= current_rating != new_kobo_rating and not (
                 current_rating is None and new_kobo_rating == 0
             )
@@ -2610,6 +2642,11 @@ def _read_locations(
                 "current_time_spent_reading != new_time_spent_reading=",
                 current_time_spent_reading != new_time_spent_reading,
             )
+            log_change(
+                current_time_spent_reading,
+                new_time_spent_reading,
+                _("Time spent reading"),
+            )
             reading_position_changed |= utils.value_changed(
                 current_time_spent_reading, new_time_spent_reading
             )
@@ -2622,9 +2659,21 @@ def _read_locations(
                 "current_rest_of_book_estimate != new_rest_of_book_estimate=",
                 current_rest_of_book_estimate != new_rest_of_book_estimate,
             )
+            log_change(
+                current_rest_of_book_estimate,
+                new_rest_of_book_estimate,
+                _("Rest of book estimate"),
+            )
             reading_position_changed |= utils.value_changed(
                 current_rest_of_book_estimate, new_rest_of_book_estimate
             )
+
+            if log_changes:
+                log_store(
+                    _("{}: Found changes:").format(title)
+                    + "\n  - "
+                    + "\n  - ".join(log_changes)
+                )
 
         if reading_position_changed:
             debug("position changed for: %s - %s" % (title, authors))
