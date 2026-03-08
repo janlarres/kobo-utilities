@@ -255,10 +255,8 @@ class ConfigWrapper:
         }.items().__iter__()
 
     def __deepcopy__(self: Self, memo: Any) -> Self:
-        """
-        Deep copy everything except the _json_config reference,
-        so that changing the copy doesn't update the original file
-        """
+        # Deep copy everything except the _json_config reference,
+        # so that changing the copy doesn't update the original file
         new = self.__class__()
         for k, v in self.__dict__.items():
             if k.startswith("_"):
@@ -325,10 +323,8 @@ class ConfigDictWrapper(Dict[str, W]):
         return super().__delitem__(key)
 
     def __deepcopy__(self, memo: Any) -> ConfigDictWrapper[W]:
-        """
-        Deep copy everything except the _json_config reference,
-        so that changing the copy doesn't update the original file
-        """
+        # Deep copy everything except the _json_config reference,
+        # so that changing the copy doesn't update the original file
         new: ConfigDictWrapper[W] = ConfigDictWrapper()
         for k, v in self.items():
             new[k] = copy.deepcopy(v, memo)
