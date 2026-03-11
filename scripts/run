@@ -179,25 +179,16 @@ def run_tests(plugin_zip: Path, bin_path: Path, args: argparse.Namespace) -> boo
         )
 
         # Run tests
-        tests = args.tests or Path("tests").glob("test_*.py")
-        failed_tests = False
-        for test in tests:
-            failed_tests |= run_test(bin_path, test_env, test)
-
-    return failed_tests
-
-
-def run_test(bin_path: Path, test_env: dict[str, str], test: Path) -> bool:
-    log.info("Running test: %s", test)
-    try:
-        subprocess.run(
-            [bin_path / "calibre-debug", test],
-            check=True,
-            env={**os.environ, **test_env},
-        )
-    except subprocess.CalledProcessError:
-        return True
-    return False
+        try:
+            subprocess.run(
+                [bin_path / "calibre-debug", "-e", "tests/runner.py", "--"]
+                + (args.tests or ["discover", "-s", "tests"]),
+                check=True,
+                env={**os.environ, **test_env},
+            )
+        except subprocess.CalledProcessError:
+            return True
+        return False
 
 
 def update_calibre(args: argparse.Namespace) -> None:

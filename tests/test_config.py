@@ -1,4 +1,4 @@
-# ruff: noqa: INP001, PT009
+# ruff: noqa: PT009
 from __future__ import annotations
 
 import copy
@@ -303,7 +303,3 @@ class PluginConfigManager:
         if self.tmp_file_ctx is not None:
             return self.tmp_file_ctx.__exit__(exc, value, tb)
         return False
-
-
-if __name__ == "__main__":
-    unittest.main(module=Path(__file__).stem, verbosity=2)

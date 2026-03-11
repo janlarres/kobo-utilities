@@ -1,4 +1,4 @@
-# ruff: noqa: INP001, PT009
+# ruff: noqa: PT009
 from __future__ import annotations
 
 import dataclasses
@@ -466,7 +466,3 @@ class TestLocations(unittest.TestCase):
 
 def row_factory(cursor: apsw.Cursor, row: apsw.SQLiteValues):
     return {k[0]: row[i] for i, k in enumerate(cursor.getdescription())}
-
-
-if __name__ == "__main__":
-    unittest.main(module=Path(__file__).stem, verbosity=2)
