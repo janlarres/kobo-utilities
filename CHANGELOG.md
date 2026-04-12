@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.28.0 - 2026-04-12
+
+- The automatic reading location sync now creates a simple log that can be
+  accessed from the config dialog
+- Always make sure to have exclusive database access when restoring backup
+  if the Calibre version supports it
+
 ## Version 2.27.1 - 2026-02-23
 
 - Fixed an error on Windows when cleaning up after creating a backup
