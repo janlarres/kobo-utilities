@@ -98,74 +98,96 @@ TOKEN_CLEAR_SUBTITLE = "*Clear*"  # noqa: S105
 TOKEN_FILE_TIMESTAMP = "*filetimestamp"  # noqa: S105
 OTHER_SORTS = {TOKEN_FILE_TIMESTAMP: _("* File timestamp")}
 
-CUSTOM_COLUMN_DEFAULT_LOOKUP_READING_LOCATION = "#kobo_reading_location"
-CUSTOM_COLUMN_DEFAULT_LOOKUP_LAST_READ = "#kobo_last_read"
-CUSTOM_COLUMN_DEFAULT_LOOKUP_RATING = "#kobo_rating"
-CUSTOM_COLUMN_DEFAULT_LOOKUP_PERCENT_READ = "#kobo_percent_read"
-CUSTOM_COLUMN_DEFAULT_LOOKUP_TIME_SPENT_READING = "#kobo_time_spent_reading"
-CUSTOM_COLUMN_DEFAULT_LOOKUP_REST_OF_BOOK_ESTIMATE = "#kobo_rest_of_book_estimate"
-CUSTOM_COLUMN_DEFAULTS = {
-    CUSTOM_COLUMN_DEFAULT_LOOKUP_READING_LOCATION: {
-        "column_heading": _("Kobo reading location"),
-        "datatype": "text",
-        "description": _("Kobo reading location from the device."),
-        "columns_list": "avail_text_columns",
-        "config_label": _("Current reading location column:"),
-        "config_tool_tip": _(
+
+class CustomColumnDatatype(enum.Enum):
+    TEXT = "text"
+    INT = "int"
+    RATING = "rating"
+    DATETIME = "datetime"
+
+
+@dataclass
+class CustomColumnDef:
+    default_name: str
+    column_heading: str
+    datatype: CustomColumnDatatype
+    description: str
+    config_label: str
+    config_tool_tip: str
+
+
+@dataclass
+class CustomColumnConfig:
+    reading_location: CustomColumnDef
+    percent_read: CustomColumnDef
+    rating: CustomColumnDef
+    last_read: CustomColumnDef
+    time_spent_reading: CustomColumnDef
+    rest_of_book_estimate: CustomColumnDef
+
+
+CUSTOM_COLUMN_CONFIG = CustomColumnConfig(
+    CustomColumnDef(
+        "#kobo_reading_location",
+        _("Kobo reading location"),
+        CustomColumnDatatype.TEXT,
+        _("Kobo reading location from the device."),
+        _("Current reading location column:"),
+        _(
             "Select a custom column to store the current reading location. The column type must be 'text' or 'comments'. Leave this blank if you do not want to store or restore the current reading location."
         ),
-    },
-    CUSTOM_COLUMN_DEFAULT_LOOKUP_PERCENT_READ: {
-        "column_heading": _("Kobo % read"),
-        "datatype": "int",
-        "description": _("Percentage read for the book"),
-        "columns_list": "avail_number_columns",
-        "config_label": _("Percent read column:"),
-        "config_tool_tip": _(
+    ),
+    CustomColumnDef(
+        "#kobo_percent_read",
+        _("Kobo % read"),
+        CustomColumnDatatype.INT,
+        _("Percentage read for the book"),
+        _("Percent read column:"),
+        _(
             "Column used to store the current percent read. The column type must be 'integer' or 'float'. Leave this blank if you do not want to store or restore the percentage read."
         ),
-    },
-    CUSTOM_COLUMN_DEFAULT_LOOKUP_RATING: {
-        "column_heading": _("Kobo rating"),
-        "datatype": "rating",
-        "description": _("Rating for the book on the Kobo device."),
-        "columns_list": "avail_rating_columns",
-        "config_label": _("Rating column:"),
-        "config_tool_tip": _(
+    ),
+    CustomColumnDef(
+        "#kobo_rating",
+        _("Kobo rating"),
+        CustomColumnDatatype.RATING,
+        _("Rating for the book on the Kobo device."),
+        _("Rating column:"),
+        _(
             "Column used to store the rating. The column type must be a 'integer'. Leave this blank if you do not want to store or restore the rating."
         ),
-    },
-    CUSTOM_COLUMN_DEFAULT_LOOKUP_LAST_READ: {
-        "column_heading": _("Kobo last read"),
-        "datatype": "datetime",
-        "description": _("When the book was last read on the Kobo device."),
-        "columns_list": "avail_date_columns",
-        "config_label": _("Last read column:"),
-        "config_tool_tip": _(
+    ),
+    CustomColumnDef(
+        "#kobo_last_read",
+        _("Kobo last read"),
+        CustomColumnDatatype.DATETIME,
+        _("When the book was last read on the Kobo device."),
+        _("Last read column:"),
+        _(
             "Column used to store when the book was last read. The column type must be a 'Date'. Leave this blank if you do not want to store the last read timestamp."
         ),
-    },
-    CUSTOM_COLUMN_DEFAULT_LOOKUP_TIME_SPENT_READING: {
-        "column_heading": _("Kobo time spent reading"),
-        "datatype": "int",
-        "description": _("The time already spent reading the book, in seconds."),
-        "columns_list": "avail_number_columns",
-        "config_label": _("Time spent reading column:"),
-        "config_tool_tip": _(
+    ),
+    CustomColumnDef(
+        "#kobo_time_spent_reading",
+        _("Kobo time spent reading"),
+        CustomColumnDatatype.INT,
+        _("The time already spent reading the book, in seconds."),
+        _("Time spent reading column:"),
+        _(
             "Column used to store how much time was spent reading the book, in seconds. The column type must be 'integer'. Leave this blank if you do not want to store the time spent reading the book."
         ),
-    },
-    CUSTOM_COLUMN_DEFAULT_LOOKUP_REST_OF_BOOK_ESTIMATE: {
-        "column_heading": _("Kobo rest of book estimate"),
-        "datatype": "int",
-        "description": _("The estimate of the time left to read the book, in seconds."),
-        "columns_list": "avail_number_columns",
-        "config_label": _("Rest of book estimate column:"),
-        "config_tool_tip": _(
+    ),
+    CustomColumnDef(
+        "#kobo_rest_of_book_estimate",
+        _("Kobo rest of book estimate"),
+        CustomColumnDatatype.INT,
+        _("The estimate of the time left to read the book, in seconds."),
+        _("Rest of book estimate column:"),
+        _(
             "Column used to store the estimate of how much time is left in the book, in seconds. The column type must be 'integer'. Leave this blank if you do not want to store the estimate of the time left."
         ),
-    },
-}
+    ),
+)
 
 
 # This is necessary because JSONConfig defines a __setitem__() that checks
@@ -911,42 +933,42 @@ class ProfilesTab(QWidget):
         custom_column_group.setLayout(options_layout)
 
         self.custom_columns = {}
-        self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_READING_LOCATION] = {
+        self.custom_columns[CUSTOM_COLUMN_CONFIG.reading_location.default_name] = {
             "current_columns": self.get_text_custom_columns
         }
-        self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_PERCENT_READ] = {
+        self.custom_columns[CUSTOM_COLUMN_CONFIG.percent_read.default_name] = {
             "current_columns": self.get_number_custom_columns
         }
-        self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_RATING] = {
+        self.custom_columns[CUSTOM_COLUMN_CONFIG.rating.default_name] = {
             "current_columns": self.get_rating_custom_columns
         }
-        self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_LAST_READ] = {
+        self.custom_columns[CUSTOM_COLUMN_CONFIG.last_read.default_name] = {
             "current_columns": self.get_date_custom_columns
         }
-        self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_TIME_SPENT_READING] = {
+        self.custom_columns[CUSTOM_COLUMN_CONFIG.time_spent_reading.default_name] = {
             "current_columns": self.get_number_custom_columns
         }
-        self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_REST_OF_BOOK_ESTIMATE] = {
+        self.custom_columns[CUSTOM_COLUMN_CONFIG.rest_of_book_estimate.default_name] = {
             "current_columns": self.get_number_custom_columns
         }
 
         self.current_Location_combo = self.create_custom_column_controls(
-            options_layout, CUSTOM_COLUMN_DEFAULT_LOOKUP_READING_LOCATION, 1
+            options_layout, CUSTOM_COLUMN_CONFIG.reading_location, 1
         )
         self.percent_read_combo = self.create_custom_column_controls(
-            options_layout, CUSTOM_COLUMN_DEFAULT_LOOKUP_PERCENT_READ, 2
+            options_layout, CUSTOM_COLUMN_CONFIG.percent_read, 2
         )
         self.rating_combo = self.create_custom_column_controls(
-            options_layout, CUSTOM_COLUMN_DEFAULT_LOOKUP_RATING, 3
+            options_layout, CUSTOM_COLUMN_CONFIG.rating, 3
         )
         self.last_read_combo = self.create_custom_column_controls(
-            options_layout, CUSTOM_COLUMN_DEFAULT_LOOKUP_LAST_READ, 4
+            options_layout, CUSTOM_COLUMN_CONFIG.last_read, 4
         )
         self.time_spent_reading_combo = self.create_custom_column_controls(
-            options_layout, CUSTOM_COLUMN_DEFAULT_LOOKUP_TIME_SPENT_READING, 5
+            options_layout, CUSTOM_COLUMN_CONFIG.time_spent_reading, 5
         )
         self.rest_of_book_estimate_combo = self.create_custom_column_controls(
-            options_layout, CUSTOM_COLUMN_DEFAULT_LOOKUP_REST_OF_BOOK_ESTIMATE, 6
+            options_layout, CUSTOM_COLUMN_CONFIG.rest_of_book_estimate, 6
         )
 
         auto_store_group = QGroupBox(_("Store on connect"), self)
@@ -1018,27 +1040,28 @@ class ProfilesTab(QWidget):
         layout.addStretch(1)
 
     def create_custom_column_controls(
-        self, options_layout: QGridLayout, custom_col_name: str, row_number: int = 1
+        self,
+        options_layout: QGridLayout,
+        custom_col: CustomColumnDef,
+        row_number: int = 1,
     ):
-        current_Location_label = QLabel(
-            CUSTOM_COLUMN_DEFAULTS[custom_col_name]["config_label"], self
-        )
-        current_Location_label.setToolTip(
-            CUSTOM_COLUMN_DEFAULTS[custom_col_name]["config_tool_tip"]
-        )
+        current_Location_label = QLabel(custom_col.config_label, self)
+        current_Location_label.setToolTip(custom_col.config_tool_tip)
         create_column_callback = (
-            partial(self.create_custom_column, custom_col_name)
+            partial(self.create_custom_column, custom_col)
             if self.parent_dialog.supports_create_custom_column
             else None
         )
-        avail_columns = self.custom_columns[custom_col_name]["current_columns"]()
+        avail_columns = self.custom_columns[custom_col.default_name][
+            "current_columns"
+        ]()
         custom_column_combo = CustomColumnComboBox(
             self, avail_columns, create_column_callback=create_column_callback
         )
         current_Location_label.setBuddy(custom_column_combo)
         options_layout.addWidget(current_Location_label, row_number, 0, 1, 1)
         options_layout.addWidget(custom_column_combo, row_number, 1, 1, 1)
-        self.custom_columns[custom_col_name]["combo_box"] = custom_column_combo
+        self.custom_columns[custom_col.default_name]["combo_box"] = custom_column_combo
 
         return custom_column_combo
 
@@ -1174,39 +1197,39 @@ class ProfilesTab(QWidget):
 
         # Display profile configuration in the controls
         self.current_Location_combo.populate_combo(
-            self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_READING_LOCATION][
+            self.custom_columns[CUSTOM_COLUMN_CONFIG.reading_location.default_name][
                 "current_columns"
             ](),
             profile.customColumnOptions.currentReadingLocationColumn,
         )
         self.percent_read_combo.populate_combo(
-            self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_PERCENT_READ][
+            self.custom_columns[CUSTOM_COLUMN_CONFIG.percent_read.default_name][
                 "current_columns"
             ](),
             profile.customColumnOptions.percentReadColumn,
         )
         self.rating_combo.populate_combo(
-            self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_RATING][
+            self.custom_columns[CUSTOM_COLUMN_CONFIG.rating.default_name][
                 "current_columns"
             ](),
             profile.customColumnOptions.ratingColumn,
         )
         self.last_read_combo.populate_combo(
-            self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_LAST_READ][
+            self.custom_columns[CUSTOM_COLUMN_CONFIG.last_read.default_name][
                 "current_columns"
             ](),
             profile.customColumnOptions.lastReadColumn,
         )
         self.time_spent_reading_combo.populate_combo(
-            self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_TIME_SPENT_READING][
+            self.custom_columns[CUSTOM_COLUMN_CONFIG.time_spent_reading.default_name][
                 "current_columns"
             ](),
             profile.customColumnOptions.timeSpentReadingColumn,
         )
         self.rest_of_book_estimate_combo.populate_combo(
-            self.custom_columns[CUSTOM_COLUMN_DEFAULT_LOOKUP_REST_OF_BOOK_ESTIMATE][
-                "current_columns"
-            ](),
+            self.custom_columns[
+                CUSTOM_COLUMN_CONFIG.rest_of_book_estimate.default_name
+            ]["current_columns"](),
             profile.customColumnOptions.restOfBookEstimateColumn,
         )
 
@@ -1302,15 +1325,13 @@ class ProfilesTab(QWidget):
                 available_columns[key] = column["name"]
         return available_columns
 
-    def create_custom_column(self, lookup_name: str):
-        debug("lookup_name:", lookup_name)
-        display_params = {
-            "description": CUSTOM_COLUMN_DEFAULTS[lookup_name]["description"]
-        }
-        datatype = CUSTOM_COLUMN_DEFAULTS[lookup_name]["datatype"]
-        column_heading = CUSTOM_COLUMN_DEFAULTS[lookup_name]["column_heading"]
+    def create_custom_column(self, custom_col: CustomColumnDef):
+        debug("lookup_name:", custom_col.default_name)
+        display_params = {"description": custom_col.description}
+        datatype = custom_col.datatype.value
+        column_heading = custom_col.column_heading
 
-        new_lookup_name = lookup_name
+        new_lookup_name = custom_col.default_name
 
         create_new_custom_column_instance = (
             self.parent_dialog.get_create_new_custom_column_instance
@@ -1327,8 +1348,9 @@ class ProfilesTab(QWidget):
         )
         debug("result:", result)
         if result[0] == CreateNewCustomColumn.Result.COLUMN_ADDED:  # pyright: ignore[reportPossiblyUnboundVariable]
-            self.custom_columns[lookup_name]["combo_box"].populate_combo(
-                self.custom_columns[lookup_name]["current_columns"](), result[1]
+            self.custom_columns[custom_col.default_name]["combo_box"].populate_combo(
+                self.custom_columns[custom_col.default_name]["current_columns"](),
+                result[1],
             )
             return True
 
