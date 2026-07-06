@@ -53,7 +53,6 @@ plugin_name = None
 # classes if you need any zip images to be displayed on the configuration dialog.
 plugin_icon_resources = {}
 
-STORE_LOG = Path(ptempfile.base_dir(), "kobo-utilities-store.log")
 
 Dispatcher = Callable[[Callable[[DeviceJob], None]], None]
 LoadResources = Callable[[Iterable[str]], Dict[str, bytes]]
@@ -77,11 +76,24 @@ def debug(*args: Any):
         )
 
 
+def get_store_log() -> Path:
+    """
+    Get the path to the user-facing location store log
+
+    This can't be a constant as the directory may get deleted while Calibre is running,
+    see:
+    https://github.com/janlarres/kobo-utilities/issues/39
+    https://magnusviri.com/what-is-var-folders.html
+    """
+    return Path(ptempfile.base_dir(), "kobo-utilities-store.log")
+
+
 def log_store(msg: str) -> None:
     """
     Write a message to the user-facing location store log.
     """
-    with STORE_LOG.open("a") as f:
+    store_log = get_store_log()
+    with store_log.open("a") as f:
         now = dt.datetime.now().strftime("%X")  # noqa: DTZ005
         f.write(f"{now}: {msg}\n")
 

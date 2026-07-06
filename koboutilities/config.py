@@ -57,7 +57,7 @@ from .dialogs import (
     ReadOnlyTableWidgetItem,
     ReadOnlyTextIconWidgetItem,
 )
-from .utils import STORE_LOG, debug, get_icon, prompt_for_restart
+from .utils import debug, get_icon, get_store_log, prompt_for_restart
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -1075,7 +1075,8 @@ class ProfilesTab(QWidget):
         self.do_not_store_if_reopened_checkbox.setEnabled(checked)
 
     def open_log_button_clicked(self) -> None:
-        log = STORE_LOG.read_text() if STORE_LOG.exists() else ""
+        store_log = get_store_log()
+        log = store_log.read_text() if store_log.exists() else ""
         d = ViewLog(_("Log of the automatic storing of reading positions"), log, self)
         d.exec()
 
