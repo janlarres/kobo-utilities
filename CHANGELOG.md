@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 2.28.1 - 2026-07-06
+
+- Fixed an error on macOS if Calibre's temporary directory got deleted
+  while Calibre was running
+
 ## Version 2.28.0 - 2026-04-12
 
 - The automatic reading location sync now creates a simple log that can be
