@@ -128,6 +128,7 @@ class KoboUtilitiesAction(InterfaceAction):
 
     def initialization_complete(self):
         cfg.do_config_migrations()
+        debug("Plugin config: ", cfg.plugin_prefs)
         cfg.do_library_migrations(self.gui.current_db)
 
         # otherwise configured hot keys won't work until the menu's

@@ -116,6 +116,7 @@ def update_book_toc_on_device(
     debug("filtered update_books=%d" % len(update_books))
     if len(update_books) > 0:
         update_device_toc_for_books(update_books, device, gui)
+    debug("finished updating ToCs")
 
 
 def load_ebook(pathtoebook: str) -> EpubContainer:

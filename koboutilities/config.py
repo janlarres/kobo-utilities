@@ -1360,6 +1360,7 @@ class ProfilesTab(QWidget):
 class DevicesTab(QWidget):
     def __init__(self, parent_dialog: ConfigWidget, plugin_action: KoboUtilitiesAction):
         self.devices = copy.deepcopy(plugin_prefs.Devices)
+        debug("Configured devices: ", self.devices)
         self.current_device_info = None
 
         self.parent_dialog = parent_dialog
