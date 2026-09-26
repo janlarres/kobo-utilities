@@ -75,13 +75,7 @@ def remove_annotations_files(
     )
 
     debug("options=", options)
-    RemoveAnnotationsProgressDialog(
-        device,
-        gui,
-        dispatcher,
-        options,
-        current_view.model().db,
-    )
+    RemoveAnnotationsProgressDialog(device, gui, dispatcher, options, gui.current_db)
 
     return
 
@@ -118,6 +112,7 @@ def _remove_annotations_completed(job: DeviceJob, gui: ui.Main) -> None:
         )
         return
     annotations_removed = job.result
+    assert annotations_removed is not None
     msg = annotations_removed["message"]
     gui.status_bar.show_message(_("Cleaning annotations completed"), 3000)
 
@@ -387,7 +382,7 @@ class RemoveAnnotationsProgressDialog(QProgressDialog):
                 debug("device_book_paths:", device_book_paths)
                 book.paths = device_book_paths
                 book.contentIDs = contentIDs
-                if len(book.contentIDs):
+                if len(contentIDs):
                     title = book.title
                     self.setLabelText(_("Queueing {}").format(title))
                     authors = authors_to_string(book.authors)

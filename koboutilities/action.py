@@ -28,7 +28,6 @@ from .config import KoboDevice, KoboVersionInfo
 from .constants import CORRUPT_MSG, GUI_NAME
 from .features import (
     analytics,
-    annotations,  # pyright: ignore[reportDuplicateImport]
     backup,
     booksnotindb,
     cleanimages,
@@ -45,6 +44,9 @@ from .features import (
     removeannotations,
     toc,
 )
+
+# Clashes with the __future__ import
+from .features import annotations as ku_annotations
 from .utils import (
     debug,
     get_icon,
@@ -88,11 +90,13 @@ load_translations()
 
 
 class KoboUtilitiesAction(InterfaceAction):
+    # pyrefly: ignore [bad-override-mutable-attribute]
     interface_action_base_plugin: ActionKoboUtilities
     qaction: QAction
 
     name = "KoboUtilities"
     # Create our top-level menu/toolbar action (text, icon_path, tooltip, keyboard shortcut)
+    # pyrefly: ignore [bad-override-mutable-attribute]
     action_spec = (name, None, ActionKoboUtilities.description, ())
     action_type = "current"
 
@@ -452,7 +456,7 @@ class KoboUtilitiesAction(InterfaceAction):
                 image="edit_input.png",
                 unique_name="Copy annotations for selected books",
                 shortcut_name=_("Copy annotations for selected books"),
-                triggered=menu_wrapper(annotations.getAnnotationForSelected),
+                triggered=menu_wrapper(ku_annotations.getAnnotationForSelected),
                 is_library_action=True,
             )
             self.create_menu_item_ex(
@@ -460,7 +464,7 @@ class KoboUtilitiesAction(InterfaceAction):
                 _("Back up EPUB annotation files"),
                 unique_name="Back up EPUB annotation files",
                 shortcut_name=_("Back up EPUB annotation files"),
-                triggered=menu_wrapper(annotations.backup_annotation_files),
+                triggered=menu_wrapper(ku_annotations.backup_annotation_files),
                 is_library_action=True,
             )
             self.create_menu_item_ex(
@@ -698,7 +702,7 @@ class KoboUtilitiesAction(InterfaceAction):
         menu_text: str,
         triggered: Callable[[], None] | Callable[[QAction], None],
         image: str | None = None,
-        shortcut: str | list[str] | None | Literal[False] = None,
+        shortcut: str | list[str] | Literal[False] | None = None,
         is_checked: bool | None = None,
         shortcut_name: str | None = None,
         unique_name: str | None = None,
@@ -989,7 +993,7 @@ def get_device(gui: ui.Main):
     debug("device_info:", connected_device_info)
     device_type = connected_device_info[0]
     drive_info = cast("dict[str, dict[str, str]]", connected_device_info[4])
-    library_db = gui.library_view.model().db
+    library_db = gui.current_db
     device_uuid = drive_info["main"]["device_store_uuid"]
     current_device_profile = cfg.get_book_profile_for_device(library_db, serial_no)
     current_device_config = cfg.get_device_config(serial_no)

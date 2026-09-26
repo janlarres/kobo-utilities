@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import re
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Any, Generator, cast
+from typing import TYPE_CHECKING, Any, Generator, Iterable, cast
 
 from calibre.devices.kobo.driver import KOBOTOUCH
 from calibre.ebooks.metadata import authors_to_string
@@ -24,7 +24,7 @@ from qt.core import (
 try:
     from calibre.ebooks.oeb.polish.kepubify import DUMMY_TITLE_PAGE_NAME
 except ImportError:
-    DUMMY_TITLE_PAGE_NAME = None  # pyright: ignore[reportConstantRedefinition]
+    DUMMY_TITLE_PAGE_NAME = None
 
 from .. import utils
 from ..constants import GUI_NAME
@@ -72,7 +72,7 @@ def update_book_toc_on_device(
     db: LibraryDatabase = gui.current_db
 
     # Use local versions as just need a few details.
-    def _convert_calibre_ids_to_books(db: LibraryDatabase, ids: list[int]):
+    def _convert_calibre_ids_to_books(db: LibraryDatabase, ids: Iterable[int]):
         return [_convert_calibre_id_to_book(db, book_id) for book_id in ids]
 
     def _convert_calibre_id_to_book(
@@ -90,7 +90,7 @@ def update_book_toc_on_device(
         book["added"] = False
         return book
 
-    book_ids: list[int] = gui.library_view.get_selected_ids()
+    book_ids: list[int] | set[int] = gui.library_view.get_selected_ids()
     books = _convert_calibre_ids_to_books(db, book_ids)
     progressbar = ProgressBar(
         parent=gui, window_title=_("Getting ToC status for books"), on_top=True
@@ -255,11 +255,8 @@ def _get_chapter_status(
     assert device is not None
     connection = utils.device_database_connection(device, use_row_factory=True)
     i = 0
-    debug(
-        "device format_map='{0}".format(
-            device.driver.settings().format_map  # pyright: ignore[reportAttributeAccessIssue]
-        )
-    )
+    # pyrefly: ignore [missing-attribute]
+    debug("device format_map='{0}".format(device.driver.settings().format_map))
     for book in books:
         progressbar.increment()
         debug(f"Handling book: {book}")
@@ -312,7 +309,8 @@ def _get_chapter_status(
             book["library_format"] = book["kobo_format"]
         elif (
             book["kobo_format"] == "KEPUB"
-            and "EPUB".lower() in device.driver.settings().format_map  # pyright: ignore[reportAttributeAccessIssue]
+            # pyrefly: ignore [missing-attribute]
+            and "EPUB".lower() in device.driver.settings().format_map
             and db.has_format(book_id, "EPUB", index_is_id=True)
         ):
             book["library_format"] = "EPUB"

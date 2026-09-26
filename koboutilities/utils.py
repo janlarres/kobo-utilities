@@ -41,7 +41,7 @@ if TYPE_CHECKING:
     from calibre.db.legacy import LibraryDatabase
     from calibre.gui2 import ui
     from calibre.gui2.dialogs.message_box import MessageBox
-    from calibre.gui2.library.models import DeviceBooksModel
+    from calibre.gui2.library.models import BooksModel, DeviceBooksModel
     from calibre.gui2.library.views import BooksView
     from qt.core import QModelIndex, QPushButton, QWidget
 
@@ -302,6 +302,11 @@ def is_device_view(gui: ui.Main) -> bool:
     return isinstance(gui.current_view(), DeviceBooksView)
 
 
+def get_library_model(gui: ui.Main) -> BooksModel:
+    """Get the model for the library view, cast to the correct type."""
+    return cast("BooksModel", gui.library_view().model())
+
+
 def check_device_is_ready(
     device: KoboDevice | None, gui: ui.Main, function_message: str
 ):
@@ -328,14 +333,14 @@ def check_device_is_ready(
     return True
 
 
-def get_contentIDs_from_id(book_id: int, gui: ui.Main) -> list[str | None]:
+def get_contentIDs_from_id(book_id: int, gui: ui.Main) -> list[str]:
     debug("book_id=", book_id)
     paths = []
     for x in ("memory", "card_a"):
         x = getattr(gui, x + "_view").model()
         paths += x.paths_for_db_ids({book_id}, as_map=True)[book_id]
     debug("paths=", paths)
-    return [r.contentID for r in paths]
+    return [r.contentID for r in paths if r.contentID is not None]
 
 
 def get_selected_ids(gui: ui.Main) -> list[int]:
@@ -346,7 +351,8 @@ def get_selected_ids(gui: ui.Main) -> list[int]:
     if not rows or len(rows) == 0:
         return []
     debug("gui.current_view().model()", current_view.model())
-    return list(map(current_view.model().id, rows))
+    model = cast("BooksModel", current_view.model())
+    return list(map(model.id, rows))
 
 
 def convert_calibre_ids_to_books(
@@ -388,7 +394,7 @@ def get_device_path_from_contentID(
 def get_books_from_ids(book_ids: Iterable[int], gui: ui.Main) -> dict[int, list[Book]]:
     books = defaultdict(list)
     for view in (gui.memory_view, gui.card_a_view):
-        model: DeviceBooksModel = view.model()
+        model = cast("DeviceBooksModel", view.model())
         view_books = cast(
             "dict[int, list[Book]]", model.paths_for_db_ids(book_ids, as_map=True)
         )
@@ -399,14 +405,15 @@ def get_books_from_ids(book_ids: Iterable[int], gui: ui.Main) -> dict[int, list[
 
 
 def get_books_for_selected(gui: ui.Main) -> list[Book]:
-    view: DeviceBooksView | BooksView | None = gui.current_view()  # pyright: ignore[reportGeneralTypeIssues]
+    view: DeviceBooksView | BooksView | None = gui.current_view()
     if view is None:
         return []
     if isinstance(view, DeviceBooksView):
         rows = view.selectionModel().selectedRows()
         books = []
+        model = cast("DeviceBooksModel", view.model())
         for r in rows:
-            book = view.model().db[view.model().map[r.row()]]
+            book = model.db[model.map[r.row()]]
             book.calibre_id = r.row()
             books.append(book)
     else:

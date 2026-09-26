@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import os
 import time
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Any, cast
 
 from calibre import strftime
 from calibre.constants import DEBUG
@@ -75,7 +75,7 @@ def update_metadata(
     progressbar.set_label(_("Number of selected books: {0}").format(len(selectedIDs)))
     progressbar.show_with_maximum(len(selectedIDs))
     debug("selectedIDs:", selectedIDs)
-    books = utils.convert_calibre_ids_to_books(current_view.model().db, selectedIDs)
+    books = utils.convert_calibre_ids_to_books(gui.current_db, selectedIDs)
     for book in books:
         progressbar.increment()
         device_book_paths = utils.get_device_paths_from_id(
@@ -140,7 +140,7 @@ def do_update_metadata(
 
     from calibre.library.save_to_disk import find_plugboard
 
-    plugboards = gui.library_view.model().db.prefs.get("plugboards", {})
+    plugboards = gui.current_db.prefs.get("plugboards", {})
     debug("plugboards=", plugboards)
     debug(
         "self.device.driver.__class__.__name__=",
@@ -258,7 +258,7 @@ def do_update_metadata(
                     update_values = []
                     set_clause_columns = []
                     changes_found = False
-                    rating_values = []
+                    rating_values: list[Any] = []
                     rating_change_query = None
 
                     if options.title and result["Title"] != title_string:
@@ -359,7 +359,7 @@ def do_update_metadata(
                             if rating != result["Rating"]:
                                 if not rating:
                                     rating_change_query = rating_delete
-                                    rating_values = (contentID,)
+                                    rating_values = [contentID]
                                 elif (
                                     result["DateModified"] is None
                                 ):  # If the date modified column does not have a value, there is no rating column
@@ -710,6 +710,7 @@ def _render_synopsis(mi: Metadata, book: Book, template: str | None = None):
         op = ps.get("output_profile", "default")
         opmap = {x.short_name: x for x in output_profiles()}
         output_profile = opmap.get(op, opmap["default"])
+        assert output_profile is not None
 
         rating = get_rating(
             mi.rating,
@@ -1073,7 +1074,7 @@ class UpdateMetadataOptionsDialog(PluginDialog):
 
         if new_prefs.set_reading_direction:
             new_prefs.reading_direction = READING_DIRECTIONS[
-                str(self.reading_direction_combo.currentText()).strip()
+                self.reading_direction_combo.currentText().strip()
             ]
 
         if new_prefs.set_sync_date:
@@ -1161,7 +1162,7 @@ class UpdateMetadataOptionsDialog(PluginDialog):
     ) -> dict[str, str]:
         available_columns: dict[str, str] = {}
         for column_name in column_names:
-            calibre_column_name = self.gui.library_view.model().orig_headers[
+            calibre_column_name = utils.get_library_model(self.gui).orig_headers[
                 column_name
             ]
             available_columns[column_name] = calibre_column_name
@@ -1173,7 +1174,7 @@ class UpdateMetadataOptionsDialog(PluginDialog):
         return self.get_custom_columns(column_types)
 
     def get_custom_columns(self, column_types: list[str]) -> dict[str, str]:
-        custom_columns = self.gui.library_view.model().custom_columns
+        custom_columns = utils.get_library_model(self.gui).custom_columns
         available_columns = {}
         for key, column in custom_columns.items():
             typ = column["datatype"]
@@ -1200,7 +1201,7 @@ class TemplateConfig(QWidget):  # {{{
 
     @property
     def template(self):
-        return str(self.t.text()).strip()
+        return self.t.text().strip()
 
     @template.setter
     def template(self, template: str):

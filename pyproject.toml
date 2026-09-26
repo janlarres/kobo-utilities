@@ -17,6 +17,7 @@ dependencies = ["apsw==3.43.0", "pyqt6>=6.7.1"]
 [dependency-groups]
 dev = [
     "ipykernel>=6.29.5",
+    "pyrefly>=1.3.1",
     "vulture>=2.14",
 ]
 
@@ -141,61 +142,6 @@ future-annotations = true
 [tool.ruff.lint.isort]
 required-imports = ["from __future__ import annotations"]
 
-# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
-# https://github.com/microsoft/pyright/blob/main/docs/comments.md
-[tool.pyright]
-typeCheckingMode = "standard"
-include = ["koboutilities/**/*.py", "tests/*.py", "scripts/run"]
-exclude = ["**/__pycache__", "koboutilities/whitelist.py"]
-extraPaths = ["../calibre/src", "calibre-repo/src"]
-ignore = ["../calibre/src", "calibre-repo/src"]
-pythonVersion = "3.8"
-# reportImportCycles = "warning"
-reportUnnecessaryTypeIgnoreComment = "warning"
-reportUnreachable = "warning"
-
-# Individual strict checks
-strictListInference = true
-strictDictionaryInference = true
-strictSetInference = true
-reportMissingTypeStubs = "error"
-reportAssertAlwaysTrue = "error"
-reportInvalidStringEscapeSequence = "error"
-reportInvalidTypeVarUse = "error"
-reportSelfClsParameterName = "error"
-reportUnsupportedDunderAll = "error"
-reportUnusedExpression = "error"
-reportWildcardImportFromLibrary = "error"
-reportConstantRedefinition = "error"
-reportDeprecated = "error"
-reportDuplicateImport = "error"
-reportIncompleteStub = "error"
-reportInconsistentConstructor = "error"
-reportInvalidStubStatement = "error"
-reportMatchNotExhaustive = "error"
-reportMissingParameterType = "error"
-reportMissingTypeArgument = "error"
-# reportPrivateUsage = "error"
-reportTypeCommentUsage = "error"
-# reportUnknownArgumentType = "error"
-# reportUnknownLambdaType = "error"
-# reportUnknownMemberType = "error"
-reportUnknownParameterType = "error"
-# reportUnknownVariableType = "error"
-reportUnnecessaryCast = "error"
-reportUnnecessaryComparison = "error"
-reportUnnecessaryContains = "error"
-reportUnnecessaryIsInstance = "error"
-reportUnusedClass = "error"
-reportUnusedImport = "none"              # Already checked by ruff
-reportUnusedFunction = "error"
-reportUnusedVariable = "error"
-reportUntypedBaseClass = "error"
-reportUntypedClassDecorator = "error"
-reportUntypedFunctionDecorator = "error"
-reportUntypedNamedTuple = "error"
-
-
 [tool.ruff.lint.flake8-import-conventions]
 banned-from = ["datetime"]
 [tool.ruff.lint.flake8-import-conventions.extend-aliases]
@@ -206,13 +152,13 @@ extra-paths = ["../calibre/src"]
 
 [tool.pyrefly]
 python-version = "3.8.5"
-project-includes = [
-    "koboutilities/**/*.py",
-    "tests/*.py",
-    # "scripts/run",
-]
+project-includes = ["koboutilities/**/*.py", "tests/*.py", "scripts/run"]
 project-excludes = ["**/__pycache__", "koboutilities/whitelist.py"]
 search-path = ["../calibre/src", "calibre-repo/src"]
+preset = "default"
+
+[tool.pyrefly.errors]
+unused-ignore = "warn"
 
 [tool.vulture]
 paths = ["koboutilities", "tests", "scripts/run"]

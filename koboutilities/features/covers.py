@@ -42,7 +42,7 @@ def upload_covers(
         return
     debug("selectedIDs:", selectedIDs)
     books = utils.convert_calibre_ids_to_books(
-        current_view.model().db, selectedIDs, get_cover=True
+        gui.current_db, selectedIDs, get_cover=True
     )
 
     dlg = CoverUploadOptionsDialog(gui, device)
@@ -83,7 +83,7 @@ def remove_covers(
 
     if gui.stack.currentIndex() == 0:
         selectedIDs = utils.get_selected_ids(gui)
-        books = utils.convert_calibre_ids_to_books(current_view.model().db, selectedIDs)
+        books = utils.convert_calibre_ids_to_books(gui.current_db, selectedIDs)
     else:
         books = utils.get_books_for_selected(gui)
 
@@ -128,8 +128,7 @@ def open_cover_image_directory(
 
     if gui.stack.currentIndex() == 0:
         selectedIDs = utils.get_selected_ids(gui)
-        books = utils.convert_calibre_ids_to_books(current_view.model().db, selectedIDs)
-
+        books = utils.convert_calibre_ids_to_books(gui.current_db, selectedIDs)
     else:
         books = utils.get_books_for_selected(gui)
 

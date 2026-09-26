@@ -127,6 +127,7 @@ def _clean_images_dir_completed(
         )
         return
     extra_image_files = job.result
+    assert extra_image_files is not None
     extra_covers_count = len(extra_image_files["main_memory"]) + len(
         extra_image_files["sd_card"]
     )

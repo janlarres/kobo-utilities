@@ -30,6 +30,7 @@ class ActionKoboUtilities(InterfaceActionBase):
     description = "Utilities to use with Kobo ereaders"
     supported_platforms = ["windows", "osx", "linux"]  # noqa: RUF012
     author = "David Forrester, Jan Larres, and others"
+    # pyrefly: ignore [bad-override-mutable-attribute]
     version = __version__
     # Calibre versions from https://github.com/kovidgoyal/calibre/blob/master/bypy/sources.json:
     # Calibre 5.13.0 (2021-03-10): Python 3.8.5
@@ -39,6 +40,7 @@ class ActionKoboUtilities(InterfaceActionBase):
     # Calibre 9.0.0 (2026-01-30): Python 3.14.1
     # Maintenance note: if you update the minimum version here,
     # make sure to also update it in scripts/run and .github/workflows/main.yml
+    # pyrefly: ignore [bad-override-mutable-attribute]
     minimum_calibre_version = (5, 13, 0)
 
     #: This field defines the GUI plugin class that contains all the code

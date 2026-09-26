@@ -29,6 +29,7 @@ from ..utils import debug
 if TYPE_CHECKING:
     from calibre.devices.kobo.books import Book
     from calibre.gui2 import ui
+    from calibre.gui2.library.models import DeviceBooksModel
     from qt.core import QWidget
 
     from ..config import KoboDevice
@@ -51,7 +52,7 @@ def show_books_not_in_database(
     books = utils.get_books_for_selected(gui)
 
     if len(books) == 0:
-        books = current_view.model().db
+        books = cast("DeviceBooksModel", current_view.model()).db
 
     books_not_in_database = _check_book_in_database(device, books)
 
@@ -73,7 +74,7 @@ def _check_book_in_database(device: KoboDevice, books: list[Book]) -> list[Book]
 
     for book in books:
         if not book.contentID:
-            book.contentID = utils.contentid_from_path(  # pyright: ignore[reportAttributeAccessIssue]
+            book.contentID = utils.contentid_from_path(
                 device, book.path, BOOK_CONTENTTYPE
             )
 
@@ -181,7 +182,7 @@ class ShowBooksNotInDeviceDatabaseDialog(PluginDialog):
             parent,
             "kobo utilities plugin:not in device database dialog",
         )
-        self.db = parent.library_view.model().db
+        self.db = parent.current_db
         self.books = books
         self.blockSignals(True)
 

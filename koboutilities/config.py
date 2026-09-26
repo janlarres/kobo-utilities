@@ -57,7 +57,7 @@ from .dialogs import (
     ReadOnlyTableWidgetItem,
     ReadOnlyTextIconWidgetItem,
 )
-from .utils import debug, get_icon, get_store_log, prompt_for_restart
+from .utils import debug, get_icon, get_library_model, get_store_log, prompt_for_restart
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -75,7 +75,7 @@ try:
     SUPPORTS_CREATE_CUSTOM_COLUMN = True
 except ImportError:
     debug("CreateNewCustomColumn is not supported")
-    SUPPORTS_CREATE_CUSTOM_COLUMN = False  # pyright: ignore[reportConstantRedefinition]
+    SUPPORTS_CREATE_CUSTOM_COLUMN = False
 
 load_translations()
 
@@ -249,8 +249,8 @@ class ConfigWrapper:
         assert isinstance(annotation, ast.Subscript)
 
         # Necessary for Python 3.8 support
-        if isinstance(annotation.slice, ast.Index):  # pyright: ignore[reportDeprecated]
-            val_type = annotation.slice.value.id  # pyright: ignore[reportAttributeAccessIssue]
+        if isinstance(annotation.slice, ast.Index):
+            val_type = annotation.slice.value.id  # pyrefly: ignore [missing-attribute]
         else:
             assert isinstance(annotation.slice, ast.Name)
             val_type = annotation.slice.id
@@ -301,19 +301,15 @@ class ConfigWrapper:
             return self._json_config.__exit__(exc, value, tb)
         return False
 
-    # Workaround for https://github.com/microsoft/pyright/issues/7183
-    # so that access to non-existent attributes gets flagged as an error
-    if not TYPE_CHECKING:
-
-        def __setattr__(self, name: Any, value: Any) -> None:
-            super().__setattr__(name, value)
-            if name != "__annotations__" and name in self.__annotations__:
-                if isinstance(value, (ConfigWrapper, ConfigDictWrapper)):
-                    self._wrapped_dict[name] = value._wrapped_dict
-                else:
-                    self._wrapped_dict[name] = value
-                if self._json_config is not None:
-                    self._json_config.commit()
+    def __setattr__(self, name: Any, value: Any) -> None:
+        super().__setattr__(name, value)
+        if name != "__annotations__" and name in self.__annotations__:
+            if isinstance(value, (ConfigWrapper, ConfigDictWrapper)):
+                self._wrapped_dict[name] = value._wrapped_dict
+            else:
+                self._wrapped_dict[name] = value
+            if self._json_config is not None:
+                self._json_config.commit()
 
 
 W = TypeVar("W", bound="ConfigWrapper")
@@ -1099,7 +1095,7 @@ class ProfilesTab(QWidget):
         if not ok:
             # Operation cancelled
             return
-        new_profile_name = str(new_profile_name).strip()
+        new_profile_name = new_profile_name.strip()
         # Verify it does not clash with any other profiles in the profile
         for profile_name in self.profiles:
             debug("existing profile: ", profile_name)
@@ -1138,7 +1134,7 @@ class ProfilesTab(QWidget):
         if not ok:
             # Operation cancelled
             return
-        new_profile_name = str(new_profile_name).strip()
+        new_profile_name = new_profile_name.strip()
         if new_profile_name == old_profile_name:
             return
         # Verify it does not clash with any other profiles in the profile
@@ -1191,7 +1187,7 @@ class ProfilesTab(QWidget):
     def refresh_current_profile_info(self):
         debug("Start")
         # Get configuration for the selected profile
-        self.profile_name = str(self.select_profile_combo.currentText()).strip()
+        self.profile_name = self.select_profile_combo.currentText().strip()
         profile = get_profile_info(self.plugin_action.gui.current_db, self.profile_name)
 
         serial_no = profile.forDevice
@@ -1299,7 +1295,7 @@ class ProfilesTab(QWidget):
     def get_rating_custom_columns(self):
         column_types = ["rating", "int"]
         custom_columns = self.get_custom_columns(column_types)
-        ratings_column_name = self.plugin_action.gui.library_view.model().orig_headers[
+        ratings_column_name = get_library_model(self.plugin_action.gui).orig_headers[
             "rating"
         ]
         custom_columns["rating"] = ratings_column_name
@@ -1318,7 +1314,7 @@ class ProfilesTab(QWidget):
             assert self.parent_dialog.get_create_new_custom_column_instance is not None
             custom_columns = self.parent_dialog.get_create_new_custom_column_instance.current_columns()
         else:
-            custom_columns = self.plugin_action.gui.library_view.model().custom_columns
+            custom_columns = get_library_model(self.plugin_action.gui).custom_columns
         available_columns: dict[str, str] = {}
         for key, column in custom_columns.items():
             typ = column["datatype"]
@@ -1348,7 +1344,7 @@ class ProfilesTab(QWidget):
             freeze_lookup_name=False,
         )
         debug("result:", result)
-        if result[0] == CreateNewCustomColumn.Result.COLUMN_ADDED:  # pyright: ignore[reportPossiblyUnboundVariable]
+        if result[0] == CreateNewCustomColumn.Result.COLUMN_ADDED:
             self.custom_columns[custom_col.default_name]["combo_box"].populate_combo(
                 self.custom_columns[custom_col.default_name]["current_columns"](),
                 result[1],
@@ -1575,7 +1571,7 @@ class DevicesTab(QWidget):
         if not ok:
             # Operation cancelled
             return
-        new_device_name = str(new_device_name).strip()
+        new_device_name = new_device_name.strip()
         if new_device_name == old_name:
             return
         try:
@@ -2069,7 +2065,7 @@ class ConfigWidget(QWidget):
             self._get_create_new_custom_column_instance is None
             and self.supports_create_custom_column
         ):
-            self._get_create_new_custom_column_instance = CreateNewCustomColumn(  # pyright: ignore[reportPossiblyUnboundVariable]
+            self._get_create_new_custom_column_instance = CreateNewCustomColumn(
                 self.plugin_action.gui
             )
         return self._get_create_new_custom_column_instance
@@ -2142,7 +2138,7 @@ class PrefsViewerDialog(PluginDialog):
             return
         current_item = self.keys_list.currentItem()
         assert current_item is not None
-        key = str(current_item.text())
+        key = current_item.text()
         val = self.db.prefs.get_namespaced(self.namespace, key, "")
         self.value_text.setPlainText(self.db.prefs.to_raw(val))
 
@@ -2161,10 +2157,10 @@ class PrefsViewerDialog(PluginDialog):
         if not confirm(message, self.namespace + "_clear_settings", self):
             return
 
-        val = self.db.prefs.raw_to_object(str(self.value_text.toPlainText()))
+        val = self.db.prefs.raw_to_object(self.value_text.toPlainText())
         current_item = self.keys_list.currentItem()
         assert current_item is not None
-        key = str(current_item.text())
+        key = current_item.text()
         self.db.prefs.set_namespaced(self.namespace, key, val)
 
         restart = prompt_for_restart(
@@ -2291,6 +2287,6 @@ class SimpleComboBox(QComboBox):
 
     def selected_key(self):
         for value in list(self.values):
-            if value == str(self.currentText()).strip():
+            if value == self.currentText().strip():
                 return value
         return None

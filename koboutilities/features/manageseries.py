@@ -54,6 +54,7 @@ if TYPE_CHECKING:
 
     from calibre.devices.kobo.books import Book
     from calibre.gui2 import ui
+    from calibre.gui2.library.models import DeviceBooksModel
     from qt.core import QDropEvent, QMouseEvent, QWidget
 
     from ..config import KoboDevice
@@ -90,8 +91,8 @@ def manage_series_on_device(
     )
     debug("books:", seriesBooks)
 
-    library_db = gui.library_view.model().db
-    all_series = library_db.all_series()
+    library_db = gui.current_db
+    all_series = library_db.all_series()  # pyrefly: ignore [missing-attribute]
     all_series.sort(key=lambda x: sort_key(x[1]))
 
     d = ManageSeriesDeviceDialog(gui, seriesBooks, all_series, series_columns)
@@ -112,8 +113,8 @@ def manage_series_on_device(
         ):
             book = seriesBook._mi
             book.series_index_string = seriesBook.series_index_string()
-            book.kobo_series_number = seriesBook.series_index_string()  # pyright: ignore[reportAttributeAccessIssue]
-            book.kobo_series = seriesBook.series_name()  # pyright: ignore[reportAttributeAccessIssue]
+            book.kobo_series_number = seriesBook.series_index_string()
+            book.kobo_series = seriesBook.series_name()
             book.contentIDs = [book.contentID]
             books.append(book)
             options.title = options.title or seriesBook.is_title_changed()
@@ -142,7 +143,8 @@ def manage_series_on_device(
         )
 
         debug("about to call sync_booklists")
-        USBMS.sync_booklists(device.driver, (current_view.model().db, None, None))
+        model = cast("DeviceBooksModel", current_view.model())
+        USBMS.sync_booklists(device.driver, (model.db, None, None))
         result_message = (
             _("Update summary:")
             + "\n\t"
@@ -162,7 +164,7 @@ def manage_series_on_device(
 
 def get_series_columns(gui: ui.Main) -> dict[str, str]:
     custom_columns = cast(
-        "dict[str, dict[str, Any]]", gui.library_view.model().custom_columns
+        "dict[str, dict[str, Any]]", utils.get_library_model(gui).custom_columns
     )
     series_columns = OrderedDict()
     for key, column in list(custom_columns.items()):
@@ -181,7 +183,7 @@ class ManageSeriesDeviceDialog(PluginDialog):
         series_columns: dict[str, str],
     ):
         super().__init__(parent, "kobo utilities plugin:series dialog")
-        self.db = parent.library_view.model().db
+        self.db = parent.current_db
         self.books = books
         self.all_series = all_series
         self.series_columns = series_columns
@@ -202,7 +204,7 @@ class ManageSeriesDeviceDialog(PluginDialog):
         # Display the books in the table
         self.blockSignals(False)
         self.series_table.populate_table(books)
-        if len(str(self.series_combo.text()).strip()) > 0:
+        if len(self.series_combo.text().strip()) > 0:
             self.series_table.setFocus()
         else:
             self.series_combo.setFocus()
@@ -453,7 +455,7 @@ class ManageSeriesDeviceDialog(PluginDialog):
     def renumber_series(self, display_in_table: bool = True):
         if len(self.books) == 0:
             return
-        series_name = str(self.series_combo.currentText()).strip()
+        series_name = self.series_combo.currentText().strip()
         series_index = float(str(self.series_start_number.value()))
         last_series_indent = 0
         for row, book in enumerate(self.books):
@@ -701,7 +703,7 @@ class ManageSeriesDeviceDialog(PluginDialog):
         item = self.series_table.item(row, column)
         assert item is not None
         if column == 0:
-            book.set_title(str(item.text()).strip())
+            book.set_title(item.text().strip())
         elif column == 2:
             qtdate = item.data(Qt.ItemDataRole.DisplayRole)
             book.set_pubdate(qt_to_dt(qtdate, as_utc=False))
@@ -1117,7 +1119,7 @@ class SeriesBook:
         if hasattr(self._mi, "pubdate"):
             self._mi.pubdate = self._orig_pubdate
         self._mi.series = self._mi.kobo_series
-        self._mi.series_index = self._orig_series_index  # pyright: ignore[reportAttributeAccessIssue]
+        self._mi.series_index = self._orig_series_index
 
         return
 
@@ -1185,7 +1187,7 @@ class SeriesBook:
         return fmt_sidx(self._mi.series_index)
 
     def set_series_index(self, series_index: float | None):
-        self._mi.series_index = series_index  # pyright: ignore[reportAttributeAccessIssue]
+        self._mi.series_index = series_index
         self.set_series_indent(get_indent_for_index(series_index))
 
     def series_indent(self) -> int:

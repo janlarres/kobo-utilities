@@ -29,10 +29,15 @@ repos:
     rev: v8.30.0
     hooks:
       - id: gitleaks
-  - repo: https://github.com/DetachHead/basedpyright-prek-mirror
-    rev: 1.37.4
+  - repo: local
     hooks:
-      - id: basedpyright
+      - id: pyrefly
+        name: Pyrefly
+        entry: uv run pyrefly check
+        language: system
+        types_or: [python, pyi]
+        pass_filenames: false
+        stages: [pre-commit, pre-merge-commit, pre-push, manual]
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.10
     hooks:

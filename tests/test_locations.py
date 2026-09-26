@@ -138,6 +138,7 @@ class DeviceDb:
                         :rest_of_book_estimate
                     )
                 """,
+                # pyrefly: ignore [bad-argument-type]
                 {
                     **dataclasses.asdict(book),
                     "content_type": BOOK_CONTENTTYPE,

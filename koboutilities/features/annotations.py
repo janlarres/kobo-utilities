@@ -51,13 +51,16 @@ def getAnnotationForSelected(
 def _getAnnotationForSelected(device: KoboDevice, gui: ui.Main) -> None:
     # Generate a path_map from selected ids
     def get_ids_from_selected_rows() -> list[int]:
+        books_model = utils.get_library_model(gui)
         rows = gui.library_view.selectionModel().selectedRows()
         if not rows or len(rows) < 1:
-            rows = range(gui.library_view.model().rowCount(QModelIndex()))
-        return list(map(gui.library_view.model().id, rows))
+            rows = range(books_model.rowCount(QModelIndex()))
+        return list(map(books_model.id, rows))
 
     def get_formats(id_: int) -> list[str]:
         formats = db.formats(id_, index_is_id=True)
+        if formats is None:
+            return []
         return [fmt.lower() for fmt in formats.split(",")]
 
     def generate_annotation_paths(
@@ -87,7 +90,7 @@ def _getAnnotationForSelected(device: KoboDevice, gui: ui.Main) -> None:
             show=True,
         )
         return
-    db = gui.library_view.model().db
+    db = gui.current_db
 
     # Get the list of ids
     ids = get_ids_from_selected_rows()
@@ -163,7 +166,7 @@ def backup_annotation_files(
 
     dest_path = dlg.dest_path()
     debug("selectedIDs:", selectedIDs)
-    books = utils.convert_calibre_ids_to_books(current_view.model().db, selectedIDs)
+    books = utils.convert_calibre_ids_to_books(gui.current_db, selectedIDs)
     for book in books:
         device_book_paths = utils.get_device_paths_from_id(
             cast("int", book.calibre_id), gui

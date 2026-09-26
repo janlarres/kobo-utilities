@@ -89,10 +89,11 @@ def get_shelves_from_device(
     progressbar.show()
     progressbar.set_label(_("Getting list of collections"))
 
-    library_db = current_view.model().db
+    library_db = gui.current_db
     options = cfg.plugin_prefs.getShelvesOptionStore
     if options.allBooks:
         selectedIDs = set(
+            # pyrefly: ignore [missing-attribute]
             library_db.search_getting_ids(
                 "ondevice:True", None, sort_results=False, use_virtual_library=False
             )
@@ -323,7 +324,7 @@ class GetShelvesFromDeviceDialog(PluginDialog):
         return self.get_custom_columns(column_types)
 
     def get_custom_columns(self, column_types: list[str]) -> dict[str, str]:
-        custom_columns = self.gui.library_view.model().custom_columns
+        custom_columns = utils.get_library_model(self.gui).custom_columns
         available_columns: dict[str, str] = {}
         for key, column in custom_columns.items():
             typ = column["datatype"]

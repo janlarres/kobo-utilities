@@ -44,7 +44,7 @@ Note that on Windows you may have to run the script as `uv run scripts/run <task
 Note also that `calibre-customize -b .` will not work due to the project structure
 being different from how that command expects it.
 
-The project uses pyright for type checking and ruff for linting and formatting,
+The project uses pyrefly for type checking and ruff for linting and formatting,
 so please make sure to run those tools before submitting a pull request.
 
 ### Translating the plugin

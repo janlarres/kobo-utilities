@@ -11,11 +11,11 @@
 # ]
 # ///
 #
-# Ignore until https://github.com/microsoft/pylance-release/discussions/6522 is fixed
-# pyright: reportMissingModuleSource=false, reportMissingImports=false
 # ruff: noqa: S603, S607
 # Necessary until https://github.com/astral-sh/ty/issues/691 is fixed
 # ty: ignore[unresolved-import]
+# Necessary until https://github.com/facebook/pyrefly/issues/3176 is fixed
+# pyrefly: ignore-errors[missing-import]
 
 from __future__ import annotations
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 import time
 from configparser import ConfigParser
 from functools import partial
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Iterable, cast
 
 from calibre.devices.kobo.driver import KOBO
 from calibre.gui2 import info_dialog, question_dialog
@@ -29,6 +29,7 @@ from ..utils import debug
 
 if TYPE_CHECKING:
     from calibre.gui2 import ui
+    from calibre.gui2.library.models import DeviceBooksModel
     from qt.core import QWidget
 
     from ..config import KoboDevice
@@ -793,17 +794,18 @@ def get_contentIDs_for_selected(gui: ui.Main) -> list[str]:
         return []
     if utils.is_device_view(gui):
         rows = view.selectionModel().selectedRows()
-        books = [view.model().db[view.model().map[r.row()]] for r in rows]
+        model = cast("DeviceBooksModel", view.model())
+        books = [model.db[model.map[r.row()]] for r in rows]
         contentIDs = [book.contentID for book in books]
     else:
-        book_ids: list[int] = view.get_selected_ids()
+        book_ids: list[int] | set[int] = view.get_selected_ids()
         contentIDs = get_contentIDs_for_books(book_ids, gui)
         debug("contentIDs=", contentIDs)
 
     return contentIDs
 
 
-def get_contentIDs_for_books(book_ids: list[int], gui: ui.Main) -> list[str]:
+def get_contentIDs_for_books(book_ids: Iterable[int], gui: ui.Main) -> list[str]:
     contentIDs = []
     for book_id in book_ids:
         contentIDs_for_book = utils.get_contentIDs_from_id(book_id, gui)

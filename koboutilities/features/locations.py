@@ -263,20 +263,14 @@ def store_current_bookmark(
     debug("options:", options)
 
     if cfg.plugin_prefs.BookmarkOptions.backgroundJob:
-        ReadLocationsProgressDialog(
-            gui,
-            device,
-            dispatcher,
-            options,
-            current_view.model().db,
-        )
+        ReadLocationsProgressDialog(gui, device, dispatcher, options, gui.current_db)
     else:
         selectedIDs = utils.get_selected_ids(gui)
 
         if len(selectedIDs) == 0:
             return
         debug("selectedIDs:", selectedIDs)
-        books = utils.convert_calibre_ids_to_books(current_view.model().db, selectedIDs)
+        books = utils.convert_calibre_ids_to_books(gui.current_db, selectedIDs)
         for book in books:
             device_book_paths = utils.get_device_paths_from_id(
                 cast("int", book.calibre_id), gui
@@ -578,7 +572,8 @@ def _store_current_bookmark(
                     current_rating = book.rating
                     debug("rating - in book=", current_rating)
                     if current_rating != kobo_rating:
-                        library_db.set_rating(  # pyright: ignore[reportAttributeAccessIssue]
+                        # pyrefly: ignore [missing-attribute]
+                        library_db.set_rating(
                             book.calibre_id, kobo_rating, commit=False
                         )
                 else:
@@ -715,7 +710,7 @@ def restore_current_bookmark(
     if len(selectedIDs) == 0:
         return
     debug("selectedIDs:", selectedIDs)
-    books = utils.convert_calibre_ids_to_books(current_view.model().db, selectedIDs)
+    books = utils.convert_calibre_ids_to_books(gui.current_db, selectedIDs)
     for book in books:
         device_book_paths = utils.get_device_paths_from_id(
             cast("int", book.calibre_id), gui
@@ -841,7 +836,7 @@ def _restore_current_bookmark(
                     location_set_clause = ""
                     location_values = []
                     rating_change_query = None
-                    rating_values = []
+                    rating_values: list[Any] = []
 
                     kobo_chapteridbookmarked = None
                     kobo_adobe_location = None
@@ -981,7 +976,7 @@ def _restore_current_bookmark(
                         rating_values.append(contentID)
                         if rating is None:
                             rating_change_query = rating_delete
-                            rating_values = (contentID,)
+                            rating_values = [contentID]
                         elif (
                             result["DateModified"] is None
                         ):  # If the date modified column does not have a value, there is no rating column
@@ -1149,7 +1144,8 @@ def auto_store_current_bookmark(
     search_condition = f"ondevice:True {search_condition}"
     debug("search_condition=", search_condition)
     onDeviceIds = set(
-        library_db.search_getting_ids(  # pyright: ignore[reportAttributeAccessIssue]
+        # pyrefly: ignore [missing-attribute]
+        library_db.search_getting_ids(
             search_condition, None, sort_results=False, use_virtual_library=False
         )
     )
@@ -1167,11 +1163,12 @@ def auto_store_current_bookmark(
         device_book_paths = [
             x.path for x in onDevice_book_paths[cast("int", book.calibre_id)]
         ]
-        book.contentIDs = [
+        contentIDs = [
             utils.contentid_from_path(device, path, BOOK_CONTENTTYPE)
             for path in device_book_paths
         ]
-        if len(book.contentIDs) > 0:
+        book.contentIDs = contentIDs
+        if len(contentIDs) > 0:
             title = book.title
             progressbar.set_label(_("Queueing {}").format(title))
             authors = authors_to_string(book.authors)
@@ -1239,7 +1236,7 @@ def _store_queue_job(
     device: KoboDevice,
     gui: ui.Main,
     options: ReadLocationsJobOptions,
-    books_to_modify: list[tuple[Any]],
+    books_to_modify: list[tuple[Any, ...]],
 ):
     debug("Start")
     cpus = 1  # self.gui.device_manager.server.pool_size
@@ -1263,7 +1260,7 @@ def _read_completed(job: DeviceJob, device: KoboDevice, gui: ui.Main):
         return
     modified_epubs_map: dict[int, dict[str, Any]]
     options: ReadLocationsJobOptions
-    modified_epubs_map, options = job.result
+    modified_epubs_map, options = job.result  # pyrefly: ignore [not-iterable]
     debug("options", options)
 
     update_count = len(modified_epubs_map) if modified_epubs_map else 0
@@ -1316,7 +1313,7 @@ def _read_completed(job: DeviceJob, device: KoboDevice, gui: ui.Main):
                     list(goodreads_sync_plugin.users.keys()),
                 )
                 goodreads_sync_plugin.update_reading_progress(
-                    "progress", sorted(goodreads_sync_plugin.users.keys())[0]
+                    "progress", min(goodreads_sync_plugin.users.keys())
                 )
 
 
@@ -1342,7 +1339,7 @@ def _update_database_columns(
     library_db = gui.current_db
 
     def value_changed(old_value: object | None, new_value: object | None):
-        return bool(
+        return (
             (old_value is not None and new_value is None)
             or (old_value is None and new_value is not None)
             or old_value != new_value
@@ -1774,7 +1771,7 @@ class BookmarkOptionsDialog(PluginDialog):
         layout.addWidget(button_box)
 
     def ok_clicked(self):
-        profile_name = str(self.select_profile_combo.currentText()).strip()
+        profile_name = self.select_profile_combo.currentText().strip()
         msg = cfg.validate_profile(profile_name, self.gui, self.device)
         if msg is not None:
             error_dialog(
@@ -1873,7 +1870,8 @@ class ReadLocationsProgressDialog(QProgressDialog):
             search_condition = f"ondevice:True {search_condition}"
             debug("search_condition=", search_condition)
             onDeviceIds = set(
-                library_db.search_getting_ids(  # pyright: ignore[reportAttributeAccessIssue]
+                # pyrefly: ignore [missing-attribute]
+                library_db.search_getting_ids(
                     search_condition,
                     None,
                     sort_results=False,
@@ -1892,11 +1890,12 @@ class ReadLocationsProgressDialog(QProgressDialog):
             device_book_paths = utils.get_device_paths_from_id(
                 cast("int", book.calibre_id), self.gui
             )
-            book.contentIDs = [
+            contentIDs = [
                 utils.contentid_from_path(device, path, BOOK_CONTENTTYPE)
                 for path in device_book_paths
             ]
-            if len(book.contentIDs):
+            book.contentIDs = contentIDs
+            if len(contentIDs):
                 title = book.title
                 self.setLabelText(_("Queueing {}").format(title))
                 authors = authors_to_string(book.authors)
