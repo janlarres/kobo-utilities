@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.29.0 - 2026-10-17
+
+- Support restoring and resetting reading times on devices
+- When using the "Update metadata" feature to update series information
+  then apply the series number template if configured in the driver
+
 ## Version 2.28.2 - 2026-08-02
 
 - Fixed a bug where custom columns that weren't configured for storing changes
