@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Any, cast
 
 from calibre import strftime
 from calibre.constants import DEBUG
+from calibre.devices.kobo.driver import KOBOTOUCH
 from calibre.gui2 import error_dialog, info_dialog
 from calibre.gui2.dialogs.template_dialog import TemplateDialog
 from qt.core import (
@@ -389,7 +390,23 @@ def do_update_metadata(
                         if newmi.series is not None:
                             new_series = newmi.series
                             try:
-                                new_series_number = "%g" % newmi.series_index
+                                driver = device.driver
+                                if (
+                                    isinstance(driver, KOBOTOUCH)
+                                    and driver.use_series_index_template
+                                ):
+                                    from calibre.ebooks.metadata.book.formatter import (
+                                        SafeFormat,
+                                    )
+
+                                    new_series_number = SafeFormat().safe_format(
+                                        driver.series_index_template,
+                                        newmi,
+                                        "Kobo series number template",
+                                        newmi,
+                                    )
+                                else:
+                                    new_series_number = "%g" % newmi.series_index
                             except Exception:
                                 new_series_number = None
                         else:
