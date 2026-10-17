@@ -5,6 +5,7 @@
         "doNotStoreIfReopened": false,
         "rating": false,
         "readingStatus": true,
+        "readingTime": true,
         "setDateToNow": true,
         "storeBookmarks": true,
         "storeIfMoreRecent": false
@@ -55,6 +56,7 @@
         "readingStatus": -1,
         "reading_direction": "Default",
         "resetPosition": false,
+        "resetReadingTime": false,
         "series": false,
         "setRreadingStatus": false,
         "set_reading_direction": false,

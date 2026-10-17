@@ -136,6 +136,9 @@ class ChangeReadingStatusOptionsDialog(PluginDialog):
             self.options.resetPosition = (
                 self.readingStatusGroupBox.reset_position_checkbox.isChecked()
             )
+            self.options.resetReadingTime = (
+                self.readingStatusGroupBox.reset_reading_time_checkbox.isChecked()
+            )
 
         # Only if the user has checked at least one option will we continue
         for _key, val in self.options:

@@ -984,7 +984,7 @@ def _restore_current_bookmark(
                         else:
                             rating_change_query = rating_update
 
-                    if time_spent_reading_column:
+                    if time_spent_reading_column and options.readingTime:
                         metadata = book.get_user_metadata(
                             time_spent_reading_column, True
                         )
@@ -998,7 +998,7 @@ def _restore_current_bookmark(
                         chapter_values.append(kobo_time_spent_reading)
                         chapter_set_clause += ", TimeSpentReading = ? "
 
-                    if rest_of_book_estimate_column:
+                    if rest_of_book_estimate_column and options.readingTime:
                         metadata = book.get_user_metadata(
                             rest_of_book_estimate_column, True
                         )
@@ -1654,6 +1654,7 @@ class BookmarkOptionsDialog(PluginDialog):
         self.status_to_reading_checkbox.setChecked(options.readingStatus)
         self.date_to_now_checkbox.setChecked(options.setDateToNow)
         self.set_rating_checkbox.setChecked(options.rating and device.supports_ratings)
+        self.set_reading_time_checkbox.setChecked(options.readingTime)
 
         self.clear_if_unread_checkbox.setChecked(options.clearIfUnread)
         self.store_if_more_recent_checkbox.setChecked(options.storeIfMoreRecent)
@@ -1752,6 +1753,12 @@ class BookmarkOptionsDialog(PluginDialog):
         )
         options_layout.addWidget(self.set_rating_checkbox, 4, 1, 1, 1)
 
+        self.set_reading_time_checkbox = QCheckBox(_("Update reading time"), self)
+        self.set_reading_time_checkbox.setToolTip(
+            _("Set the time spent reading and estimate of remaining time in book.")
+        )
+        options_layout.addWidget(self.set_reading_time_checkbox, 5, 1, 1, 1)
+
         profiles_label = QLabel(_("Profile"), self)
         options_layout.addWidget(profiles_label, 6, 0, 1, 1)
         self.select_profile_combo = cfg.ProfileComboBox(
@@ -1784,6 +1791,7 @@ class BookmarkOptionsDialog(PluginDialog):
             options.readingStatus = self.status_to_reading_checkbox.isChecked()
             options.setDateToNow = self.date_to_now_checkbox.isChecked()
             options.rating = self.set_rating_checkbox.isChecked()
+            options.readingTime = self.set_reading_time_checkbox.isChecked()
             options.clearIfUnread = self.clear_if_unread_checkbox.isChecked()
             options.storeIfMoreRecent = self.store_if_more_recent_checkbox.isChecked()
             options.doNotStoreIfReopened = (
@@ -1805,6 +1813,7 @@ class BookmarkOptionsDialog(PluginDialog):
         self.set_rating_checkbox.setEnabled(
             checked and has_rating_column and device.supports_ratings
         )
+        self.set_reading_time_checkbox.setEnabled(checked)
         self.clear_if_unread_checkbox.setEnabled(not checked)
         self.store_if_more_recent_checkbox.setEnabled(not checked)
         self.do_not_store_if_reopened_checkbox.setEnabled(not checked)
@@ -1814,6 +1823,7 @@ class BookmarkOptionsDialog(PluginDialog):
         self.status_to_reading_checkbox.setEnabled(not checked)
         self.date_to_now_checkbox.setEnabled(not checked)
         self.set_rating_checkbox.setEnabled(not checked)
+        self.set_reading_time_checkbox.setEnabled(not checked)
         self.clear_if_unread_checkbox.setEnabled(checked)
         self.store_if_more_recent_checkbox.setEnabled(checked)
         self.do_not_store_if_reopened_checkbox.setEnabled(checked)

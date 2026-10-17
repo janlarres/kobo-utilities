@@ -355,6 +355,7 @@ class BookmarkOptionsConfig(ConfigWrapper):
     doNotStoreIfReopened: bool = False
     rating: bool = True
     readingStatus: bool = True
+    readingTime: bool = True
     setDateToNow: bool = True
     storeBookmarks: bool = True
     storeIfMoreRecent: bool = False
@@ -374,6 +375,7 @@ class MetadataOptionsConfig(ConfigWrapper):
     readingStatus: int = -1
     reading_direction: str = "Default"
     resetPosition: bool = False
+    resetReadingTime: bool = False
     series: bool = False
     setRreadingStatus: bool = False
     set_reading_direction: bool = False

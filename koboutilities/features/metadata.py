@@ -553,6 +553,7 @@ def do_update_metadata(
                     if options.setRreadingStatus and (
                         result["ReadStatus"] != options.readingStatus
                         or options.resetPosition
+                        or options.resetReadingTime
                     ):
                         set_clause_columns.append("ReadStatus=?")
                         update_values.append(options.readingStatus)
@@ -565,6 +566,11 @@ def do_update_metadata(
                             update_values.append(0)
                             set_clause_columns.append("FirstTimeReading=?")
                             update_values.append(options.readingStatus < 2)
+                        if options.resetReadingTime:
+                            set_clause_columns.append("TimeSpentReading=?")
+                            update_values.append(0)
+                            set_clause_columns.append("RestOfBookEstimate=?")
+                            update_values.append(0)
 
                     if len(set_clause_columns) > 0:
                         update_query += ",".join(set_clause_columns)
@@ -1098,6 +1104,9 @@ class UpdateMetadataOptionsDialog(PluginDialog):
                 return
             new_prefs.resetPosition = (
                 self.readingStatusGroupBox.reset_position_checkbox.isChecked()
+            )
+            new_prefs.resetReadingTime = (
+                self.readingStatusGroupBox.reset_reading_time_checkbox.isChecked()
             )
 
         # Only if the user has checked at least one option will we continue

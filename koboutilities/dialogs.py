@@ -381,18 +381,28 @@ class ReadingStatusGroupBox(QGroupBox):
         self.finished_radiobutton.setEnabled(False)
 
         self.reset_position_checkbox = QCheckBox(_("Reset reading position"), self)
-        options_layout.addWidget(self.reset_position_checkbox, 2, 0, 1, 3)
+        options_layout.addWidget(self.reset_position_checkbox, 2, 0, 1, 1)
         self.reset_position_checkbox.setToolTip(
             _(
                 "If this option is checked, the current position and last reading date will be reset."
             )
         )
+        self.reset_reading_time_checkbox = QCheckBox(_("Reset reading time"), self)
+        options_layout.addWidget(self.reset_reading_time_checkbox, 2, 1, 1, 1)
+        self.reset_reading_time_checkbox.setToolTip(
+            _(
+                "If this option is checked, the time spent reading and estimate of remaining time will be reset."
+            )
+        )
+
+        self.reading_status_checkbox_clicked(False)
 
     def reading_status_checkbox_clicked(self, checked: bool):
         self.unread_radiobutton.setEnabled(checked)
         self.reading_radiobutton.setEnabled(checked)
         self.finished_radiobutton.setEnabled(checked)
         self.reset_position_checkbox.setEnabled(checked)
+        self.reset_reading_time_checkbox.setEnabled(checked)
 
     def readingStatusIsChecked(self):
         return self.reading_status_checkbox.isChecked()
