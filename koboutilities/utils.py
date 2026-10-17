@@ -304,7 +304,7 @@ def is_device_view(gui: ui.Main) -> bool:
 
 def get_library_model(gui: ui.Main) -> BooksModel:
     """Get the model for the library view, cast to the correct type."""
-    return cast("BooksModel", gui.library_view().model())
+    return cast("BooksModel", gui.library_view.model())
 
 
 def check_device_is_ready(
