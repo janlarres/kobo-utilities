@@ -149,9 +149,9 @@ def _upload_covers(
     sd_kepub_dir = cast("str", device.driver.normalize_path("koboExtStorage/kepub/"))
     debug("kobo_kepub_dir=", kobo_kepub_dir)
     # Extra cover upload options were added in calibre 3.45.
-    driver_supports_extended_cover_options = hasattr(device, "dithered_covers")
+    driver_supports_extended_cover_options = hasattr(device.driver, "dithered_covers")
     driver_supports_cover_letterbox_colors = hasattr(
-        device, "letterbox_fs_covers_color"
+        device.driver, "letterbox_fs_covers_color"
     )
 
     for book in books:
