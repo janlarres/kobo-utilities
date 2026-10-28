@@ -334,6 +334,84 @@ class TestLocations(unittest.TestCase):
         self.assertEqual(stored_locations[book2.calibre_id]["TimeSpentReading"], 450)
         self.assertEqual(stored_locations[book2.calibre_id]["RestOfBookEstimate"], 250)
 
+    def test_store_current_bookmark(self):
+        book = TestBook(
+            title="Title 1",
+            authors=["Author 1"],
+            rating=0,
+            chapter_id="chapter1",
+            read_status=ReadStatus.READING,
+            percent_read=50,
+            last_read=None,
+            time_spent_reading=100,
+            rest_of_book_estimate=200,
+            is_kepub=True,
+        )
+
+        device_db = DeviceDb()
+        device_db.insert_books(book)
+        device_db.cursor.execute(
+            """
+                UPDATE content
+                SET ___PercentRead = 60,
+                    RestOfBookEstimate = 150
+                WHERE ContentID = ?
+            """,
+            (book.contentID,),
+        )
+
+        bookmark_options = config.BookmarkOptionsConfig()
+        bookmark_options.clearIfUnread = False
+        bookmark_options.storeIfMoreRecent = False
+        bookmark_options.doNotStoreIfReopened = False
+        # Only some of the columns are configured
+        custom_columns = config.CustomColumns(
+            None,
+            "#percent_read",
+            None,
+            None,
+            None,
+            "#rest_of_book_estimate",
+        )
+        options = locations.ReadLocationsJobOptions(
+            bookmark_options,
+            False,
+            locations.FetchQueries(
+                locations.KEPUB_FETCH_QUERY, locations.EPUB_FETCH_QUERY
+            ),
+            "unused",
+            "unused",
+            False,
+            None,
+            custom_columns,
+            supports_ratings=True,
+            allOnDevice=False,
+            prompt_to_store=False,
+        )
+
+        gui = mock.MagicMock()
+        with ExitStack() as stack:
+            stack.enter_context(
+                mock.patch.object(
+                    config, "get_column_names", return_value=custom_columns
+                )
+            )
+            stack.enter_context(
+                mock.patch.object(
+                    utils, "device_database_connection", return_value=device_db.db_conn
+                )
+            )
+            stack.enter_context(mock.patch.object(locations, "ProgressBar"))
+            device = self.plugin.device
+            assert device is not None
+            locations._store_current_bookmark(
+                [book.to_calibre_book()], device, gui, options
+            )
+
+        set_field = gui.current_db.new_api.set_field
+        set_field.assert_any_call("#percent_read", {book.calibre_id: 60})
+        set_field.assert_any_call("#rest_of_book_estimate", {book.calibre_id: 150})
+
     def test_restore_current_bookmark(self):
         book1 = TestBook(
             title="Title A",

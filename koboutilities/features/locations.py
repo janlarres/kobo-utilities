@@ -608,7 +608,9 @@ def _store_current_bookmark(
 
             if rest_of_book_estimate_column_name is not None:
                 debug("setting rest_of_book_estimate=", rest_of_book_estimate)
-                metadata = book.get_user_metadata(time_spent_reading_column_name, True)
+                metadata = book.get_user_metadata(
+                    rest_of_book_estimate_column_name, True
+                )
                 assert metadata is not None
                 current_rest_of_book_estimate = metadata["#value#"]
                 debug(
