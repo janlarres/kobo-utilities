@@ -373,7 +373,22 @@ class TestLocations(unittest.TestCase):
             rest_of_book_estimate=200,
             is_kepub=False,
         )
-        books = [book1, book2, book3]
+        book4_last_read = dt.datetime(
+            2001, 1, 1, 12, 0, 0, tzinfo=dt.timezone(dt.timedelta(hours=0))
+        )
+        book4 = TestBook(
+            title="Title D",
+            authors=["Author D"],
+            rating=6,
+            chapter_id="chapter4",
+            read_status=ReadStatus.READING,
+            percent_read=40,
+            last_read=book4_last_read,
+            time_spent_reading=100,
+            rest_of_book_estimate=200,
+            is_kepub=True,
+        )
+        books = [book1, book2, book3, book4]
 
         column_names = config.CustomColumns(
             "#chapter_id",
@@ -409,6 +424,8 @@ class TestLocations(unittest.TestCase):
         book2.rest_of_book_estimate = 0
         book3.time_spent_reading = 0
         book3.rest_of_book_estimate = None
+        # Unrated in Calibre
+        book4.rating = None
 
         # Update expected DB values
         db_book1 = device_books_before[book1.contentID]
@@ -437,6 +454,10 @@ class TestLocations(unittest.TestCase):
         db_book3["TimeSpentReading"] = 0
         db_book3["RestOfBookEstimate"] = 0
         db_book3["Rating"] = None
+        db_book4 = device_books_before[book4.contentID]
+        db_book4["___SyncTime"] = book4_last_read.strftime(TIMESTAMP_STRING)
+        db_book4["FirstTimeReading"] = "false"
+        db_book4["Rating"] = None
 
         plugin = self.plugin
         options = config.BookmarkOptionsConfig()

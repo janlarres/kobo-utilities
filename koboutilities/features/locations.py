@@ -957,8 +957,9 @@ def _restore_current_bookmark(
                             metadata = book.get_user_metadata(rating_column, True)
                             assert metadata is not None
                             rating = metadata["#value#"]
-                        assert isinstance(rating, int)
-                        rating = None if not rating or rating == 0 else rating / 2
+                        # The rating is None if the book is unrated in the library
+                        assert rating is None or isinstance(rating, int)
+                        rating = None if not rating else rating / 2
                         debug(
                             "rating=",
                             rating,
