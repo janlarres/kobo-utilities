@@ -107,9 +107,7 @@ def _remove_annotations_job(
 
 def _remove_annotations_completed(job: DeviceJob, gui: ui.Main) -> None:
     if job.failed:
-        gui.job_exception(
-            job, dialog_title=_("Failed to check cover directory on device")
-        )
+        gui.job_exception(job, dialog_title=_("Failed to remove annotations files"))
         return
     annotations_removed = job.result
     assert annotations_removed is not None

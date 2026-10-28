@@ -77,10 +77,9 @@ def manage_series_on_device(
     series_columns = get_series_columns(gui)
 
     books = utils.get_books_for_selected(gui)
-    debug("books[0].__class__=", books[0].__class__)
-
     if len(books) == 0:
         return
+    debug("books[0].__class__=", books[0].__class__)
     seriesBooks = [SeriesBook(book, series_columns) for book in books]
     seriesBooks = sorted(seriesBooks, key=lambda k: k.sort_key(sort_by_name=True))
     debug("seriesBooks[0]._mi.__class__=", seriesBooks[0]._mi.__class__)

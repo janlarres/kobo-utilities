@@ -1099,7 +1099,7 @@ def auto_store_current_bookmark(
     if profile is None:
         log_store(_("No profile found for device"))
     else:
-        log_store(_("Using profile '{}'".format(profile.profileName)))
+        log_store(_("Using profile '{}'").format(profile.profileName))
         profile_name = profile.profileName
         prompt_to_store = profile.storeOptionsStore.promptToStore
         bookmark_options.storeIfMoreRecent = profile.storeOptionsStore.storeIfMoreRecent
